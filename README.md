@@ -1,5 +1,3 @@
-Perfecto. Ahora sí, **nivel CEO exigente + consultoría top-tier**.
-Esto es un **README EJECUTIVO 10/10**, pensado para que tú luego me entregues un **informe profesional** como si estuvieras rindiendo cuentas al directorio.
 
 ---
 
@@ -228,12 +226,3 @@ Un **INFORME EJECUTIVO** que incluya:
 * Nivel profesional real
 
 ---
-
-Cuando quieras:
-
-* Te evalúo el informe **como CEO real**
-* Te hago preguntas incómodas tipo comité ejecutivo
-* Lo convertimos en **portfolio para LinkedIn / entrevistas**
-
-Este proyecto ya está a **nivel senior**.
-Tu turno. 💼📊
