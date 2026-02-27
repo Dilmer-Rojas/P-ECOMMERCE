@@ -43,8 +43,9 @@ Tablas incluidas
 - **Descripción**: Breve explicación del grupo.
 
 ## 💡 Posibilidades de Análisis
-Ventas totales por producto, cliente o categoría.
-Comparativas de métodos de pago.
-Comportamiento por región.
-Evaluación de stock vs ventas.
-Visualización temporal de ingresos y unidades vendidas.
+
+- Ventas totales por producto, cliente o categoría.
+- Comparativas de métodos de pago.
+- Comportamiento por región.
+- Evaluación de stock vs ventas.
+- Visualización temporal de ingresos y unidades vendidas.
