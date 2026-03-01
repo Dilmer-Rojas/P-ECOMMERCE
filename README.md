@@ -1,228 +1,107 @@
 
 ---
 
-# 📘 README — Proyecto de Análisis de Datos
-
-## Empresa X — E-commerce & Business Intelligence
+# Proyecto de Análisis de Datos E-commerce & Business Intelligence
 
 ### 📌 Rol asignado
 
 **Analista de Datos / BI Analyst**
 
-Reportas directamente al **CEO y Comité Ejecutivo**.
-El objetivo no es “analizar datos”, sino **mejorar decisiones de negocio**.
+**Por: Laureano Rojas Castañeda**
 
----
+## 1. Definición del Problema y Objetivos
 
-## 🎯 Objetivo del Proyecto
+🚀 *Definición del Problema*
+"¿Cómo podemos aumentar la rentabilidad del e-commerce optimizando el inventario y personalizando la experiencia del cliente, identificando:
+- Productos estrella por región y categoría
+- Clientes con mayor potencial de compra recurrente
+- Patrones de compra según método de pago y estacionales?"
 
-Evaluar el desempeño del e-commerce de la Empresa X mediante el análisis integral de:
+💡 *Objetivos clave:*
+- Maximizar ventas en regiones/productos de alta demanda
+- Reducir stock de productos de baja rotación
+- Mejorar estrategias de marketing por segmento de cliente
 
-* Ventas
-* Clientes
-* Productos
-* Métodos de pago
-* Stock
+## 2. Identificación de Indicadores
 
-El resultado final debe permitir responder **qué está funcionando, qué no y qué decisiones debemos tomar** para aumentar ingresos, reducir pérdidas y optimizar operaciones.
+📊 *Indicadores Clave (KPIs)*
 
----
+Para abordar el problema "¿Cómo aumentar la rentabilidad del e-commerce optimizando el inventario y personalizando la experiencia del cliente?", estos son algunos KPIs relevantes:
 
-## 🧠 Expectativa Ejecutiva (léelo bien)
+1. **Ventas Totales por Región y Categoría**
+    - *Objetivo*: Identificar mercados con mayor potencial.
+    - Cálculo: `SUM(Ventas.Cantidad * Productos.Precio_Unitario)`
+2. **Tasa de Rotación de Stock**
+    - *Objetivo*: Detectar productos con riesgo de desabastecimiento o exceso.
+    - Cálculo: `Ventas.Cantidad / Productos.Stock`
+3. **Ticket Promedio por Cliente y Método de Pago**
+    - *Objetivo*: Optimizar estrategias de pago y segmentación.
+    - Cálculo: `SUM(Ventas.Cantidad * Productos.Precio_Unitario) / COUNT(DISTINCT Ventas.ID_Cliente)`
+4. **Clientes Recurrentes vs. Únicos**
+    - *Objetivo*: Focarse en retención vs. captación.
+    - Cálculo: `COUNT(Ventas.ID_Cliente)` (con más de 1 compra)
+5. **Margen de Ganancia por Producto**
+    - *Objetivo*: Priorizar productos más rentables.
+    - Cálculo: `(Ventas.Cantidad * (Productos.Precio_Unitario - Costo_Unitario))`
 
-* No quiero descripciones.
-* No quiero gráficos decorativos.
-* Quiero **respuestas claras, métricas sólidas y recomendaciones accionables**.
-* Todo análisis debe responder **“¿y esto para qué le sirve al negocio?”**
+## 3. Recolección de Datos
 
----
+🗃 *Recolección de los Datos a Usar*
 
-## 🗂️ Dataset Disponible
+Para este proyecto usamos un dataset de "Kaggle":
 
-El proyecto se basa en un dataset de e-commerce con las siguientes tablas:
+[Dataset Usado](https://www.kaggle.com/datasets/dataregina/datasets-para-proyecto-bi)
 
-* **Ventas**
-* **Clientes**
-* **Productos**
-* **Categorías_Productos**
-* **Métodos_Pago**
+**Descripción Breve del Dataset**
 
-(Relaciones y claves deben ser validadas por el analista).
+**Tablas incluidas**
 
----
+1. **Ventas** Contiene el detalle de cada transacción.
 
-## 🔍 FASE 1 — Auditoría y Calidad de Datos (OBLIGATORIA)
+- ID_Venta: Identificador único de la venta.
+- Fecha: Fecha de la transacción.
+- ID_Cliente: Identificador del cliente.
+- ID_Producto: Identificador del producto.
+- Cantidad: Número de unidades vendidas.
+- Método_Pago: Medio de pago utilizado.
+- Estado: Estado de la transacción (Completa, Pendiente, Cancelada).
 
-Antes de cualquier análisis, debes validar la confiabilidad de la información.
+2. **Clientes** Información general de los clientes.
 
-### Tareas:
+- ID_Cliente: Identificador único.
+- Nombre, Apellido, Correo electrónico: Datos personales.
+- Fecha_Registro: Fecha de alta en la plataforma.
+- Región: Ubicación geográfica.
 
-* Verificar duplicados en ventas
-* Identificar ventas sin cliente o producto asociado
-* Revisar coherencia entre:
+3. **Productos** Listado de productos disponibles.
 
-  * Estado de la venta vs ingresos
-  * Cantidad vendida vs stock
-* Detectar valores nulos críticos
-* Analizar rangos de fechas anómalos
+- ID_Producto: Identificador único.
+- Nombre_Producto: Nombre del artículo.
+- ID_Categoría: Clave foránea hacia tabla de categorías.
+- Precio_Unitario: Precio del producto.
+- Stock: Inventario disponible.
 
-### Entregable:
+4. **Métodos_Pago** Listado de medios de pago posibles.
 
-**Informe de Calidad de Datos**, que incluya:
+- ID_Método: Identificador.
+- Método: Nombre del método (ej. Tarjeta, PayPal).
+- Descripción: Explicación breve del método.
 
-* Problemas detectados
-* Impacto potencial en el negocio
-* Decisión: *¿la data es apta para análisis ejecutivo o no?*
+5. **Categorías_Productos** Clasificación de productos por tipo.
 
----
+- ID_Categoría: Identificador único.
+- Categoría: Nombre (ej. Lácteos, Carnicería).
+- Descripción: Breve explicación del grupo.
 
-## 📊 FASE 2 — Definición de KPIs Estratégicos
 
-Debes definir, calcular y justificar los **KPIs clave del negocio**.
+## 4. Limpieza de Datos
 
-### KPIs mínimos esperados:
 
-* Ingresos totales
-* Ingresos mensuales
-* Ticket promedio
-* Unidades vendidas
-* % ventas canceladas
-* Clientes activos
-* Ventas por región
-* Ventas por categoría
 
-### Entregable:
+## 5. Análisis Exploratorio de Datos (EDA)
 
-Documento que contenga:
+## 6. Visualización y Comunicación
 
-* KPI
-* Fórmula de cálculo
-* Interpretación de negocio
-* Frecuencia de monitoreo
-
----
-
-## 📈 FASE 3 — Análisis de Ventas
-
-Responder con datos a las siguientes preguntas:
-
-* ¿Qué productos generan más ingresos?
-* ¿Qué categorías son más rentables?
-* ¿Qué productos venden mucho pero aportan poco valor?
-* ¿Cómo evoluciona la venta en el tiempo?
-* ¿Existen picos o caídas críticas?
-
-### Entregable:
-
-**Insights claros**, con soporte numérico y conclusiones ejecutivas.
-
----
-
-## 👥 FASE 4 — Análisis de Clientes
-
-Segmenta clientes según:
-
-* Frecuencia de compra
-* Gasto total
-* Región
-
-Identifica:
-
-* Clientes de alto valor
-* Clientes inactivos
-* Regiones con bajo rendimiento comercial
-
-### Entregable:
-
-* Segmentación de clientes
-* Perfil de cliente ideal
-* Oportunidades de retención o expansión
-
----
-
-## 📦 FASE 5 — Análisis de Stock e Inventario
-
-Evaluar la eficiencia del inventario.
-
-### Preguntas clave:
-
-* ¿Qué productos tienen riesgo de quiebre de stock?
-* ¿Dónde existe sobrestock innecesario?
-* ¿Qué categorías están mal gestionadas?
-
-### Entregable:
-
-Listado de **alertas de inventario** y recomendaciones operativas.
-
----
-
-## 💳 FASE 6 — Métodos de Pago
-
-Analizar el impacto de los métodos de pago en el negocio.
-
-* Método más utilizado
-* Método con mayor tasa de cancelación
-* Relación entre método de pago y ticket promedio
-
-### Entregable:
-
-Conclusiones claras para decisiones comerciales y operativas.
-
----
-
-## 📊 FASE 7 — Dashboard Ejecutivo
-
-Diseñar un dashboard que permita al CEO responder en **30 segundos**:
-
-* ¿Cómo va el negocio?
-* ¿Dónde estamos perdiendo dinero?
-* ¿Dónde debemos enfocar esfuerzos?
-
-### Requisitos:
-
-* Visual
-* Sintético
-* Orientado a decisiones
-* No técnico
-
----
-
-## 🧠 FASE 8 — Recomendaciones Estratégicas (CRÍTICO)
-
-Basado **exclusivamente en datos**, debes proponer:
-
-* Acciones para aumentar ingresos
-* Ajustes en productos o categorías
-* Cambios en gestión de stock
-* Foco geográfico o comercial
-
-### Entregable:
-
-**Plan de recomendaciones accionables**, priorizadas por impacto.
-
----
-
-## 📄 ENTREGABLE FINAL
-
-Un **INFORME EJECUTIVO** que incluya:
-
-1. Resumen ejecutivo (1 página)
-2. Metodología
-3. Hallazgos clave
-4. KPIs
-5. Insights de negocio
-6. Dashboard (link o capturas)
-7. Recomendaciones estratégicas
-
----
-
-## 🏁 Criterios de Evaluación
-
-* Claridad
-* Pensamiento crítico
-* Enfoque en negocio
-* Uso correcto de datos
-* Capacidad de síntesis
-* Nivel profesional real
+## 7. Toma de Decisiones
 
 ---
