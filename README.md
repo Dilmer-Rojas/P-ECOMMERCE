@@ -98,7 +98,7 @@ Para este proyecto usamos un dataset de "Kaggle":
 
 **🧹 Limpieza | Data Cleaning (Python y SQL)**:
 
-- [Notebook Data Cleaning - Python](./notebooks/1.Limpieza_Datos.ipynb)
+- [Notebook Data Cleaning - Python](./notebooks/1.limpieza_datos.ipynb)
 - [Query Data Cleaning - SQL - MySQL Server](./sql/cleanin.sql)
 
 
