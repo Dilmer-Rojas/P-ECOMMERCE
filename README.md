@@ -96,6 +96,10 @@ Para este proyecto usamos un dataset de "Kaggle":
 
 ## 4. Limpieza de Datos
 
+**🧹 Limpieza | Data Cleaning (Python y SQL)**:
+
+- [Notebook Data Cleaning - Python](./notebooks/Data_Cleaning_Python.ipynb)
+- [Query Data Cleaning - SQL - MySQL Server](./sql/cleanin.sql)
 
 
 ## 5. Análisis Exploratorio de Datos (EDA)
