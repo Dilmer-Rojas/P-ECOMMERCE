@@ -3,7 +3,7 @@
 
 # Proyecto de Análisis de Datos E-commerce & Business Intelligence
 
-### 📌 Rol asignado
+## 📌 Rol asignado
 
 **Analista de Datos / BI Analyst**
 
