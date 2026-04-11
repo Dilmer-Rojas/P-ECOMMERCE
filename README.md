@@ -6,6 +6,8 @@
 
 El e-commerce necesita entender qué productos generan más ingresos y cómo se comportan los clientes para optimizar las estrategias de ventas y marketing.
 
+
+
 *Aumentar ganancias y mejorar campañas de marketing*
 
 **Objetivo del análisis:**

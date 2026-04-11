@@ -1,0 +1,70 @@
+
+<style>
+  .e1-wrap { padding: 1.5rem 0; }
+  .etapa-badge { display: inline-flex; align-items: center; gap: 8px; background: #EEEDFE; color: #3C3489; border-radius: 20px; padding: 5px 14px; font-size: 13px; font-weight: 500; }
+  .pregunta-card { background: var(--color-background-secondary); border-left: 3px solid #7F77DD; border-radius: 0 12px 12px 0; padding: 1rem 1.25rem; margin: 1.25rem 0; }
+  .pregunta-card p { margin: 0; font-size: 15px; color: var(--color-text-primary); }
+  .pregunta-card .label { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 4px; display: block; }
+  .context-box { border: 0.5px solid var(--color-border-tertiary); border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 10px; }
+  .context-box h3 { font-size: 14px; font-weight: 500; margin: 0 0 6px; color: var(--color-text-primary); }
+  .context-box p { font-size: 13px; color: var(--color-text-secondary); margin: 0; line-height: 1.6; }
+  .questions-list { list-style: none; padding: 0; margin: 0; }
+  .questions-list li { padding: 10px 0; border-bottom: 0.5px solid var(--color-border-tertiary); font-size: 14px; color: var(--color-text-primary); display: flex; align-items: flex-start; gap: 10px; }
+  .questions-list li:last-child { border-bottom: none; }
+  .q-num { background: #EEEDFE; color: #534AB7; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; flex-shrink: 0; margin-top: 1px; }
+  .scope-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 1rem; }
+  .scope-item { padding: 10px 12px; border-radius: 8px; font-size: 13px; }
+  .in-scope { background: #EAF3DE; color: #27500A; }
+  .out-scope { background: #FCEBEB; color: #791F1F; }
+  .scope-title { font-weight: 500; font-size: 11px; margin-bottom: 4px; display: block; }
+</style>
+
+<div class="e1-wrap">
+  <h2 class="sr-only">Etapa 1: Definición del problema</h2>
+
+  <div style="display:flex; align-items:center; gap:12px; margin-bottom: 1.25rem;">
+    <span class="etapa-badge">Etapa 1 · Definición del problema</span>
+  </div>
+
+  <div class="pregunta-card">
+    <span class="label">Pregunta central del análisis</span>
+    <p><strong>¿Qué factores determinan el éxito de ventas de un videojuego a nivel global?</strong></p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.25rem;">
+    <div class="context-box">
+      <h3>Contexto de negocio</h3>
+      <p>Una distribuidora de videojuegos quiere optimizar su catálogo. Necesita saber qué géneros, plataformas y regiones tienen mayor potencial de ventas antes de invertir en nuevos títulos.</p>
+    </div>
+    <div class="context-box">
+      <h3>¿Por qué es importante?</h3>
+      <p>El mercado global de videojuegos supera los $200B anuales. Elegir mal un género o plataforma puede significar pérdidas de millones en desarrollo y marketing.</p>
+    </div>
+  </div>
+
+  <div class="context-box" style="margin-bottom: 1.25rem;">
+    <h3>Preguntas específicas que guiarán el análisis</h3>
+    <ul class="questions-list">
+      <li><span class="q-num">1</span> ¿Cuáles son los géneros de videojuegos más vendidos históricamente?</li>
+      <li><span class="q-num">2</span> ¿Qué plataformas (PS4, Xbox, PC...) concentran más ventas globales?</li>
+      <li><span class="q-num">3</span> ¿Cómo evolucionaron las ventas globales entre 1980 y 2020?</li>
+      <li><span class="q-num">4</span> ¿Existen diferencias significativas entre regiones (NA, EU, JP, otros)?</li>
+      <li><span class="q-num">5</span> ¿Qué publishers dominan el mercado y qué estrategias usan?</li>
+    </ul>
+  </div>
+
+  <div class="context-box">
+    <h3>Alcance del proyecto</h3>
+    <div class="scope-grid">
+      <div>
+        <span class="scope-title">✓ Dentro del alcance</span>
+        <div class="in-scope">Análisis descriptivo y tendencias históricas, segmentación por género / plataforma / región, ranking de publishers y títulos</div>
+      </div>
+      <div>
+        <span class="scope-title">✗ Fuera del alcance</span>
+        <div class="out-scope">Predicción de ventas futuras (machine learning), análisis de reviews o ratings, datos de streaming/digital que no estén en el dataset</div>
+      </div>
+    </div>
+  </div>
+
+</div>
