@@ -1,70 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
 
-<style>
-  .e1-wrap { padding: 1.5rem 0; }
-  .etapa-badge { display: inline-flex; align-items: center; gap: 8px; background: #EEEDFE; color: #3C3489; border-radius: 20px; padding: 5px 14px; font-size: 13px; font-weight: 500; }
-  .pregunta-card { background: var(--color-background-secondary); border-left: 3px solid #7F77DD; border-radius: 0 12px 12px 0; padding: 1rem 1.25rem; margin: 1.25rem 0; }
-  .pregunta-card p { margin: 0; font-size: 15px; color: var(--color-text-primary); }
-  .pregunta-card .label { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 4px; display: block; }
-  .context-box { border: 0.5px solid var(--color-border-tertiary); border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 10px; }
-  .context-box h3 { font-size: 14px; font-weight: 500; margin: 0 0 6px; color: var(--color-text-primary); }
-  .context-box p { font-size: 13px; color: var(--color-text-secondary); margin: 0; line-height: 1.6; }
-  .questions-list { list-style: none; padding: 0; margin: 0; }
-  .questions-list li { padding: 10px 0; border-bottom: 0.5px solid var(--color-border-tertiary); font-size: 14px; color: var(--color-text-primary); display: flex; align-items: flex-start; gap: 10px; }
-  .questions-list li:last-child { border-bottom: none; }
-  .q-num { background: #EEEDFE; color: #534AB7; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; flex-shrink: 0; margin-top: 1px; }
-  .scope-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 1rem; }
-  .scope-item { padding: 10px 12px; border-radius: 8px; font-size: 13px; }
-  .in-scope { background: #EAF3DE; color: #27500A; }
-  .out-scope { background: #FCEBEB; color: #791F1F; }
-  .scope-title { font-weight: 500; font-size: 11px; margin-bottom: 4px; display: block; }
-</style>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Etapa 1: Definición del problema</title>
+  <style>
+    :root {
+      --black: #000000;
+      --neon-cyan: #00f3ff;
+      --neon-pink: #ff00ff;
+      --neon-green: #39ff14;
+      --glass: rgba(255, 255, 255, 0.1);
+    }
 
-<div class="e1-wrap">
-  <h2 class="sr-only">Etapa 1: Definición del problema</h2>
+    body {
+      background-color: #050505;
+      background-image: radial-gradient(rgba(0, 243, 255, 0.1) 1px, transparent 0);
+      background-size: 25px 25px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      color: white;
+    }
 
-  <div style="display:flex; align-items:center; gap:12px; margin-bottom: 1.25rem;">
-    <span class="etapa-badge">Etapa 1 · Definición del problema</span>
-  </div>
+    .e1-wrap {
+      background: var(--glass);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 3px solid var(--neon-cyan);
+      box-shadow: 10px 10px 0px var(--black), 10px 10px 0px 2px var(--neon-cyan);
+      max-width: 500px;
+      width: 100%;
+      padding: 30px;
+      box-sizing: border-box;
+    }
 
-  <div class="pregunta-card">
-    <span class="label">Pregunta central del análisis</span>
-    <p><strong>¿Qué factores determinan el éxito de ventas de un videojuego a nivel global?</strong></p>
-  </div>
+    .etapa-badge {
+      display: inline-flex;
+      align-items: center;
+      background: var(--neon-cyan);
+      color: var(--black);
+      padding: 5px 14px;
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      border: 2px solid var(--black);
+      box-shadow: 4px 4px 0px var(--black);
+      margin-bottom: 1.25rem;
+    }
 
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.25rem;">
-    <div class="context-box">
-      <h3>Contexto de negocio</h3>
-      <p>Una distribuidora de videojuegos quiere optimizar su catálogo. Necesita saber qué géneros, plataformas y regiones tienen mayor potencial de ventas antes de invertir en nuevos títulos.</p>
+    .pregunta-card {
+      background: var(--black);
+      border: 2px solid var(--neon-pink);
+      padding: 1rem 1.25rem;
+      margin: 1.25rem 0;
+      box-shadow: 6px 6px 0px var(--neon-pink);
+    }
+
+    .pregunta-card p {
+      margin: 0;
+      font-size: 14px;
+      color: white;
+      line-height: 1.4;
+    }
+
+    .pregunta-card .label {
+      font-size: 10px;
+      color: var(--neon-pink);
+      text-transform: uppercase;
+      font-weight: 800;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .context-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 1.25rem;
+    }
+
+    .context-box {
+      background: rgba(0, 0, 0, 0.4);
+      border: 2px solid var(--neon-cyan);
+      padding: 12px;
+    }
+
+    .context-box h3 {
+      font-size: 11px;
+      font-weight: 900;
+      margin: 0 0 8px;
+      color: var(--neon-cyan);
+      text-transform: uppercase;
+    }
+
+    .context-box p {
+      font-size: 11px;
+      color: #ccc;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .questions-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .questions-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+      font-size: 12px;
+      color: white;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .q-num {
+      background: var(--neon-green);
+      color: black;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 900;
+      flex-shrink: 0;
+      border: 1px solid black;
+    }
+
+    .scope-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 1rem;
+    }
+
+    .scope-item-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .scope-title {
+      font-weight: 800;
+      font-size: 9px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      color: white;
+    }
+
+    .in-scope {
+      background: var(--neon-green);
+      color: black;
+      padding: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      border: 2px solid black;
+      box-shadow: 4px 4px 0px var(--black);
+      height: 100%;
+    }
+
+    .out-scope {
+      background: var(--neon-pink);
+      color: black;
+      padding: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      border: 2px solid black;
+      box-shadow: 4px 4px 0px var(--black);
+      height: 100%;
+    }
+
+    .sr-only {
+      display: none;
+    }
+
+    @media (max-width: 450px) {
+
+      .context-grid,
+      .scope-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="e1-wrap">
+    <h2 class="sr-only">Etapa 1: Definición del problema</h2>
+
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom: 1.25rem;">
+      <span class="etapa-badge">Etapa 1 · Definición del problema</span>
     </div>
-    <div class="context-box">
-      <h3>¿Por qué es importante?</h3>
-      <p>El mercado global de videojuegos supera los $200B anuales. Elegir mal un género o plataforma puede significar pérdidas de millones en desarrollo y marketing.</p>
+
+    <div class="pregunta-card">
+      <span class="label">Pregunta central del análisis</span>
+      <p><strong>¿Qué productos generan más ingresos y cómo se comportan los clientes para optimizar las estrategias de
+          ventas y marketing?</strong></p>
     </div>
-  </div>
 
-  <div class="context-box" style="margin-bottom: 1.25rem;">
-    <h3>Preguntas específicas que guiarán el análisis</h3>
-    <ul class="questions-list">
-      <li><span class="q-num">1</span> ¿Cuáles son los géneros de videojuegos más vendidos históricamente?</li>
-      <li><span class="q-num">2</span> ¿Qué plataformas (PS4, Xbox, PC...) concentran más ventas globales?</li>
-      <li><span class="q-num">3</span> ¿Cómo evolucionaron las ventas globales entre 1980 y 2020?</li>
-      <li><span class="q-num">4</span> ¿Existen diferencias significativas entre regiones (NA, EU, JP, otros)?</li>
-      <li><span class="q-num">5</span> ¿Qué publishers dominan el mercado y qué estrategias usan?</li>
-    </ul>
-  </div>
-
-  <div class="context-box">
-    <h3>Alcance del proyecto</h3>
-    <div class="scope-grid">
-      <div>
-        <span class="scope-title">✓ Dentro del alcance</span>
-        <div class="in-scope">Análisis descriptivo y tendencias históricas, segmentación por género / plataforma / región, ranking de publishers y títulos</div>
+    <div class="context-grid">
+      <div class="context-box">
+        <h3>Contexto de negocio</h3>
+        <p>El e-commerce busca maximizar sus ganancias y la efectividad de sus campañas actuales mediante el análisis de
+          su histórico de transacciones.</p>
       </div>
-      <div>
-        <span class="scope-title">✗ Fuera del alcance</span>
-        <div class="out-scope">Predicción de ventas futuras (machine learning), análisis de reviews o ratings, datos de streaming/digital que no estén en el dataset</div>
+      <div class="context-box">
+        <h3>¿Por qué es importante?</h3>
+        <p>Permitirá tomar decisiones basadas en datos para aumentar la rentabilidad, mejorar la segmentación de
+          marketing y detectar oportunidades de crecimiento.</p>
       </div>
     </div>
-  </div>
 
-</div>
+    <div class="context-box" style="margin-bottom: 1.25rem; border-color: var(--neon-green);">
+      <h3 style="color: var(--neon-green);">Preguntas específicas que guiarán el análisis</h3>
+      <ul class="questions-list">
+        <li><span class="q-num">1</span> ¿Cuáles son los productos más rentables del catálogo?</li>
+        <li><span class="q-num">2</span> ¿Qué patrones de comportamiento siguen los clientes al comprar?</li>
+        <li><span class="q-num">3</span> ¿Dónde existen brechas o fallas en el proceso actual que puedan convertirse en
+          oportunidades de venta?</li>
+      </ul>
+    </div>
+
+    <div class="context-box" style="border-color: white;">
+      <h3 style="color: white;">Alcance del proyecto</h3>
+      <div class="scope-grid">
+        <div class="scope-item-wrap">
+          <span class="scope-title">✓ Dentro del alcance</span>
+          <div class="in-scope">Análisis de rentabilidad por producto, estudio de patrones de consumo de los clientes
+            existentes y detección de oportunidades comerciales.</div>
+        </div>
+        <div class="scope-item-wrap">
+          <span class="scope-title">✗ Fuera del alcance</span>
+          <div class="out-scope">Implementación directa de campañas de marketing, cambios logísticos o rediseño de la
+            plataforma web.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+
+</html>
