@@ -1,0 +1,234 @@
+
+<style>
+  .wrap { padding: 1.5rem 0; }
+  .etapa-badge { display: inline-flex; align-items: center; gap: 8px; background: #EAF3DE; color: #27500A; border-radius: 20px; padding: 5px 14px; font-size: 13px; font-weight: 500; }
+  .section-title { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin: 1.25rem 0 0.75rem; }
+  .context-box { border: 0.5px solid var(--color-border-tertiary); border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 10px; }
+  .decision-card { border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 10px; border: 0.5px solid; }
+  .decision-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
+  .decision-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+  .decision-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 3px; }
+  .decision-sub { font-size: 12px; color: var(--color-text-secondary); margin: 0; }
+  .evidence-row { display: flex; gap: 8px; align-items: flex-start; padding: 7px 0; border-top: 0.5px solid var(--color-border-tertiary); font-size: 12px; }
+  .ev-label { font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 20px; flex-shrink: 0; }
+  .ev-text { color: var(--color-text-secondary); line-height: 1.5; }
+  .action-row { display: flex; gap: 8px; align-items: flex-start; padding: 7px 0; border-top: 0.5px solid var(--color-border-tertiary); font-size: 12px; }
+  .action-bullet { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+  .priority-badge { font-size: 11px; padding: 2px 9px; border-radius: 20px; font-weight: 500; display: inline-block; }
+  .matrix-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--color-border-tertiary); border-radius: 10px; overflow: hidden; }
+  .matrix-cell { padding: 0.9rem 1rem; background: var(--color-background-primary); }
+  .matrix-cell h4 { font-size: 12px; font-weight: 500; margin: 0 0 6px; }
+  .matrix-cell p { font-size: 12px; color: var(--color-text-secondary); margin: 0; line-height: 1.5; }
+  .kpi-track-row { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 0.5px solid var(--color-border-tertiary); font-size: 12px; }
+  .kpi-track-row:last-child { border-bottom: none; }
+  .kpi-name { flex: 1; color: var(--color-text-primary); }
+  .kpi-target { font-weight: 500; min-width: 80px; text-align: right; }
+  .kpi-when { font-size: 11px; color: var(--color-text-secondary); min-width: 70px; text-align: right; }
+  .lesson-row { display: flex; gap: 12px; padding: 10px 0; border-bottom: 0.5px solid var(--color-border-tertiary); align-items: flex-start; }
+  .lesson-row:last-child { border-bottom: none; }
+  .lesson-num { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; flex-shrink: 0; }
+  .lesson-text { font-size: 13px; color: var(--color-text-primary); line-height: 1.6; }
+  .final-box { border-radius: 12px; padding: 1.25rem 1.5rem; text-align: center; margin-top: 1.25rem; }
+</style>
+
+<div class="wrap">
+  <h2 style="display:none">Etapa 7: Toma de decisiones</h2>
+
+  <div style="display:flex; align-items:center; gap:12px; margin-bottom:1.25rem;">
+    <span class="etapa-badge">Etapa 7 · Toma de Decisiones</span>
+  </div>
+
+  <div style="background:var(--color-background-secondary); border-left:3px solid #639922; border-radius:0 12px 12px 0; padding:1rem 1.25rem; margin-bottom:1.25rem;">
+    <p style="margin:0; font-size:14px; color:var(--color-text-primary);">Un análisis que no genera acción es un análisis perdido. Cada hallazgo del EDA debe traducirse en una <strong>decisión concreta, medible y con responsable asignado</strong>.</p>
+  </div>
+
+  <!-- DECISIÓN 1 -->
+  <p class="section-title">Las 4 decisiones que genera este análisis</p>
+
+  <div class="decision-card" style="background:#EAF3DE; border-color:#97C459;">
+    <div class="decision-header">
+      <div class="decision-icon" style="background:#C0DD97;">🎯</div>
+      <div>
+        <p class="decision-title">Decisión 1 — Concentrar catálogo en géneros Action y Shooter para mercado occidental</p>
+        <p class="decision-sub">Área: Selección de títulos · Prioridad: <span class="priority-badge" style="background:#639922; color:#fff;">Alta</span></p>
+      </div>
+    </div>
+    <div class="evidence-row">
+      <span class="ev-label" style="background:#C0DD97; color:#27500A;">Evidencia</span>
+      <span class="ev-text">Action (1,751M) + Shooter (1,037M) = 31% del mercado global. En Norteamérica representan más del 40% de las ventas totales.</span>
+    </div>
+    <div class="action-row">
+      <div class="action-bullet" style="background:#639922;"></div>
+      <span style="color:var(--color-text-primary);">Destinar al menos el 50% del presupuesto de adquisición de títulos a géneros Action y Shooter orientados a NA y EU.</span>
+    </div>
+    <div class="action-row">
+      <div class="action-bullet" style="background:#639922;"></div>
+      <span style="color:var(--color-text-primary);">Evitar diversificar en géneros Strategy y Puzzle — representan menos del 3% del mercado global.</span>
+    </div>
+  </div>
+
+  <div class="decision-card" style="background:#FAEEDA; border-color:#EF9F27;">
+    <div class="decision-header">
+      <div class="decision-icon" style="background:#FAC775;">🌏</div>
+      <div>
+        <p class="decision-title">Decisión 2 — Desarrollar estrategia RPG diferenciada para el mercado asiático</p>
+        <p class="decision-sub">Área: Expansión regional · Prioridad: <span class="priority-badge" style="background:#BA7517; color:#fff;">Media-Alta</span></p>
+      </div>
+    </div>
+    <div class="evidence-row">
+      <span class="ev-label" style="background:#FAC775; color:#633806;">Evidencia</span>
+      <span class="ev-text">RPG es el único género donde Japón (352M) supera a Europa (188M). El mercado JP tiene gustos radicalmente distintos — lo que vende en NA no vende en JP.</span>
+    </div>
+    <div class="action-row">
+      <div class="action-bullet" style="background:#BA7517;"></div>
+      <span style="color:var(--color-text-primary);">Crear una línea de catálogo RPG exclusiva para Asia con localización profunda — no solo traducción.</span>
+    </div>
+    <div class="action-row">
+      <div class="action-bullet" style="background:#BA7517;"></div>
+      <span style="color:var(--color-text-primary);">No lanzar títulos Shooter masivos en Japón sin validación previa — el historial de datos muestra bajo retorno.</span>
+    </div>
+  </div>
+
+  <div class="decision-card" style="background:#E6F1FB; border-color:#85B7EB;">
+    <div class="decision-header">
+      <div class="decision-icon" style="background:#B5D4F4;">🏆</div>
+      <div>
+        <p class="decision-title">Decisión 3 — Priorizar plataformas PlayStation y Xbox para lanzamientos principales</p>
+        <p class="decision-sub">Área: Plataformas objetivo · Prioridad: <span class="priority-badge" style="background:#185FA5; color:#fff;">Alta</span></p>
+      </div>
+    </div>
+    <div class="evidence-row">
+      <span class="ev-label" style="background:#B5D4F4; color:#0C447C;">Evidencia</span>
+      <span class="ev-text">PS2 + PS3 + X360 acumulan 3,183M de copias. Las 3 plataformas más vendidas de la historia son Sony o Microsoft — Nintendo lidera solo en portátiles.</span>
+    </div>
+    <div class="action-row">
+      <div class="action-bullet" style="background:#185FA5;"></div>
+      <span style="color:var(--color-text-primary);">Lanzar simultáneamente en PS y Xbox para maximizar alcance. El port posterior a Nintendo puede evaluarse según performance.</span>
+    </div>
+    <div class="action-row">
+      <div class="action-bullet" style="background:#185FA5;"></div>
+      <span style="color:var(--color-text-primary);">Para títulos familiares o casual gaming, considerar Nintendo como plataforma primaria — su modelo Wii demostró que puede crear mercados nuevos.</span>
+    </div>
+  </div>
+
+  <div class="decision-card" style="background:#EEEDFE; border-color:#AFA9EC;">
+    <div class="decision-header">
+      <div class="decision-icon" style="background:#CECBF6;">📅</div>
+      <div>
+        <p class="decision-title">Decisión 4 — Invertir en actualización del dataset con datos de ventas digitales</p>
+        <p class="decision-sub">Área: Calidad de datos · Prioridad: <span class="priority-badge" style="background:#534AB7; color:#fff;">Urgente</span></p>
+      </div>
+    </div>
+    <div class="evidence-row">
+      <span class="ev-label" style="background:#CECBF6; color:#3C3489;">Evidencia</span>
+      <span class="ev-text">La caída de ventas desde 2010 en este dataset es probablemente artificial — el mercado físico migró a digital (Steam, PSN, Xbox Live). Los datos actuales no capturan esa realidad.</span>
+    </div>
+    <div class="action-row">
+      <div class="action-bullet" style="background:#534AB7;"></div>
+      <span style="color:var(--color-text-primary);">Complementar con APIs de Steam, IGDB o informes de Newzoo para tener visión completa del mercado actual.</span>
+    </div>
+    <div class="action-row">
+      <div class="action-bullet" style="background:#534AB7;"></div>
+      <span style="color:var(--color-text-primary);">No basar decisiones de inversión en tendencias post-2012 de este dataset — son datos incompletos.</span>
+    </div>
+  </div>
+
+  <!-- MATRIZ IMPACTO ESFUERZO -->
+  <p class="section-title">Matriz de priorización — Impacto vs. Esfuerzo</p>
+  <div style="position:relative; margin-bottom:10px;">
+    <div style="display:flex; justify-content:space-between; font-size:11px; color:var(--color-text-secondary); margin-bottom:4px; padding:0 2px;">
+      <span>← Menos esfuerzo</span><span>Más esfuerzo →</span>
+    </div>
+    <div class="matrix-grid">
+      <div class="matrix-cell" style="background:#EAF3DE;">
+        <h4 style="color:#27500A;">⚡ Hacer ya</h4>
+        <p>Reasignar presupuesto a Action/Shooter para NA-EU. Impacto inmediato, bajo costo de decisión.</p>
+      </div>
+      <div class="matrix-cell" style="background:#E6F1FB;">
+        <h4 style="color:#0C447C;">📋 Planificar</h4>
+        <p>Estrategia RPG para Asia. Requiere investigación de mercado + localización + socios locales.</p>
+      </div>
+      <div class="matrix-cell" style="background:#FAEEDA;">
+        <h4 style="color:#633806;">🔍 Evaluar</h4>
+        <p>Decisión de plataforma primaria. Depende del tipo de título y del timing del ciclo de consolas.</p>
+      </div>
+      <div class="matrix-cell" style="background:#FCEBEB;">
+        <h4 style="color:#791F1F;">⏳ A largo plazo</h4>
+        <p>Integración de datos digitales. Alta complejidad técnica y contractual con plataformas.</p>
+      </div>
+    </div>
+    <div style="display:flex; justify-content:space-between; font-size:11px; color:var(--color-text-secondary); margin-top:4px; padding:0 2px; flex-direction:column; position:absolute; top:20px; right:-52px; height:calc(100% - 30px); align-items:center;">
+    </div>
+  </div>
+
+  <!-- KPIs DE SEGUIMIENTO -->
+  <p class="section-title">KPIs para monitorear el impacto de las decisiones</p>
+  <div class="context-box">
+    <div class="kpi-track-row">
+      <span style="font-size:11px; color:var(--color-text-secondary); min-width:18px;">1</span>
+      <span class="kpi-name">% ventas Action/Shooter sobre total de catálogo</span>
+      <span class="kpi-target" style="color:#639922;">Meta: ≥ 50%</span>
+      <span class="kpi-when">Trimestral</span>
+    </div>
+    <div class="kpi-track-row">
+      <span style="font-size:11px; color:var(--color-text-secondary); min-width:18px;">2</span>
+      <span class="kpi-name">Ventas en mercado asiático (JP + Others)</span>
+      <span class="kpi-target" style="color:#BA7517;">Meta: +15% YoY</span>
+      <span class="kpi-when">Anual</span>
+    </div>
+    <div class="kpi-track-row">
+      <span style="font-size:11px; color:var(--color-text-secondary); min-width:18px;">3</span>
+      <span class="kpi-name">Ratio ventas digitales / ventas físicas</span>
+      <span class="kpi-target" style="color:#534AB7;">Meta: medir</span>
+      <span class="kpi-when">Mensual</span>
+    </div>
+    <div class="kpi-track-row">
+      <span style="font-size:11px; color:var(--color-text-secondary); min-width:18px;">4</span>
+      <span class="kpi-name">ROI promedio por título según plataforma</span>
+      <span class="kpi-target" style="color:#185FA5;">Meta: +20% vs. prev</span>
+      <span class="kpi-when">Por lanzamiento</span>
+    </div>
+  </div>
+
+  <!-- LECCIONES DEL PROYECTO -->
+  <p class="section-title">Lecciones del proyecto — lo que aprendiste siendo analista</p>
+  <div class="context-box">
+    <div class="lesson-row">
+      <div class="lesson-num" style="background:#EEEDFE; color:#534AB7;">1</div>
+      <p class="lesson-text">La limpieza de datos tomó más tiempo que el análisis — siempre es así. El 60-70% del trabajo real de un analista es preparar los datos.</p>
+    </div>
+    <div class="lesson-row">
+      <div class="lesson-num" style="background:#E1F5EE; color:#085041;">2</div>
+      <p class="lesson-text">Los datos responden preguntas, pero tú tienes que hacer las preguntas correctas. Sin la Etapa 1 bien definida, el EDA se convierte en exploración sin rumbo.</p>
+    </div>
+    <div class="lesson-row">
+      <div class="lesson-num" style="background:#FAEEDA; color:#633806;">3</div>
+      <p class="lesson-text">Un dataset puede tener sesgos importantes — las ventas digitales post-2010 no están aquí. Un buen analista siempre pregunta: ¿qué no están capturando estos datos?</p>
+    </div>
+    <div class="lesson-row">
+      <div class="lesson-num" style="background:#E6F1FB; color:#0C447C;">4</div>
+      <p class="lesson-text">La visualización no es decoración — es la diferencia entre que te crean o no. Un gráfico mal elegido puede ocultar el insight más importante.</p>
+    </div>
+    <div class="lesson-row">
+      <div class="lesson-num" style="background:#EAF3DE; color:#27500A;">5</div>
+      <p class="lesson-text">El análisis no termina con los gráficos — termina cuando alguien toma una decisión diferente gracias a tu trabajo. Si no hay acción, no hubo valor.</p>
+    </div>
+  </div>
+
+  <!-- CIERRE FINAL -->
+  <div class="final-box" style="background:var(--color-background-secondary); border:0.5px solid var(--color-border-tertiary);">
+    <p style="font-size:22px; font-weight:500; margin:0 0 8px; color:var(--color-text-primary);">Proyecto completado ✓</p>
+    <p style="font-size:13px; color:var(--color-text-secondary); margin:0 0 14px;">7 etapas · 1 dataset · 4 decisiones de negocio concretas</p>
+    <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-bottom:14px;">
+      <span style="font-size:11px; background:#EEEDFE; color:#3C3489; padding:3px 10px; border-radius:20px; font-weight:500;">Definición del problema</span>
+      <span style="font-size:11px; background:#E1F5EE; color:#085041; padding:3px 10px; border-radius:20px; font-weight:500;">KPIs identificados</span>
+      <span style="font-size:11px; background:#E6F1FB; color:#0C447C; padding:3px 10px; border-radius:20px; font-weight:500;">Datos recolectados</span>
+      <span style="font-size:11px; background:#FAEEDA; color:#633806; padding:3px 10px; border-radius:20px; font-weight:500;">Datos limpios</span>
+      <span style="font-size:11px; background:#FCEBEB; color:#791F1F; padding:3px 10px; border-radius:20px; font-weight:500;">EDA completo</span>
+      <span style="font-size:11px; background:#FBEAF0; color:#72243E; padding:3px 10px; border-radius:20px; font-weight:500;">Visualizado</span>
+      <span style="font-size:11px; background:#EAF3DE; color:#27500A; padding:3px 10px; border-radius:20px; font-weight:500;">Decisiones tomadas</span>
+    </div>
+    <p style="font-size:12px; color:var(--color-text-secondary); margin:0;">Esto es exactamente lo que un analista de datos entrega en el mundo real.</p>
+  </div>
+
+</div>
