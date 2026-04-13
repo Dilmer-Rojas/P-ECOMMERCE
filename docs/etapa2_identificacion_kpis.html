@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Etapa 2: Identificación de Indicadores</title>
+  <style>
+    :root {
+      --black: #000000;
+      --white: #ffffff;
+      --neon-cyan: #00f3ff;
+      --neon-pink: #ff00ff;
+      --neon-green: #39ff14;
+      --glass: rgba(255, 255, 255, 0.1);
+    }
+
+    body {
+      background-color: #050505;
+      background-image: radial-gradient(rgba(0, 243, 255, 0.1) 1px, transparent 0);
+      background-size: 25px 25px;
+      font-family: 'Inter', system-ui, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      color: white;
+    }
+
+    .wrap {
+      background: var(--glass);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 3px solid var(--neon-cyan);
+      box-shadow: 10px 10px 0px var(--black), 10px 10px 0px 2px var(--neon-cyan);
+      max-width: 500px;
+      width: 100%;
+      padding: 30px;
+      box-sizing: border-box;
+    }
+
+    .etapa-badge {
+      display: inline-flex;
+      align-items: center;
+      background: var(--neon-cyan);
+      color: var(--black);
+      padding: 5px 14px;
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      border: 2px solid var(--black);
+      box-shadow: 4px 4px 0px var(--black);
+      margin-bottom: 1.25rem;
+    }
+
+    .intro-box {
+      background: rgba(0, 0, 0, 0.6);
+      border-left: 4px solid var(--neon-green);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .intro-box p {
+      margin: 0;
+      font-size: 13px;
+      color: white;
+      line-height: 1.4;
+    }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--neon-pink);
+      text-transform: uppercase;
+      margin: 1.5rem 0 0.75rem;
+      letter-spacing: 0.5px;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .kpi-card {
+      background: var(--black);
+      border: 2px solid var(--neon-cyan);
+      padding: 1rem;
+      box-shadow: 4px 4px 0px var(--neon-cyan);
+    }
+
+    .kpi-card .kpi-name {
+      font-size: 12px;
+      font-weight: 800;
+      color: white;
+      margin: 0 0 6px;
+      display: flex;
+      align-items: center;
+    }
+
+    .kpi-dot {
+      width: 8px;
+      height: 8px;
+      margin-right: 8px;
+      flex-shrink: 0;
+    }
+
+    .kpi-formula {
+      font-size: 9px;
+      font-family: 'Consolas', monospace;
+      background: rgba(0, 243, 255, 0.1);
+      padding: 4px 6px;
+      border: 1px solid var(--neon-cyan);
+      display: inline-block;
+      margin-bottom: 8px;
+      color: var(--neon-cyan);
+    }
+
+    .kpi-why {
+      font-size: 11px;
+      color: #ccc;
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    .context-box {
+      background: rgba(0, 0, 0, 0.4);
+      border: 2px solid white;
+      padding: 1rem;
+    }
+
+    .dim-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .dim-row:last-child {
+      border-bottom: none;
+    }
+
+    .dim-label {
+      font-size: 11px;
+      font-weight: 900;
+      color: var(--neon-green);
+      min-width: 80px;
+      text-transform: uppercase;
+    }
+
+    .dim-desc {
+      font-size: 11px;
+      color: white;
+      margin-bottom: 6px;
+    }
+
+    .dim-values {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .pill {
+      font-size: 9px;
+      padding: 2px 8px;
+      border: 1px solid var(--neon-green);
+      color: var(--neon-green);
+      font-weight: 700;
+    }
+
+    .priority-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 11px;
+    }
+
+    .badge-pri {
+      font-size: 9px;
+      padding: 2px 8px;
+      font-weight: 900;
+      text-transform: uppercase;
+      min-width: 50px;
+      text-align: center;
+      color: black;
+    }
+
+    @media (max-width: 450px) {
+      .kpi-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="wrap">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom: 1.25rem;">
+      <span class="etapa-badge">Etapa 2 · Identificación de indicadores (KPIs)</span>
+    </div>
+
+    <div class="intro-box">
+      <p>Antes de tocar un solo dato, el analista define <strong>qué va a medir y por qué</strong>. Cada KPI responde
+        directamente a la necesidad de optimizar ventas y marketing planteada en la Etapa 1.</p>
+    </div>
+
+    <p class="section-title">Métricas primarias — impacto en ingresos</p>
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <p class="kpi-name"><span class="kpi-dot" style="background:var(--neon-green);"></span>Ingresos Totales</p>
+        <span class="kpi-formula">SUM(Precio × Cantidad)</span>
+        <p class="kpi-why">Mide el éxito financiero bruto y la rentabilidad por producto.</p>
+      </div>
+      <div class="kpi-card">
+        <p class="kpi-name"><span class="kpi-dot" style="background:var(--neon-pink);"></span>Ticket Promedio</p>
+        <span class="kpi-formula">Total_Ingresos / Total_Ventas</span>
+        <p class="kpi-why">Indica cuánto gasta un cliente en promedio por transacción.</p>
+      </div>
+      <div class="kpi-card">
+        <p class="kpi-name"><span class="kpi-dot" style="background:var(--neon-cyan);"></span>Ventas por Categoría</p>
+        <span class="kpi-formula">% = Ventas_Cat / Total_Ventas</span>
+        <p class="kpi-why">Identifica qué segmentos de productos dominan el mercado.</p>
+      </div>
+      <div class="kpi-card">
+        <p class="kpi-name"><span class="kpi-dot" style="background:var(--white);"></span>Tasa de Conversión</p>
+        <span class="kpi-formula">Ventas / Clientes_Únicos</span>
+        <p class="kpi-why">Evalúa la eficiencia de convertir interesados en compradores.</p>
+      </div>
+    </div>
+
+    <p class="section-title">Métricas secundarias — comportamiento</p>
+    <div class="kpi-grid">
+      <div class="kpi-card" style="border-color: var(--neon-pink); box-shadow: 4px 4px 0px var(--neon-pink);">
+        <p class="kpi-name"><span class="kpi-dot" style="background:var(--neon-pink);"></span>Frecuencia de Compra</p>
+        <span class="kpi-formula">Ventas / Total_Clientes</span>
+        <p class="kpi-why">Muestra cada cuánto tiempo regresa un cliente a comprar.</p>
+      </div>
+      <div class="kpi-card" style="border-color: var(--neon-pink); box-shadow: 4px 4px 0px var(--neon-pink);">
+        <p class="kpi-name"><span class="kpi-dot" style="background:var(--neon-pink);"></span>Preferencia de Pago</p>
+        <span class="kpi-formula">COUNT(Ventas) GROUP BY Metodo</span>
+        <p class="kpi-why">Detecta fallas o brechas según la facilidad de pago ofrecida.</p>
+      </div>
+    </div>
+
+    <p class="section-title">Dimensiones de análisis (filtros)</p>
+    <div class="context-box">
+      <div class="dim-row">
+        <span class="dim-label">Tiempo</span>
+        <div>
+          <div class="dim-desc">Ciclos de venta — tendencias mensuales</div>
+          <div class="dim-values"><span class="pill">Mes</span><span class="pill">Trimestre</span></div>
+        </div>
+      </div>
+      <div class="dim-row">
+        <span class="dim-label">Producto</span>
+        <div>
+          <div class="dim-desc">Segmentación del catálogo</div>
+          <div class="dim-values"><span class="pill"
+              style="border-color:var(--neon-pink); color:var(--neon-pink);">Categoría</span><span class="pill"
+              style="border-color:var(--neon-pink); color:var(--neon-pink);">Nombre_Producto</span></div>
+        </div>
+      </div>
+      <div class="dim-row">
+        <span class="dim-label">Cliente</span>
+        <div>
+          <div class="dim-desc">Ubicación y perfil</div>
+          <div class="dim-values"><span class="pill"
+              style="border-color:var(--neon-cyan); color:var(--neon-cyan);">Ciudad</span><span class="pill"
+              style="border-color:var(--neon-cyan); color:var(--neon-cyan);">ID_Cliente</span></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="section-title">Priorización estratégica</p>
+    <div class="context-box" style="border-color: var(--neon-pink);">
+      <div class="priority-row">
+        <span class="badge-pri" style="background:var(--neon-green);">Alta</span>
+        <span>Ingresos totales · Rentabilidad por categoría · Ticket promedio</span>
+      </div>
+      <div class="priority-row">
+        <span class="badge-pri" style="background:var(--neon-cyan);">Media</span>
+        <span>Frecuencia de compra · Métodos de pago más usados</span>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

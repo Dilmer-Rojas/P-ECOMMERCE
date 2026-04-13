@@ -1,0 +1,210 @@
+
+<style>
+  .wrap { padding: 1.5rem 0; }
+  .etapa-badge { display: inline-flex; align-items: center; gap: 8px; background: #E6F1FB; color: #0C447C; border-radius: 20px; padding: 5px 14px; font-size: 13px; font-weight: 500; }
+  .section-title { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin: 1.25rem 0 0.75rem; }
+  .context-box { border: 0.5px solid var(--color-border-tertiary); border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 10px; }
+  .code-block { background: var(--color-background-secondary); border-radius: 10px; padding: 1rem 1.25rem; font-family: var(--font-mono); font-size: 12px; color: var(--color-text-primary); line-height: 1.8; overflow-x: auto; margin-bottom: 10px; border: 0.5px solid var(--color-border-tertiary); }
+  .kw { color: #534AB7; font-weight: 500; }
+  .fn { color: #0F6E56; }
+  .st { color: #993C1D; }
+  .cm { color: var(--color-text-secondary); }
+  .col-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .col-table th { text-align: left; padding: 8px 10px; font-weight: 500; font-size: 12px; color: var(--color-text-secondary); border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .col-table td { padding: 8px 10px; border-bottom: 0.5px solid var(--color-border-tertiary); color: var(--color-text-primary); vertical-align: top; }
+  .col-table tr:last-child td { border-bottom: none; }
+  .dtype-pill { font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 500; font-family: var(--font-mono); }
+  .output-block { background: var(--color-background-secondary); border-radius: 10px; padding: 1rem 1.25rem; font-family: var(--font-mono); font-size: 12px; color: var(--color-text-secondary); line-height: 1.9; border-left: 3px solid #85B7EB; margin-bottom: 10px; }
+  .out-val { color: var(--color-text-primary); font-weight: 500; }
+  .stat-mini-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .stat-mini { background: var(--color-background-secondary); border-radius: 10px; padding: 0.75rem 1rem; text-align: center; }
+  .stat-mini .val { font-size: 20px; font-weight: 500; }
+  .stat-mini .lbl { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
+  .source-card { display: flex; align-items: flex-start; gap: 14px; border: 0.5px solid var(--color-border-tertiary); border-radius: 12px; padding: 1rem 1.25rem; }
+  .source-icon { width: 40px; height: 40px; border-radius: 10px; background: #E6F1FB; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .tip-box { background: #EAF3DE; border-radius: 10px; padding: 0.85rem 1.1rem; font-size: 13px; color: #27500A; margin-top: 1.25rem; }
+</style>
+
+<div class="wrap">
+  <h2 style="display:none">Etapa 3: Recolección de datos</h2>
+
+  <div style="display:flex; align-items:center; gap:12px; margin-bottom: 1.25rem;">
+    <span class="etapa-badge">Etapa 3 · Recolección de datos</span>
+  </div>
+
+  <div style="background: var(--color-background-secondary); border-left: 3px solid #378ADD; border-radius: 0 12px 12px 0; padding: 1rem 1.25rem; margin-bottom: 1.25rem;">
+    <p style="margin:0; font-size:14px; color: var(--color-text-primary);">El analista documenta <strong>de dónde viene el dato, cómo se obtiene y qué forma tiene</strong> antes de procesarlo. Un dato sin origen conocido no es confiable.</p>
+  </div>
+
+  <p class="section-title">Fuente del dataset</p>
+  <div class="source-card" style="margin-bottom: 1.25rem;">
+    <div class="source-icon">📦</div>
+    <div>
+      <p style="margin:0 0 3px; font-size:14px; font-weight:500; color:var(--color-text-primary);">vgsales.csv — Kaggle</p>
+      <p style="margin:0 0 6px; font-size:13px; color:var(--color-text-secondary);">Scrapeado de VGChartz.com por Gregory Smith. Datos de ventas físicas de videojuegos con más de 100,000 copias vendidas globalmente.</p>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <span style="font-size:11px; background:#E6F1FB; color:#0C447C; padding:2px 9px; border-radius:20px; font-weight:500;">Fuente pública</span>
+        <span style="font-size:11px; background:#EAF3DE; color:#27500A; padding:2px 9px; border-radius:20px; font-weight:500;">Descarga directa CSV</span>
+        <span style="font-size:11px; background:#FAEEDA; color:#633806; padding:2px 9px; border-radius:20px; font-weight:500;">Licencia: CC0 Public Domain</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="section-title">Carga del dataset en Python</p>
+  <div class="code-block">
+<span class="cm"># Paso 1 — importar librerías esenciales</span><br>
+<span class="kw">import</span> pandas <span class="kw">as</span> pd<br>
+<span class="kw">import</span> numpy <span class="kw">as</span> np<br>
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt<br>
+<span class="kw">import</span> seaborn <span class="kw">as</span> sns<br>
+<br>
+<span class="cm"># Paso 2 — cargar el archivo</span><br>
+df = pd.<span class="fn">read_csv</span>(<span class="st">'vgsales.csv'</span>)<br>
+<br>
+<span class="cm"># Paso 3 — primer vistazo</span><br>
+<span class="fn">print</span>(df.<span class="fn">shape</span>)       <span class="cm"># filas y columnas</span><br>
+<span class="fn">print</span>(df.<span class="fn">head</span>())      <span class="cm"># primeras 5 filas</span><br>
+<span class="fn">print</span>(df.<span class="fn">dtypes</span>)     <span class="cm"># tipos de dato</span><br>
+<span class="fn">print</span>(df.<span class="fn">info</span>())      <span class="cm"># resumen general</span>
+  </div>
+
+  <p class="section-title">Output real del dataset</p>
+  <div class="output-block">
+    Shape: <span class="out-val">(16598, 11)</span> &nbsp;←&nbsp; 16,598 filas · 11 columnas<br>
+    Memory usage: <span class="out-val">~1.4 MB</span><br>
+    Null values detectados: <span class="out-val">Sí</span> (Year: 271, Publisher: 58)
+  </div>
+
+  <p class="section-title">Diccionario de datos — las 11 columnas</p>
+  <div class="context-box">
+    <table class="col-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Columna</th>
+          <th>Tipo</th>
+          <th>Descripción</th>
+          <th>Ejemplo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="color:var(--color-text-secondary);">1</td>
+          <td><code style="font-size:11px;">Rank</code></td>
+          <td><span class="dtype-pill" style="background:#E6F1FB; color:#0C447C;">int</span></td>
+          <td>Posición según ventas globales</td>
+          <td style="color:var(--color-text-secondary);">1, 2, 3…</td>
+        </tr>
+        <tr>
+          <td style="color:var(--color-text-secondary);">2</td>
+          <td><code style="font-size:11px;">Name</code></td>
+          <td><span class="dtype-pill" style="background:#EEEDFE; color:#3C3489;">object</span></td>
+          <td>Nombre del videojuego</td>
+          <td style="color:var(--color-text-secondary);">Wii Sports</td>
+        </tr>
+        <tr>
+          <td style="color:var(--color-text-secondary);">3</td>
+          <td><code style="font-size:11px;">Platform</code></td>
+          <td><span class="dtype-pill" style="background:#EEEDFE; color:#3C3489;">object</span></td>
+          <td>Consola o plataforma</td>
+          <td style="color:var(--color-text-secondary);">Wii, PS4, DS…</td>
+        </tr>
+        <tr>
+          <td style="color:var(--color-text-secondary);">4</td>
+          <td><code style="font-size:11px;">Year</code></td>
+          <td><span class="dtype-pill" style="background:#FAEEDA; color:#633806;">float</span></td>
+          <td>Año de lanzamiento</td>
+          <td style="color:var(--color-text-secondary);">2006.0, NaN</td>
+        </tr>
+        <tr>
+          <td style="color:var(--color-text-secondary);">5</td>
+          <td><code style="font-size:11px;">Genre</code></td>
+          <td><span class="dtype-pill" style="background:#EEEDFE; color:#3C3489;">object</span></td>
+          <td>Categoría del juego</td>
+          <td style="color:var(--color-text-secondary);">Sports, RPG…</td>
+        </tr>
+        <tr>
+          <td style="color:var(--color-text-secondary);">6</td>
+          <td><code style="font-size:11px;">Publisher</code></td>
+          <td><span class="dtype-pill" style="background:#EEEDFE; color:#3C3489;">object</span></td>
+          <td>Empresa que publicó el juego</td>
+          <td style="color:var(--color-text-secondary);">Nintendo, EA…</td>
+        </tr>
+        <tr>
+          <td style="color:var(--color-text-secondary);">7</td>
+          <td><code style="font-size:11px;">NA_Sales</code></td>
+          <td><span class="dtype-pill" style="background:#EAF3DE; color:#3B6D11;">float</span></td>
+          <td>Ventas en Norteamérica (millones)</td>
+          <td style="color:var(--color-text-secondary);">41.49</td>
+        </tr>
+        <tr>
+          <td style="color:var(--color-text-secondary);">8</td>
+          <td><code style="font-size:11px;">EU_Sales</code></td>
+          <td><span class="dtype-pill" style="background:#EAF3DE; color:#3B6D11;">float</span></td>
+          <td>Ventas en Europa (millones)</td>
+          <td style="color:var(--color-text-secondary);">29.02</td>
+        </tr>
+        <tr>
+          <td style="color:var(--color-text-secondary);">9</td>
+          <td><code style="font-size:11px;">JP_Sales</code></td>
+          <td><span class="dtype-pill" style="background:#EAF3DE; color:#3B6D11;">float</span></td>
+          <td>Ventas en Japón (millones)</td>
+          <td style="color:var(--color-text-secondary);">3.77</td>
+        </tr>
+        <tr>
+          <td style="color:var(--color-text-secondary);">10</td>
+          <td><code style="font-size:11px;">Other_Sales</code></td>
+          <td><span class="dtype-pill" style="background:#EAF3DE; color:#3B6D11;">float</span></td>
+          <td>Ventas en resto del mundo (millones)</td>
+          <td style="color:var(--color-text-secondary);">8.46</td>
+        </tr>
+        <tr>
+          <td style="color:var(--color-text-secondary);">11</td>
+          <td><code style="font-size:11px;">Global_Sales</code></td>
+          <td><span class="dtype-pill" style="background:#FCEBEB; color:#791F1F;">float</span></td>
+          <td>Total global (NA+EU+JP+Other)</td>
+          <td style="color:var(--color-text-secondary);">82.74</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="section-title">Estadísticas de primer vistazo</p>
+  <div class="stat-mini-grid">
+    <div class="stat-mini">
+      <div class="val" style="color:#185FA5;">16,598</div>
+      <div class="lbl">registros totales</div>
+    </div>
+    <div class="stat-mini">
+      <div class="val" style="color:#0F6E56;">11</div>
+      <div class="lbl">columnas</div>
+    </div>
+    <div class="stat-mini">
+      <div class="val" style="color:#854F0B;">329</div>
+      <div class="lbl">valores nulos</div>
+    </div>
+    <div class="stat-mini">
+      <div class="val" style="color:#A32D2D;">0</div>
+      <div class="lbl">duplicados exactos</div>
+    </div>
+  </div>
+
+  <p class="section-title">Primera fila real del dataset</p>
+  <div class="output-block">
+    Rank: <span class="out-val">1</span> &nbsp;|&nbsp;
+    Name: <span class="out-val">Wii Sports</span> &nbsp;|&nbsp;
+    Platform: <span class="out-val">Wii</span> &nbsp;|&nbsp;
+    Year: <span class="out-val">2006.0</span><br>
+    Genre: <span class="out-val">Sports</span> &nbsp;|&nbsp;
+    Publisher: <span class="out-val">Nintendo</span><br>
+    NA: <span class="out-val">41.49M</span> &nbsp;|&nbsp;
+    EU: <span class="out-val">29.02M</span> &nbsp;|&nbsp;
+    JP: <span class="out-val">3.77M</span> &nbsp;|&nbsp;
+    Other: <span class="out-val">8.46M</span> &nbsp;|&nbsp;
+    Global: <span class="out-val">82.74M</span>
+  </div>
+
+  <div class="tip-box">
+    💡 <strong>Alerta temprana del analista:</strong> Ya se detectaron 329 valores nulos (Year y Publisher). Esto no se ignora — se documenta aquí y se trata en la Etapa 4. Además, Year tiene tipo <code>float</code> en vez de <code>int</code> — señal de que hay NaN en esa columna.
+  </div>
+</div>

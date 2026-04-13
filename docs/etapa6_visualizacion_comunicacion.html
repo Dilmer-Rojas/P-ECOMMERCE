@@ -1,0 +1,287 @@
+
+<style>
+  .wrap { padding: 1.5rem 0; }
+  .etapa-badge { display: inline-flex; align-items: center; gap: 8px; background: #FBEAF0; color: #72243E; border-radius: 20px; padding: 5px 14px; font-size: 13px; font-weight: 500; }
+  .section-title { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin: 1.25rem 0 0.75rem; }
+  .context-box { border: 0.5px solid var(--color-border-tertiary); border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 10px; }
+  .code-block { background: var(--color-background-secondary); border-radius: 10px; padding: 1rem 1.25rem; font-family: var(--font-mono); font-size: 12px; color: var(--color-text-primary); line-height: 1.9; margin-bottom: 6px; border: 0.5px solid var(--color-border-tertiary); overflow-x: auto; }
+  .kw { color: #534AB7; font-weight: 500; }
+  .fn { color: #0F6E56; }
+  .st { color: #993C1D; }
+  .cm { color: var(--color-text-secondary); }
+  .out-val { color: var(--color-text-primary); font-weight: 500; }
+  .chart-box { border: 0.5px solid var(--color-border-tertiary); border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 10px; }
+  .chart-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 4px; }
+  .chart-sub { font-size: 11px; color: var(--color-text-secondary); margin: 0 0 12px; }
+  .insight-strip { border-radius: 8px; padding: 8px 12px; font-size: 12px; margin-top: 10px; display: flex; gap: 8px; align-items: flex-start; }
+  .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .bar-label { font-size: 12px; color: var(--color-text-primary); min-width: 86px; text-align: right; }
+  .bar-track { flex: 1; background: var(--color-background-secondary); border-radius: 4px; height: 20px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; padding: 0 8px; font-size: 11px; font-weight: 500; }
+  .donut-wrap { display: flex; align-items: center; gap: 1.5rem; }
+  .legend-item { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--color-text-primary); margin-bottom: 6px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .heatmap-cell { border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; }
+  .storytelling-card { border: 0.5px solid var(--color-border-tertiary); border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 8px; display: flex; gap: 14px; align-items: flex-start; }
+  .story-num { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 500; flex-shrink: 0; }
+  .story-content h3 { font-size: 13px; font-weight: 500; margin: 0 0 4px; color: var(--color-text-primary); }
+  .story-content p { font-size: 12px; color: var(--color-text-secondary); margin: 0; line-height: 1.6; }
+  .tool-pill { font-size: 11px; padding: 2px 9px; border-radius: 20px; font-weight: 500; display: inline-block; margin: 2px; }
+</style>
+
+<div class="wrap">
+  <h2 style="display:none">Etapa 6: Visualización y Comunicación</h2>
+
+  <div style="display:flex; align-items:center; gap:12px; margin-bottom:1.25rem;">
+    <span class="etapa-badge">Etapa 6 · Visualización y Comunicación</span>
+  </div>
+
+  <div style="background:var(--color-background-secondary); border-left:3px solid #D4537E; border-radius:0 12px 12px 0; padding:1rem 1.25rem; margin-bottom:1.25rem;">
+    <p style="margin:0; font-size:14px; color:var(--color-text-primary);">Un análisis sin comunicación no existe. El trabajo del analista es <strong>convertir números en decisiones</strong> — y eso requiere gráficos claros, una narrativa ordenada y saber quién es tu audiencia.</p>
+  </div>
+
+  <!-- SETUP -->
+  <p class="section-title">Setup de visualización en Python</p>
+  <div class="code-block">
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt<br>
+<span class="kw">import</span> seaborn <span class="kw">as</span> sns<br>
+<br>
+<span class="cm"># Estilo profesional consistente</span><br>
+plt.<span class="fn">style.use</span>(<span class="st">'seaborn-v0_8-whitegrid'</span>)<br>
+sns.<span class="fn">set_palette</span>(<span class="st">'husl'</span>)<br>
+plt.rcParams[<span class="st">'figure.figsize'</span>] = (<span class="out-val">12</span>, <span class="out-val">6</span>)<br>
+plt.rcParams[<span class="st">'font.family'</span>] = <span class="st">'sans-serif'</span><br>
+plt.rcParams[<span class="st">'axes.titlesize'</span>] = <span class="out-val">14</span>
+  </div>
+
+  <!-- GRÁFICO 1: BARRAS GÉNEROS -->
+  <p class="section-title">Gráfico 1 — Ventas por género (barras horizontales)</p>
+  <div class="code-block">
+genre_sales.<span class="fn">plot</span>(kind=<span class="st">'barh'</span>, color=<span class="st">'#534AB7'</span>, figsize=(<span class="out-val">10</span>,<span class="out-val">6</span>))<br>
+plt.<span class="fn">title</span>(<span class="st">'Ventas globales por género (1980–2016)'</span>)<br>
+plt.<span class="fn">xlabel</span>(<span class="st">'Millones de copias'</span>)<br>
+plt.<span class="fn">tight_layout</span>()<br>
+plt.<span class="fn">savefig</span>(<span class="st">'generos.png'</span>, dpi=<span class="out-val">150</span>)
+  </div>
+
+  <div class="chart-box">
+    <p class="chart-title">Ventas globales por género (1980–2016)</p>
+    <p class="chart-sub">Millones de copias vendidas — todos los títulos acumulados</p>
+    <div class="bar-row"><div class="bar-label">Action</div><div class="bar-track"><div class="bar-fill" style="width:100%; background:#534AB7; color:#fff;">1,751M</div></div></div>
+    <div class="bar-row"><div class="bar-label">Sports</div><div class="bar-track"><div class="bar-fill" style="width:76%; background:#7F77DD; color:#fff;">1,331M</div></div></div>
+    <div class="bar-row"><div class="bar-label">Shooter</div><div class="bar-track"><div class="bar-fill" style="width:59%; background:#AFA9EC; color:#3C3489;">1,037M</div></div></div>
+    <div class="bar-row"><div class="bar-label">Role-Play</div><div class="bar-track"><div class="bar-fill" style="width:53%; background:#CECBF6; color:#3C3489;">927M</div></div></div>
+    <div class="bar-row"><div class="bar-label">Platform</div><div class="bar-track"><div class="bar-fill" style="width:47%; background:#EEEDFE; color:#534AB7;">831M</div></div></div>
+    <div class="bar-row"><div class="bar-label">Misc</div><div class="bar-track"><div class="bar-fill" style="width:46%; background:#D3D1C7; color:#444441;">799M</div></div></div>
+    <div class="bar-row"><div class="bar-label">Racing</div><div class="bar-track"><div class="bar-fill" style="width:41%; background:#D3D1C7; color:#444441;">732M</div></div></div>
+    <div class="bar-row"><div class="bar-label">Fighting</div><div class="bar-track"><div class="bar-fill" style="width:26%; background:#D3D1C7; color:#444441;">449M</div></div></div>
+    <div class="insight-strip" style="background:#EEEDFE; color:#3C3489;">
+      <span>📊</span><span><strong>Lectura del gráfico:</strong> Las barras horizontales funcionan mejor que verticales cuando los labels son largos. El color único evita distracción — el dato habla solo.</span>
+    </div>
+  </div>
+
+  <!-- GRÁFICO 2: LÍNEA TEMPORAL -->
+  <p class="section-title">Gráfico 2 — Tendencia anual (línea de tiempo)</p>
+  <div class="code-block">
+year_sales.<span class="fn">plot</span>(kind=<span class="st">'line'</span>, linewidth=<span class="out-val">2.5</span>, color=<span class="st">'#1D9E75'</span>, marker=<span class="st">'o'</span>, markersize=<span class="out-val">3</span>)<br>
+plt.<span class="fn">axvline</span>(x=<span class="out-val">2008</span>, color=<span class="st">'#E24B4A'</span>, linestyle=<span class="st">'--'</span>, label=<span class="st">'Pico 2008'</span>)<br>
+plt.<span class="fn">fill_between</span>(year_sales.index, year_sales.values, alpha=<span class="out-val">0.15</span>, color=<span class="st">'#1D9E75'</span>)<br>
+plt.<span class="fn">title</span>(<span class="st">'Evolución de ventas globales por año'</span>)<br>
+plt.<span class="fn">legend</span>()
+  </div>
+
+  <div class="chart-box">
+    <p class="chart-title">Evolución de ventas globales de videojuegos</p>
+    <p class="chart-sub">Millones de copias vendidas por año · Línea vertical roja = pico histórico</p>
+    <svg viewBox="0 0 540 130" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:130px;">
+      <defs>
+        <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1D9E75" stop-opacity="0.2"/>
+          <stop offset="100%" stop-color="#1D9E75" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <path d="M15,112 C30,110 50,108 70,105 C90,102 110,96 130,88 C150,80 165,68 180,55 C195,42 205,28 218,20 C225,16 232,14 240,14 C248,14 255,18 265,26 C275,34 285,46 300,58 C315,70 330,80 350,88 C370,95 390,100 415,105 C435,108 460,110 480,112 L480,122 L15,122 Z" fill="url(#areaGrad)"/>
+      <polyline points="15,112 30,110 50,108 70,105 90,102 110,96 130,88 150,80 165,68 180,55 195,42 205,28 218,20 225,16 240,14 248,14 255,18 265,26 275,34 285,46 300,58 315,70 330,80 350,88 370,95 390,100 415,105 435,108 460,110 480,112" fill="none" stroke="#1D9E75" stroke-width="2.5" stroke-linejoin="round"/>
+      <line x1="240" y1="8" x2="240" y2="122" stroke="#E24B4A" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <text x="243" y="13" font-size="10" fill="#E24B4A" font-weight="500">Pico 2008</text>
+      <circle cx="240" cy="14" r="4" fill="#1D9E75"/>
+      <text x="15" y="125" font-size="10" fill="#888780">1980</text>
+      <text x="120" y="125" font-size="10" fill="#888780">1995</text>
+      <text x="230" y="125" font-size="10" fill="#888780">2008</text>
+      <text x="360" y="125" font-size="10" fill="#888780">2012</text>
+      <text x="460" y="125" font-size="10" fill="#888780">2016</text>
+    </svg>
+    <div class="insight-strip" style="background:#E1F5EE; color:#085041;">
+      <span>📊</span><span><strong>Lectura del gráfico:</strong> El área rellena enfatiza el volumen total. La línea punteada roja ancla visualmente el punto de quiebre — el ojo va directo ahí sin necesidad de explicación.</span>
+    </div>
+  </div>
+
+  <!-- GRÁFICO 3: DONUT REGIONAL -->
+  <p class="section-title">Gráfico 3 — Distribución regional (donut chart)</p>
+  <div class="code-block">
+region_data = [<span class="out-val">49.3</span>, <span class="out-val">27.2</span>, <span class="out-val">14.6</span>, <span class="out-val">8.9</span>]<br>
+labels = [<span class="st">'NA 49.3%'</span>, <span class="st">'EU 27.2%'</span>, <span class="st">'JP 14.6%'</span>, <span class="st">'Otros 8.9%'</span>]<br>
+colors = [<span class="st">'#185FA5'</span>, <span class="st">'#1D9E75'</span>, <span class="st">'#BA7517'</span>, <span class="st">'#888780'</span>]<br>
+plt.<span class="fn">pie</span>(region_data, labels=labels, colors=colors,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wedgeprops=<span class="fn">dict</span>(width=<span class="out-val">0.5</span>), startangle=<span class="out-val">90</span>)
+  </div>
+
+  <div class="chart-box">
+    <p class="chart-title">Participación de ventas por región</p>
+    <p class="chart-sub">% del total global de copias vendidas</p>
+    <div class="donut-wrap">
+      <svg viewBox="0 0 140 140" style="width:140px; height:140px; flex-shrink:0;">
+        <circle cx="70" cy="70" r="50" fill="none" stroke="#185FA5" stroke-width="22" stroke-dasharray="154.7 314.2" stroke-dashoffset="0" transform="rotate(-90 70 70)"/>
+        <circle cx="70" cy="70" r="50" fill="none" stroke="#1D9E75" stroke-width="22" stroke-dasharray="85.5 314.2" stroke-dashoffset="-154.7" transform="rotate(-90 70 70)"/>
+        <circle cx="70" cy="70" r="50" fill="none" stroke="#BA7517" stroke-width="22" stroke-dasharray="45.9 314.2" stroke-dashoffset="-240.2" transform="rotate(-90 70 70)"/>
+        <circle cx="70" cy="70" r="50" fill="none" stroke="#B4B2A9" stroke-width="22" stroke-dasharray="27.9 314.2" stroke-dashoffset="-286.1" transform="rotate(-90 70 70)"/>
+        <text x="70" y="66" text-anchor="middle" font-size="18" font-weight="500" fill="#185FA5">49.3%</text>
+        <text x="70" y="80" text-anchor="middle" font-size="10" fill="#888780">Norteamérica</text>
+      </svg>
+      <div style="flex:1;">
+        <div class="legend-item"><div class="legend-dot" style="background:#185FA5;"></div><span>Norteamérica — <strong>49.3%</strong> (4,393M)</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#1D9E75;"></div><span>Europa — <strong>27.2%</strong> (2,431M)</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#BA7517;"></div><span>Japón — <strong>14.6%</strong> (1,290M)</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#B4B2A9;"></div><span>Resto — <strong>8.9%</strong> (791M)</span></div>
+      </div>
+    </div>
+    <div class="insight-strip" style="background:#E6F1FB; color:#0C447C;">
+      <span>📊</span><span><strong>Lectura del gráfico:</strong> El donut (no pie) es mejor para proporciones porque el centro libre permite un KPI ancla. Solo 4 segmentos — más de 5 segmentos en un pie/donut se vuelve ilegible.</span>
+    </div>
+  </div>
+
+  <!-- GRÁFICO 4: HEATMAP -->
+  <p class="section-title">Gráfico 4 — Heatmap género × región</p>
+  <div class="code-block">
+<span class="cm"># Pivot table: promedio de ventas por género y región</span><br>
+pivot = df_clean.<span class="fn">pivot_table</span>(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;values=[<span class="st">'NA_Sales'</span>,<span class="st">'EU_Sales'</span>,<span class="st">'JP_Sales'</span>],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;index=<span class="st">'Genre'</span>, aggfunc=<span class="st">'sum'</span><br>
+)<br>
+sns.<span class="fn">heatmap</span>(pivot, cmap=<span class="st">'YlOrRd'</span>, annot=<span class="kw">True</span>, fmt=<span class="st">'.0f'</span>)
+  </div>
+
+  <div class="chart-box">
+    <p class="chart-title">Mapa de calor — Ventas por género y región (millones)</p>
+    <p class="chart-sub">Más oscuro = más ventas · Revela preferencias culturales</p>
+    <div style="overflow-x:auto;">
+      <table style="width:100%; border-collapse:separate; border-spacing:3px; font-size:12px;">
+        <thead>
+          <tr>
+            <th style="text-align:left; padding:5px 8px; font-size:11px; color:var(--color-text-secondary); font-weight:500;">Género</th>
+            <th style="padding:5px 8px; font-size:11px; color:#185FA5; font-weight:500; text-align:center;">NA</th>
+            <th style="padding:5px 8px; font-size:11px; color:#0F6E56; font-weight:500; text-align:center;">EU</th>
+            <th style="padding:5px 8px; font-size:11px; color:#854F0B; font-weight:500; text-align:center;">JP</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:4px 8px; font-size:12px; color:var(--color-text-primary);">Action</td>
+            <td><div class="heatmap-cell" style="background:#E24B4A; color:#fff; padding:5px;">877</div></td>
+            <td><div class="heatmap-cell" style="background:#F09595; color:#791F1F; padding:5px;">524</div></td>
+            <td><div class="heatmap-cell" style="background:#FCEBEB; color:#A32D2D; padding:5px;">159</div></td>
+          </tr>
+          <tr>
+            <td style="padding:4px 8px; font-size:12px; color:var(--color-text-primary);">Sports</td>
+            <td><div class="heatmap-cell" style="background:#F09595; color:#791F1F; padding:5px;">683</div></td>
+            <td><div class="heatmap-cell" style="background:#F7C1C1; color:#791F1F; padding:5px;">377</div></td>
+            <td><div class="heatmap-cell" style="background:#FCEBEB; color:#A32D2D; padding:5px;">134</div></td>
+          </tr>
+          <tr>
+            <td style="padding:4px 8px; font-size:12px; color:var(--color-text-primary);">Shooter</td>
+            <td><div class="heatmap-cell" style="background:#F09595; color:#791F1F; padding:5px;">582</div></td>
+            <td><div class="heatmap-cell" style="background:#FCEBEB; color:#A32D2D; padding:5px;">284</div></td>
+            <td><div class="heatmap-cell" style="background:#F1EFE8; color:#5F5E5A; padding:5px;">55</div></td>
+          </tr>
+          <tr>
+            <td style="padding:4px 8px; font-size:12px; color:var(--color-text-primary);">Role-Play</td>
+            <td><div class="heatmap-cell" style="background:#FAEEDA; color:#633806; padding:5px;">341</div></td>
+            <td><div class="heatmap-cell" style="background:#FAEEDA; color:#633806; padding:5px;">188</div></td>
+            <td><div class="heatmap-cell" style="background:#EF9F27; color:#fff; padding:5px;">352</div></td>
+          </tr>
+          <tr>
+            <td style="padding:4px 8px; font-size:12px; color:var(--color-text-primary);">Platform</td>
+            <td><div class="heatmap-cell" style="background:#F7C1C1; color:#791F1F; padding:5px;">447</div></td>
+            <td><div class="heatmap-cell" style="background:#FCEBEB; color:#A32D2D; padding:5px;">199</div></td>
+            <td><div class="heatmap-cell" style="background:#FAEEDA; color:#633806; padding:5px;">141</div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="insight-strip" style="background:#FAEEDA; color:#633806; margin-top:10px;">
+      <span>📊</span><span><strong>Hallazgo clave:</strong> RPG es el único género donde Japón supera a Europa (352M vs 188M). Action y Shooter dominan en NA pero son débiles en JP — diferencia cultural clara y accionable.</span>
+    </div>
+  </div>
+
+  <!-- STORYTELLING -->
+  <p class="section-title">La narrativa — cómo se presenta este análisis</p>
+
+  <div class="storytelling-card">
+    <div class="story-num" style="background:#EEEDFE; color:#534AB7;">1</div>
+    <div class="story-content">
+      <h3>Contexto — ¿por qué importa este análisis?</h3>
+      <p>El mercado global de videojuegos físicos procesó más de 8,900M de copias entre 1980 y 2016. Entender qué funcionó es clave para tomar decisiones de inversión en nuevos títulos.</p>
+    </div>
+  </div>
+  <div class="storytelling-card">
+    <div class="story-num" style="background:#E1F5EE; color:#085041;">2</div>
+    <div class="story-content">
+      <h3>Conflicto — ¿cuál es el problema?</h3>
+      <p>El mercado físico lleva cayendo desde 2009. Las empresas que no entienden qué géneros y regiones tienen mayor potencial, seguirán perdiendo cuota de mercado frente a los gigantes establecidos.</p>
+    </div>
+  </div>
+  <div class="storytelling-card">
+    <div class="story-num" style="background:#FAEEDA; color:#633806;">3</div>
+    <div class="story-content">
+      <h3>Hallazgos — ¿qué nos dicen los datos?</h3>
+      <p>Action domina globalmente, pero RPG es el único género con fuerza real en Asia. Nintendo controla el 21.8% del mercado con franquicias propias. Norteamérica vale más que Europa y Japón juntos.</p>
+    </div>
+  </div>
+  <div class="storytelling-card">
+    <div class="story-num" style="background:#EAF3DE; color:#27500A;">4</div>
+    <div class="story-content">
+      <h3>Recomendación — ¿qué hacer con esto?</h3>
+      <p>Priorizar géneros Action/Shooter para NA-EU. Considerar RPG para expansión en mercado asiático. Estudiar el modelo Nintendo de franquicias de largo plazo.</p>
+    </div>
+  </div>
+
+  <!-- HERRAMIENTAS -->
+  <p class="section-title">¿Qué herramienta usar según la audiencia?</p>
+  <div class="context-box">
+    <table style="width:100%; border-collapse:collapse; font-size:13px;">
+      <thead>
+        <tr>
+          <th style="text-align:left; padding:7px 10px; font-weight:500; font-size:12px; color:var(--color-text-secondary); border-bottom:0.5px solid var(--color-border-tertiary);">Audiencia</th>
+          <th style="text-align:left; padding:7px 10px; font-weight:500; font-size:12px; color:var(--color-text-secondary); border-bottom:0.5px solid var(--color-border-tertiary);">Herramienta</th>
+          <th style="text-align:left; padding:7px 10px; font-weight:500; font-size:12px; color:var(--color-text-secondary); border-bottom:0.5px solid var(--color-border-tertiary);">Por qué</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:7px 10px; border-bottom:0.5px solid var(--color-border-tertiary);">Equipo técnico</td>
+          <td style="padding:7px 10px; border-bottom:0.5px solid var(--color-border-tertiary);"><span class="tool-pill" style="background:#EEEDFE; color:#3C3489;">Jupyter + Matplotlib</span></td>
+          <td style="padding:7px 10px; border-bottom:0.5px solid var(--color-border-tertiary); color:var(--color-text-secondary);">Reproducible, versionable, en código</td>
+        </tr>
+        <tr>
+          <td style="padding:7px 10px; border-bottom:0.5px solid var(--color-border-tertiary);">Directivos / negocio</td>
+          <td style="padding:7px 10px; border-bottom:0.5px solid var(--color-border-tertiary);"><span class="tool-pill" style="background:#FAEEDA; color:#633806;">Power BI / Tableau</span></td>
+          <td style="padding:7px 10px; border-bottom:0.5px solid var(--color-border-tertiary); color:var(--color-text-secondary);">Dashboard interactivo, sin código</td>
+        </tr>
+        <tr>
+          <td style="padding:7px 10px; border-bottom:0.5px solid var(--color-border-tertiary);">Presentación formal</td>
+          <td style="padding:7px 10px; border-bottom:0.5px solid var(--color-border-tertiary);"><span class="tool-pill" style="background:#E6F1FB; color:#0C447C;">PowerPoint / Slides</span></td>
+          <td style="padding:7px 10px; border-bottom:0.5px solid var(--color-border-tertiary); color:var(--color-text-secondary);">Narrativa lineal, control total del mensaje</td>
+        </tr>
+        <tr>
+          <td style="padding:7px 10px;">Exploración propia</td>
+          <td style="padding:7px 10px;"><span class="tool-pill" style="background:#EAF3DE; color:#3B6D11;">Plotly / Seaborn</span></td>
+          <td style="padding:7px 10px; color:var(--color-text-secondary);">Gráficos interactivos en Python</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="background:#EAF3DE; border-radius:10px; padding:0.85rem 1.1rem; font-size:13px; color:#27500A; margin-top:0.75rem;">
+    💡 <strong>Regla de oro del storytelling:</strong> Un buen gráfico no necesita explicación — el título ya dice la conclusión, no la descripción. En vez de "Ventas por género", escribe "Action domina el 20% del mercado global".
+  </div>
+</div>

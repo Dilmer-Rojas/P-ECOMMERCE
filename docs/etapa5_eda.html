@@ -1,0 +1,255 @@
+
+<style>
+  .wrap { padding: 1.5rem 0; }
+  .etapa-badge { display: inline-flex; align-items: center; gap: 8px; background: #FCEBEB; color: #791F1F; border-radius: 20px; padding: 5px 14px; font-size: 13px; font-weight: 500; }
+  .section-title { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin: 1.25rem 0 0.75rem; }
+  .context-box { border: 0.5px solid var(--color-border-tertiary); border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 10px; }
+  .code-block { background: var(--color-background-secondary); border-radius: 10px; padding: 1rem 1.25rem; font-family: var(--font-mono); font-size: 12px; color: var(--color-text-primary); line-height: 1.9; margin-bottom: 10px; border: 0.5px solid var(--color-border-tertiary); overflow-x: auto; }
+  .kw { color: #534AB7; font-weight: 500; }
+  .fn { color: #0F6E56; }
+  .st { color: #993C1D; }
+  .cm { color: var(--color-text-secondary); }
+  .out-val { color: var(--color-text-primary); font-weight: 500; }
+  .insight-box { border-radius: 10px; padding: 0.85rem 1.1rem; font-size: 13px; margin-bottom: 8px; display: flex; gap: 10px; align-items: flex-start; }
+  .insight-num { font-size: 18px; font-weight: 500; flex-shrink: 0; }
+  .insight-text { line-height: 1.6; }
+  .insight-text strong { font-weight: 500; }
+  .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 7px; }
+  .bar-label { font-size: 12px; color: var(--color-text-primary); min-width: 90px; text-align: right; }
+  .bar-track { flex: 1; background: var(--color-background-secondary); border-radius: 4px; height: 22px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 8px; font-size: 11px; font-weight: 500; transition: width 0.6s ease; }
+  .bar-val { font-size: 12px; color: var(--color-text-secondary); min-width: 48px; }
+  .region-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 10px; }
+  .region-card { border-radius: 10px; padding: 0.85rem 0.75rem; text-align: center; border: 0.5px solid var(--color-border-tertiary); }
+  .region-pct { font-size: 22px; font-weight: 500; }
+  .region-name { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
+  .region-val { font-size: 12px; font-weight: 500; margin-top: 3px; }
+  .trend-wrap { position: relative; height: 130px; margin: 0.5rem 0 1rem; }
+  .top10-row { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 0.5px solid var(--color-border-tertiary); font-size: 12px; }
+  .top10-row:last-child { border-bottom: none; }
+  .top10-rank { font-size: 11px; color: var(--color-text-secondary); min-width: 18px; }
+  .top10-name { flex: 1; color: var(--color-text-primary); font-weight: 500; }
+  .top10-plat { font-size: 11px; color: var(--color-text-secondary); min-width: 44px; }
+  .top10-sales { font-size: 12px; font-weight: 500; min-width: 52px; text-align: right; }
+  .top10-bar { height: 6px; border-radius: 3px; }
+  .pill { font-size: 11px; padding: 2px 9px; border-radius: 20px; font-weight: 500; display: inline-block; margin: 2px; }
+</style>
+
+<div class="wrap">
+  <h2 style="display:none">Etapa 5: Análisis Exploratorio de Datos</h2>
+
+  <div style="display:flex; align-items:center; gap:12px; margin-bottom:1.25rem;">
+    <span class="etapa-badge">Etapa 5 · Análisis Exploratorio (EDA)</span>
+  </div>
+
+  <div style="background:var(--color-background-secondary); border-left:3px solid #E24B4A; border-radius:0 12px 12px 0; padding:1rem 1.25rem; margin-bottom:1.25rem;">
+    <p style="margin:0; font-size:14px; color:var(--color-text-primary);">El EDA no busca respuestas definitivas — busca <strong>patrones, anomalías y relaciones</strong> que guíen el análisis. Aquí nacen los primeros insights reales del negocio.</p>
+  </div>
+
+  <!-- ANÁLISIS 1: GÉNEROS -->
+  <p class="section-title">Análisis 1 — ¿Qué géneros venden más?</p>
+  <div class="code-block">
+<span class="cm"># Ventas totales por género</span><br>
+genre_sales = df_clean.<span class="fn">groupby</span>(<span class="st">'Genre'</span>)[<span class="st">'Global_Sales'</span>].<span class="fn">sum</span>().<span class="fn">sort_values</span>(ascending=<span class="kw">False</span>)<br>
+<span class="fn">print</span>(genre_sales.<span class="fn">head</span>(6))
+  </div>
+
+  <div class="context-box">
+    <p style="font-size:12px; color:var(--color-text-secondary); margin:0 0 10px;">Ventas globales totales por género (millones de copias)</p>
+    <div class="bar-row"><div class="bar-label">Action</div><div class="bar-track"><div class="bar-fill" style="width:100%; background:#534AB7; color:#fff;">1,751M</div></div></div>
+    <div class="bar-row"><div class="bar-label">Sports</div><div class="bar-track"><div class="bar-fill" style="width:78%; background:#7F77DD; color:#fff;">1,331M</div></div></div>
+    <div class="bar-row"><div class="bar-label">Shooter</div><div class="bar-track"><div class="bar-fill" style="width:64%; background:#AFA9EC; color:#3C3489;">1,037M</div></div></div>
+    <div class="bar-row"><div class="bar-label">Role-Play</div><div class="bar-track"><div class="bar-fill" style="width:54%; background:#CECBF6; color:#3C3489;">927M</div></div></div>
+    <div class="bar-row"><div class="bar-label">Platform</div><div class="bar-track"><div class="bar-fill" style="width:51%; background:#EEEDFE; color:#534AB7;">831M</div></div></div>
+    <div class="bar-row"><div class="bar-label">Misc</div><div class="bar-track"><div class="bar-fill" style="width:47%; background:#D3D1C7; color:#444441;">799M</div></div></div>
+  </div>
+
+  <div class="insight-box" style="background:#EEEDFE; color:#3C3489;">
+    <span class="insight-num">💡</span>
+    <span class="insight-text"><strong>Insight 1:</strong> Action domina con 1,751M de copias — casi el doble que Shooter. Pero atención: más títulos no siempre significa más rentabilidad por juego. Hay que revisar el promedio.</span>
+  </div>
+
+  <!-- ANÁLISIS 2: PLATAFORMAS -->
+  <p class="section-title">Análisis 2 — ¿Qué plataformas concentran más ventas?</p>
+  <div class="code-block">
+<span class="cm"># Top plataformas por ventas globales</span><br>
+plat_sales = df_clean.<span class="fn">groupby</span>(<span class="st">'Platform'</span>)[<span class="st">'Global_Sales'</span>].<span class="fn">sum</span>().<span class="fn">sort_values</span>(ascending=<span class="kw">False</span>).<span class="fn">head</span>(8)
+  </div>
+
+  <div class="context-box">
+    <p style="font-size:12px; color:var(--color-text-secondary); margin:0 0 10px;">Top 8 plataformas por ventas acumuladas (millones)</p>
+    <div class="bar-row"><div class="bar-label" style="min-width:50px;">PS2</div><div class="bar-track"><div class="bar-fill" style="width:100%; background:#1D9E75; color:#fff;">1,255M</div></div></div>
+    <div class="bar-row"><div class="bar-label" style="min-width:50px;">X360</div><div class="bar-track"><div class="bar-fill" style="width:75%; background:#5DCAA5; color:#085041;">971M</div></div></div>
+    <div class="bar-row"><div class="bar-label" style="min-width:50px;">PS3</div><div class="bar-track"><div class="bar-fill" style="width:73%; background:#5DCAA5; color:#085041;">957M</div></div></div>
+    <div class="bar-row"><div class="bar-label" style="min-width:50px;">Wii</div><div class="bar-track"><div class="bar-fill" style="width:71%; background:#9FE1CB; color:#085041;">926M</div></div></div>
+    <div class="bar-row"><div class="bar-label" style="min-width:50px;">DS</div><div class="bar-track"><div class="bar-fill" style="width:61%; background:#9FE1CB; color:#085041;">806M</div></div></div>
+    <div class="bar-row"><div class="bar-label" style="min-width:50px;">PS</div><div class="bar-track"><div class="bar-fill" style="width:58%; background:#C0DD97; color:#27500A;">730M</div></div></div>
+    <div class="bar-row"><div class="bar-label" style="min-width:50px;">GBA</div><div class="bar-track"><div class="bar-fill" style="width:39%; background:#C0DD97; color:#27500A;">464M</div></div></div>
+    <div class="bar-row"><div class="bar-label" style="min-width:50px;">PSP</div><div class="bar-track"><div class="bar-fill" style="width:37%; background:#EAF3DE; color:#3B6D11;">447M</div></div></div>
+  </div>
+
+  <div class="insight-box" style="background:#E1F5EE; color:#085041;">
+    <span class="insight-num">💡</span>
+    <span class="insight-text"><strong>Insight 2:</strong> PS2 es el rey histórico con 1,255M de copias vendidas. El duopolio Sony–Microsoft domina las consolas de sobremesa. Nintendo lidera en portátiles (DS, GBA).</span>
+  </div>
+
+  <!-- ANÁLISIS 3: TENDENCIA ANUAL -->
+  <p class="section-title">Análisis 3 — Evolución de ventas 1980–2016</p>
+  <div class="code-block">
+<span class="cm"># Tendencia de ventas globales por año</span><br>
+year_sales = df_clean.<span class="fn">groupby</span>(<span class="st">'Year'</span>)[<span class="st">'Global_Sales'</span>].<span class="fn">sum</span>()<br>
+year_sales.<span class="fn">plot</span>(kind=<span class="st">'line'</span>, title=<span class="st">'Ventas globales por año'</span>)
+  </div>
+
+  <div class="context-box">
+    <p style="font-size:12px; color:var(--color-text-secondary); margin:0 0 8px;">Ventas globales anuales — forma de la curva</p>
+    <svg viewBox="0 0 560 110" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:110px;">
+      <defs>
+        <linearGradient id="trendGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#534AB7" stop-opacity="0.15"/>
+          <stop offset="100%" stop-color="#534AB7" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <!-- area fill -->
+      <path d="M20,95 L40,92 L80,88 L120,80 L160,65 L200,42 L240,22 L270,18 L300,25 L330,35 L370,48 L410,62 L450,75 L490,85 L530,90 L530,105 L20,105 Z" fill="url(#trendGrad)"/>
+      <!-- line -->
+      <polyline points="20,95 40,92 80,88 120,80 160,65 200,42 240,22 270,18 300,25 330,35 370,48 410,62 450,75 490,85 530,90" fill="none" stroke="#534AB7" stroke-width="2.5" stroke-linejoin="round"/>
+      <!-- peak dot -->
+      <circle cx="270" cy="18" r="5" fill="#534AB7"/>
+      <text x="270" y="12" text-anchor="middle" font-size="10" fill="#534AB7" font-weight="500">Pico 2008</text>
+      <!-- labels -->
+      <text x="20" y="108" font-size="10" fill="#888780">1980</text>
+      <text x="200" y="108" font-size="10" fill="#888780">2000</text>
+      <text x="370" y="108" font-size="10" fill="#888780">2008</text>
+      <text x="490" y="108" font-size="10" fill="#888780">2016</text>
+    </svg>
+  </div>
+
+  <div class="insight-box" style="background:#EEEDFE; color:#3C3489;">
+    <span class="insight-num">💡</span>
+    <span class="insight-text"><strong>Insight 3:</strong> El mercado alcanzó su pico en <strong>2008–2009</strong> (~678M copias/año), impulsado por la era Wii + PS3 + X360. Desde 2010 cae sostenidamente — posiblemente por el auge del mercado digital no capturado en este dataset.</span>
+  </div>
+
+  <!-- ANÁLISIS 4: DISTRIBUCIÓN REGIONAL -->
+  <p class="section-title">Análisis 4 — ¿Cómo se distribuyen las ventas por región?</p>
+  <div class="code-block">
+<span class="cm"># Participación regional en ventas totales</span><br>
+regions = [<span class="st">'NA_Sales'</span>, <span class="st">'EU_Sales'</span>, <span class="st">'JP_Sales'</span>, <span class="st">'Other_Sales'</span>]<br>
+region_totals = df_clean[regions].<span class="fn">sum</span>()<br>
+region_pct = (region_totals / region_totals.<span class="fn">sum</span>() * <span class="out-val">100</span>).<span class="fn">round</span>(<span class="out-val">1</span>)
+  </div>
+
+  <div class="region-grid">
+    <div class="region-card">
+      <div class="region-pct" style="color:#185FA5;">49.3%</div>
+      <div class="region-name">Norteamérica</div>
+      <div class="region-val" style="color:#185FA5;">4,393M</div>
+    </div>
+    <div class="region-card">
+      <div class="region-pct" style="color:#0F6E56;">27.2%</div>
+      <div class="region-name">Europa</div>
+      <div class="region-val" style="color:#0F6E56;">2,431M</div>
+    </div>
+    <div class="region-card">
+      <div class="region-pct" style="color:#993C1D;">14.6%</div>
+      <div class="region-name">Japón</div>
+      <div class="region-val" style="color:#993C1D;">1,290M</div>
+    </div>
+    <div class="region-card">
+      <div class="region-pct" style="color:#888780;">8.9%</div>
+      <div class="region-name">Resto del mundo</div>
+      <div class="region-val" style="color:#888780;">791M</div>
+    </div>
+  </div>
+
+  <div class="insight-box" style="background:#E6F1FB; color:#0C447C;">
+    <span class="insight-num">💡</span>
+    <span class="insight-text"><strong>Insight 4:</strong> Norteamérica concentra casi la mitad de las ventas globales. Japón tiene un mercado con <strong>gustos radicalmente distintos</strong> — los RPG dominan allá mientras que en NA y EU dominan Action y Shooter.</span>
+  </div>
+
+  <!-- ANÁLISIS 5: TOP 10 -->
+  <p class="section-title">Análisis 5 — Top 10 videojuegos de la historia</p>
+  <div class="code-block">
+<span class="cm"># Los 10 juegos más vendidos de todos los tiempos</span><br>
+top10 = df_clean.<span class="fn">nlargest</span>(<span class="out-val">10</span>, <span class="st">'Global_Sales'</span>)[[<span class="st">'Name'</span>,<span class="st">'Platform'</span>,<span class="st">'Genre'</span>,<span class="st">'Publisher'</span>,<span class="st">'Global_Sales'</span>]]
+  </div>
+
+  <div class="context-box">
+    <div class="top10-row" style="border-bottom:0.5px solid var(--color-border-tertiary); padding-bottom:6px; margin-bottom:4px;">
+      <span class="top10-rank" style="font-weight:500; color:var(--color-text-primary);">#</span>
+      <span class="top10-name" style="color:var(--color-text-secondary); font-size:11px; font-weight:400;">Juego</span>
+      <span class="top10-plat" style="color:var(--color-text-secondary); font-size:11px;">Plataforma</span>
+      <span class="top10-sales" style="color:var(--color-text-secondary); font-size:11px;">Ventas</span>
+    </div>
+    <div class="top10-row"><span class="top10-rank">1</span><span class="top10-name">Wii Sports</span><span class="top10-plat" style="color:var(--color-text-secondary);">Wii</span><div style="flex:1; display:flex; align-items:center; gap:6px;"><div class="top10-bar" style="width:100%; background:#534AB7;"></div></div><span class="top10-sales" style="color:#534AB7;">82.74M</span></div>
+    <div class="top10-row"><span class="top10-rank">2</span><span class="top10-name">Super Mario Bros.</span><span class="top10-plat" style="color:var(--color-text-secondary);">NES</span><div style="flex:1; display:flex; align-items:center; gap:6px;"><div class="top10-bar" style="width:60%; background:#7F77DD;"></div></div><span class="top10-sales" style="color:#534AB7;">40.24M</span></div>
+    <div class="top10-row"><span class="top10-rank">3</span><span class="top10-name">Mario Kart Wii</span><span class="top10-plat" style="color:var(--color-text-secondary);">Wii</span><div style="flex:1; display:flex; align-items:center; gap:6px;"><div class="top10-bar" style="width:56%; background:#7F77DD;"></div></div><span class="top10-sales" style="color:#534AB7;">35.82M</span></div>
+    <div class="top10-row"><span class="top10-rank">4</span><span class="top10-name">Wii Sports Resort</span><span class="top10-plat" style="color:var(--color-text-secondary);">Wii</span><div style="flex:1; display:flex; align-items:center; gap:6px;"><div class="top10-bar" style="width:44%; background:#AFA9EC;"></div></div><span class="top10-sales" style="color:#534AB7;">33.00M</span></div>
+    <div class="top10-row"><span class="top10-rank">5</span><span class="top10-name">Pokemon R/B/Y</span><span class="top10-plat" style="color:var(--color-text-secondary);">GB</span><div style="flex:1; display:flex; align-items:center; gap:6px;"><div class="top10-bar" style="width:42%; background:#AFA9EC;"></div></div><span class="top10-sales" style="color:#534AB7;">31.37M</span></div>
+    <div class="top10-row"><span class="top10-rank">6</span><span class="top10-name">Tetris</span><span class="top10-plat" style="color:var(--color-text-secondary);">GB</span><div style="flex:1; display:flex; align-items:center; gap:6px;"><div class="top10-bar" style="width:40%; background:#AFA9EC;"></div></div><span class="top10-sales" style="color:#534AB7;">30.26M</span></div>
+    <div class="top10-row"><span class="top10-rank">7</span><span class="top10-name">New Super Mario Bros.</span><span class="top10-plat" style="color:var(--color-text-secondary);">DS</span><div style="flex:1; display:flex; align-items:center; gap:6px;"><div class="top10-bar" style="width:38%; background:#CECBF6;"></div></div><span class="top10-sales" style="color:#534AB7;">30.01M</span></div>
+    <div class="top10-row"><span class="top10-rank">8</span><span class="top10-name">Wii Play</span><span class="top10-plat" style="color:var(--color-text-secondary);">Wii</span><div style="flex:1; display:flex; align-items:center; gap:6px;"><div class="top10-bar" style="width:37%; background:#CECBF6;"></div></div><span class="top10-sales" style="color:#534AB7;">29.02M</span></div>
+    <div class="top10-row"><span class="top10-rank">9</span><span class="top10-name">New Super Mario Bros. Wii</span><span class="top10-plat" style="color:var(--color-text-secondary);">Wii</span><div style="flex:1; display:flex; align-items:center; gap:6px;"><div class="top10-bar" style="width:37%; background:#CECBF6;"></div></div><span class="top10-sales" style="color:#534AB7;">28.62M</span></div>
+    <div class="top10-row"><span class="top10-rank">10</span><span class="top10-name">Duck Hunt</span><span class="top10-plat" style="color:var(--color-text-secondary);">NES</span><div style="flex:1; display:flex; align-items:center; gap:6px;"><div class="top10-bar" style="width:36%; background:#EEEDFE;"></div></div><span class="top10-sales" style="color:#534AB7;">28.31M</span></div>
+  </div>
+
+  <div class="insight-box" style="background:#EEEDFE; color:#3C3489;">
+    <span class="insight-num">💡</span>
+    <span class="insight-text"><strong>Insight 5:</strong> <strong>7 de los 10 juegos más vendidos son de Nintendo.</strong> El modelo de Nintendo — hardware + software propio + franquicias de décadas — es la estrategia más rentable de la historia del gaming.</span>
+  </div>
+
+  <!-- ANÁLISIS 6: PUBLISHERS -->
+  <p class="section-title">Análisis 6 — Concentración de mercado por publisher</p>
+  <div class="code-block">
+<span class="cm"># Top publishers por ventas globales</span><br>
+pub_sales = df_clean.<span class="fn">groupby</span>(<span class="st">'Publisher'</span>)[<span class="st">'Global_Sales'</span>].<span class="fn">sum</span>().<span class="fn">sort_values</span>(ascending=<span class="kw">False</span>).<span class="fn">head</span>(5)<br>
+total = df_clean[<span class="st">'Global_Sales'</span>].<span class="fn">sum</span>()<br>
+<span class="fn">print</span>((pub_sales / total * <span class="out-val">100</span>).<span class="fn">round</span>(<span class="out-val">1</span>))
+  </div>
+
+  <div class="context-box">
+    <p style="font-size:12px; color:var(--color-text-secondary); margin:0 0 10px;">% del mercado global — Top 5 publishers</p>
+    <div class="bar-row"><div class="bar-label" style="min-width:90px;">Nintendo</div><div class="bar-track"><div class="bar-fill" style="width:100%; background:#E24B4A; color:#fff;">21.8%</div></div></div>
+    <div class="bar-row"><div class="bar-label" style="min-width:90px;">EA</div><div class="bar-track"><div class="bar-fill" style="width:56%; background:#F09595; color:#791F1F;">9.0%</div></div></div>
+    <div class="bar-row"><div class="bar-label" style="min-width:90px;">Activision</div><div class="bar-track"><div class="bar-fill" style="width:48%; background:#F7C1C1; color:#791F1F;">7.7%</div></div></div>
+    <div class="bar-row"><div class="bar-label" style="min-width:90px;">Sony</div><div class="bar-track"><div class="bar-fill" style="width:40%; background:#FCEBEB; color:#A32D2D;">5.6%</div></div></div>
+    <div class="bar-row"><div class="bar-label" style="min-width:90px;">Ubisoft</div><div class="bar-track"><div class="bar-fill" style="width:28%; background:#FCEBEB; color:#A32D2D;">4.5%</div></div></div>
+    <p style="font-size:11px; color:var(--color-text-secondary); margin:8px 0 0;">El top 5 controla el <strong style="color:var(--color-text-primary);">48.6%</strong> del mercado global — de 577 publishers totales.</p>
+  </div>
+
+  <div class="insight-box" style="background:#FCEBEB; color:#791F1F;">
+    <span class="insight-num">💡</span>
+    <span class="insight-text"><strong>Insight 6:</strong> Mercado altamente concentrado. Solo 5 empresas controlan casi la mitad de las ventas globales. Para una empresa nueva, competir de frente es inviable — la estrategia debe ser por nicho.</span>
+  </div>
+
+  <!-- RESUMEN DE INSIGHTS -->
+  <p class="section-title">Resumen de hallazgos del EDA</p>
+  <div class="context-box">
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      <div style="display:flex; gap:10px; align-items:flex-start; font-size:13px;">
+        <span style="background:#EEEDFE; color:#534AB7; border-radius:20px; padding:2px 9px; font-size:11px; font-weight:500; flex-shrink:0;">Género</span>
+        <span style="color:var(--color-text-primary);">Action lidera en volumen, pero RPG y Shooter tienen mayor promedio por título</span>
+      </div>
+      <div style="display:flex; gap:10px; align-items:flex-start; font-size:13px;">
+        <span style="background:#E1F5EE; color:#085041; border-radius:20px; padding:2px 9px; font-size:11px; font-weight:500; flex-shrink:0;">Plataforma</span>
+        <span style="color:var(--color-text-primary);">PS2 domina histórico; la guerra de consolas 7ª generación fue la más intensa</span>
+      </div>
+      <div style="display:flex; gap:10px; align-items:flex-start; font-size:13px;">
+        <span style="background:#E6F1FB; color:#0C447C; border-radius:20px; padding:2px 9px; font-size:11px; font-weight:500; flex-shrink:0;">Tendencia</span>
+        <span style="color:var(--color-text-primary);">Pico en 2008–2009, caída desde 2010 (mercado físico vs. digital)</span>
+      </div>
+      <div style="display:flex; gap:10px; align-items:flex-start; font-size:13px;">
+        <span style="background:#FAEEDA; color:#633806; border-radius:20px; padding:2px 9px; font-size:11px; font-weight:500; flex-shrink:0;">Región</span>
+        <span style="color:var(--color-text-primary);">NA = 49% del mercado; Japón tiene preferencias únicas y distintas al occidente</span>
+      </div>
+      <div style="display:flex; gap:10px; align-items:flex-start; font-size:13px;">
+        <span style="background:#FCEBEB; color:#791F1F; border-radius:20px; padding:2px 9px; font-size:11px; font-weight:500; flex-shrink:0;">Publisher</span>
+        <span style="color:var(--color-text-primary);">Nintendo domina con 21.8% del mercado; top 5 controlan casi el 50%</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#EAF3DE; border-radius:10px; padding:0.85rem 1.1rem; font-size:13px; color:#27500A; margin-top:0.5rem;">
+    💡 <strong>Nota del analista:</strong> El EDA no termina cuando encuentras los primeros patrones — termina cuando puedes contar una historia coherente con los datos que responda las preguntas del negocio planteadas en la Etapa 1.
+  </div>
+</div>

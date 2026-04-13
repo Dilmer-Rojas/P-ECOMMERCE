@@ -1,0 +1,182 @@
+
+<style>
+  .wrap { padding: 1.5rem 0; }
+  .etapa-badge { display: inline-flex; align-items: center; gap: 8px; background: #FAEEDA; color: #633806; border-radius: 20px; padding: 5px 14px; font-size: 13px; font-weight: 500; }
+  .section-title { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin: 1.25rem 0 0.75rem; }
+  .context-box { border: 0.5px solid var(--color-border-tertiary); border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 10px; }
+  .code-block { background: var(--color-background-secondary); border-radius: 10px; padding: 1rem 1.25rem; font-family: var(--font-mono); font-size: 12px; color: var(--color-text-primary); line-height: 1.9; margin-bottom: 10px; border: 0.5px solid var(--color-border-tertiary); overflow-x: auto; }
+  .kw { color: #534AB7; font-weight: 500; }
+  .fn { color: #0F6E56; }
+  .st { color: #993C1D; }
+  .cm { color: var(--color-text-secondary); }
+  .output-block { background: var(--color-background-secondary); border-radius: 10px; padding: 1rem 1.25rem; font-family: var(--font-mono); font-size: 12px; color: var(--color-text-secondary); line-height: 1.9; border-left: 3px solid #EF9F27; margin-bottom: 10px; }
+  .out-val { color: var(--color-text-primary); font-weight: 500; }
+  .problem-row { display: flex; align-items: flex-start; gap: 12px; padding: 11px 0; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .problem-row:last-child { border-bottom: none; }
+  .prob-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+  .prob-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 2px; }
+  .prob-desc { font-size: 12px; color: var(--color-text-secondary); margin: 0; line-height: 1.5; }
+  .fix-badge { font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 500; margin-top: 4px; display: inline-block; }
+  .before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+  .ba-box { border-radius: 10px; padding: 0.85rem 1rem; font-family: var(--font-mono); font-size: 12px; line-height: 1.8; }
+  .before-box { background: #FCEBEB; border: 0.5px solid #F09595; color: #791F1F; }
+  .after-box { background: #EAF3DE; border: 0.5px solid #97C459; color: #27500A; }
+  .ba-label { font-size: 11px; font-weight: 500; margin-bottom: 6px; display: block; letter-spacing: 0.03em; }
+  .checklist { list-style: none; padding: 0; margin: 0; }
+  .checklist li { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 0.5px solid var(--color-border-tertiary); font-size: 13px; color: var(--color-text-primary); }
+  .checklist li:last-child { border-bottom: none; }
+  .check-ok { width: 18px; height: 18px; border-radius: 50%; background: #EAF3DE; color: #3B6D11; display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; font-weight: 500; }
+  .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .sum-card { background: var(--color-background-secondary); border-radius: 10px; padding: 0.75rem; text-align: center; }
+  .sum-val { font-size: 19px; font-weight: 500; }
+  .sum-lbl { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
+  .tip-box { background: #EAF3DE; border-radius: 10px; padding: 0.85rem 1.1rem; font-size: 13px; color: #27500A; margin-top: 1.25rem; }
+  .warn-box { background: #FAEEDA; border-radius: 10px; padding: 0.85rem 1.1rem; font-size: 13px; color: #633806; margin-top: 0.75rem; }
+</style>
+
+<div class="wrap">
+  <h2 style="display:none">Etapa 4: Limpieza de datos</h2>
+
+  <div style="display:flex; align-items:center; gap:12px; margin-bottom: 1.25rem;">
+    <span class="etapa-badge">Etapa 4 · Limpieza de datos</span>
+  </div>
+
+  <div style="background: var(--color-background-secondary); border-left: 3px solid #EF9F27; border-radius: 0 12px 12px 0; padding: 1rem 1.25rem; margin-bottom: 1.25rem;">
+    <p style="margin:0; font-size:14px; color: var(--color-text-primary);">"<strong>Garbage in, garbage out</strong>" — si los datos están sucios, los resultados serán incorrectos sin importar qué tan avanzado sea el análisis. Esta etapa es la más tediosa y la más crítica.</p>
+  </div>
+
+  <p class="section-title">Problemas detectados en el dataset</p>
+  <div class="context-box">
+    <div class="problem-row">
+      <div class="prob-icon" style="background:#FCEBEB;">🚨</div>
+      <div>
+        <p class="prob-title">Valores nulos en Year (271 filas)</p>
+        <p class="prob-desc">271 juegos no tienen año de lanzamiento registrado — el 1.6% del dataset. No podemos eliminarlos todos porque perdemos datos de ventas válidos.</p>
+        <span class="fix-badge" style="background:#FAEEDA; color:#854F0B;">Solución: eliminar filas sin año (impacto bajo)</span>
+      </div>
+    </div>
+    <div class="problem-row">
+      <div class="prob-icon" style="background:#FAEEDA;">⚠️</div>
+      <div>
+        <p class="prob-title">Valores nulos en Publisher (58 filas)</p>
+        <p class="prob-desc">58 juegos no tienen publisher registrado. Al ser pocos y no poder inferirse, se eliminan.</p>
+        <span class="fix-badge" style="background:#FAEEDA; color:#854F0B;">Solución: eliminar filas sin publisher</span>
+      </div>
+    </div>
+    <div class="problem-row">
+      <div class="prob-icon" style="background:#FAEEDA;">⚠️</div>
+      <div>
+        <p class="prob-title">Tipo incorrecto en Year (float → int)</p>
+        <p class="prob-desc">Year aparece como 2006.0 en vez de 2006. Ocurre porque pandas convierte a float cuando hay NaN en columnas numéricas enteras.</p>
+        <span class="fix-badge" style="background:#E6F1FB; color:#185FA5;">Solución: convertir a int después de eliminar nulos</span>
+      </div>
+    </div>
+    <div class="problem-row">
+      <div class="prob-icon" style="background:#E1F5EE;">🔍</div>
+      <div>
+        <p class="prob-title">Años anómalos (2017, 2020 con pocos datos)</p>
+        <p class="prob-desc">Los últimos años tienen muy pocas entradas porque VGChartz no tenía datos completos al momento del scraping. Podrían distorsionar la tendencia.</p>
+        <span class="fix-badge" style="background:#EAF3DE; color:#3B6D11;">Solución: filtrar años ≥ 2017 del análisis temporal</span>
+      </div>
+    </div>
+    <div class="problem-row">
+      <div class="prob-icon" style="background:#E1F5EE;">🔍</div>
+      <div>
+        <p class="prob-title">Sin duplicados exactos detectados</p>
+        <p class="prob-desc">df.duplicated().sum() retorna 0. El mismo juego en diferente plataforma es un registro válido (ej: FIFA en PS4 y Xbox son filas distintas).</p>
+        <span class="fix-badge" style="background:#EAF3DE; color:#3B6D11;">Sin acción requerida</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="section-title">Código de limpieza paso a paso</p>
+
+  <div class="code-block">
+<span class="cm"># ── 1. Ver mapa de nulos ──────────────────────────</span><br>
+<span class="fn">print</span>(df.<span class="fn">isnull</span>().<span class="fn">sum</span>())<br>
+<span class="cm"># Year       271</span><br>
+<span class="cm"># Publisher   58</span><br>
+<br>
+<span class="cm"># ── 2. Eliminar filas con nulos críticos ──────────</span><br>
+df_clean = df.<span class="fn">dropna</span>(subset=[<span class="st">'Year'</span>, <span class="st">'Publisher'</span>])<br>
+<span class="fn">print</span>(df_clean.<span class="fn">shape</span>)  <span class="cm"># (16291, 11)</span><br>
+<br>
+<span class="cm"># ── 3. Corregir tipo de dato en Year ─────────────</span><br>
+df_clean[<span class="st">'Year'</span>] = df_clean[<span class="st">'Year'</span>].<span class="fn">astype</span>(<span class="fn">int</span>)<br>
+<br>
+<span class="cm"># ── 4. Filtrar años con datos incompletos ─────────</span><br>
+df_clean = df_clean[df_clean[<span class="st">'Year'</span>] &lt; <span class="out-val">2017</span>]<br>
+<span class="fn">print</span>(df_clean.<span class="fn">shape</span>)  <span class="cm"># (16444, 11) aprox</span><br>
+<br>
+<span class="cm"># ── 5. Verificar que no quedan nulos ──────────────</span><br>
+<span class="fn">print</span>(df_clean.<span class="fn">isnull</span>().<span class="fn">sum</span>().<span class="fn">sum</span>())  <span class="cm"># 0 ✓</span><br>
+<br>
+<span class="cm"># ── 6. Reset de índice ────────────────────────────</span><br>
+df_clean = df_clean.<span class="fn">reset_index</span>(drop=<span class="kw">True</span>)<br>
+<br>
+<span class="cm"># ── 7. Guardar dataset limpio ─────────────────────</span><br>
+df_clean.<span class="fn">to_csv</span>(<span class="st">'vgsales_clean.csv'</span>, index=<span class="kw">False</span>)
+  </div>
+
+  <p class="section-title">Antes vs. después de la limpieza</p>
+  <div class="before-after">
+    <div class="ba-box before-box">
+      <span class="ba-label">ANTES — df crudo</span>
+      Filas:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>16,598</strong><br>
+      Nulos:&nbsp;&nbsp;&nbsp;&nbsp;<strong>329</strong><br>
+      Year tipo: <strong>float64</strong><br>
+      Años:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>1980 – 2020</strong><br>
+      Duplicados:<strong>0</strong>
+    </div>
+    <div class="ba-box after-box">
+      <span class="ba-label">DESPUÉS — df_clean</span>
+      Filas:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>16,291</strong><br>
+      Nulos:&nbsp;&nbsp;&nbsp;&nbsp;<strong>0</strong><br>
+      Year tipo: <strong>int64</strong><br>
+      Años:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>1980 – 2016</strong><br>
+      Duplicados:<strong>0</strong>
+    </div>
+  </div>
+
+  <p class="section-title">Exploración adicional de calidad</p>
+  <div class="code-block">
+<span class="cm"># Verificar categorías únicas por columna</span><br>
+<span class="fn">print</span>(<span class="st">"Géneros:"</span>,   df_clean[<span class="st">'Genre'</span>].<span class="fn">nunique</span>())     <span class="cm"># 12</span><br>
+<span class="fn">print</span>(<span class="st">"Plataformas:"</span>,df_clean[<span class="st">'Platform'</span>].<span class="fn">nunique</span>())  <span class="cm"># 31</span><br>
+<span class="fn">print</span>(<span class="st">"Publishers:"</span>, df_clean[<span class="st">'Publisher'</span>].<span class="fn">nunique</span>()) <span class="cm"># 577</span><br>
+<br>
+<span class="cm"># Detectar outliers en ventas globales</span><br>
+<span class="fn">print</span>(df_clean[<span class="st">'Global_Sales'</span>].<span class="fn">describe</span>())<br>
+<span class="cm"># mean: 0.54M  |  max: 82.74M  |  75%: 0.47M</span><br>
+<span class="cm"># → distribución muy sesgada (pocos blockbusters)</span>
+  </div>
+
+  <div class="output-block">
+    Géneros únicos: <span class="out-val">12</span> &nbsp;(Action, Sports, Shooter, RPG…)<br>
+    Plataformas únicas: <span class="out-val">31</span> &nbsp;(PS2, DS, Wii, X360, PS3…)<br>
+    Publishers únicos: <span class="out-val">577</span> &nbsp;(Nintendo, EA, Activision…)<br>
+    Ventas promedio por juego: <span class="out-val">0.54M copias</span><br>
+    Venta máxima (Wii Sports): <span class="out-val">82.74M copias</span>
+  </div>
+
+  <p class="section-title">Checklist de limpieza completado</p>
+  <div class="context-box">
+    <ul class="checklist">
+      <li><span class="check-ok">✓</span> Nulos identificados y tratados</li>
+      <li><span class="check-ok">✓</span> Tipos de dato corregidos (Year: float → int)</li>
+      <li><span class="check-ok">✓</span> Años anómalos filtrados (2017–2020)</li>
+      <li><span class="check-ok">✓</span> Duplicados verificados (ninguno)</li>
+      <li><span class="check-ok">✓</span> Categorías únicas validadas</li>
+      <li><span class="check-ok">✓</span> Dataset limpio exportado como vgsales_clean.csv</li>
+      <li><span class="check-ok">✓</span> Índice reseteado</li>
+    </ul>
+  </div>
+
+  <div class="warn-box">
+    ⚠️ <strong>Decisión documentada:</strong> Se eliminaron 307 filas (~1.9% del total). Esta pérdida es aceptable y se reporta para que cualquier persona que revise el análisis sepa que los datos originales tenían esta limitación.
+  </div>
+
+  <div class="tip-box">
+    💡 <strong>Regla de oro:</strong> Toda decisión de limpieza se documenta — qué se eliminó, cuánto y por qué. Un analista que no documenta sus decisiones crea resultados que nadie puede reproducir ni auditar.
+  </div>
+</div>
