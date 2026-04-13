@@ -189,6 +189,85 @@
       text-align: center;
       color: black;
     }
+    :root {
+    	  --black: #000000;
+    	    --accent: #39ff14;
+    	      --neon-pink: #ff00ff;
+    	      }
+
+    	      .nav-buttons {
+    	      	  display: grid;
+    	      	    grid-template-columns: 1fr 1fr;
+    	      	      gap: 15px;
+    	      	        max-width: 500px;
+    	      	          width: 100%;
+    	      	          }
+
+    	      	          .step-btn {
+    	      	          	  background: var(--black);
+    	      	          	    border: 2px solid var(--accent);
+    	      	          	      padding: 12px 10px;
+    	      	          	        text-align: center;
+    	      	          	          cursor: pointer;
+    	      	          	            box-shadow: 4px 4px 0px var(--accent);
+    	      	          	              transition: all 0.1s;
+    	      	          	                color: var(--accent);
+    	      	          	                  text-decoration: none;
+    	      	          	                    display: block;
+    	      	          	                      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    	      	          	                      }
+
+    	      	          	                      .step-btn:hover {
+    	      	          	                      	  background: var(--accent);
+    	      	          	                      	    color: var(--black);
+    	      	          	                      	      transform: translate(-2px, -2px);
+    	      	          	                      	        box-shadow: 6px 6px 0px var(--black);
+    	      	          	                      	        }
+
+    	      	          	                      	        .step-btn:active {
+    	      	          	                      	        	  transform: translate(4px, 4px);
+    	      	          	                      	        	    box-shadow: 0px 0px 0px;
+    	      	          	                      	        	    }
+
+    	      	          	                      	        	    .step-t {
+    	      	          	                      	        	    	  font-size: 11px;
+    	      	          	                      	        	    	    font-weight: 800;
+    	      	          	                      	        	    	      text-transform: uppercase;
+    	      	          	                      	        	    	      }
+
+    	      	          	                      	        	    	      .btn-atras {
+    	      	          	                      	        	    	      	  border: 2px solid var(--neon-pink);
+    	      	          	                      	        	    	      	    box-shadow: 4px 4px 0px var(--neon-pink);
+    	      	          	                      	        	    	      	      color: var(--neon-pink);
+    	      	          	                      	        	    	      	      }
+
+    	      	          	                      	        	    	      	      .btn-atras:hover {
+    	      	          	                      	        	    	      	      	  background: var(--neon-pink);
+    	      	          	                      	        	    	      	      	    color: var(--black);
+    	      	          	                      	        	    	      	      	      box-shadow: 6px 6px 0px var(--black);
+    	      	          	                      	        	    	      	      	      }
+
+    	      	          	                      	        	    	      	      	      .btn-siguiente {
+    	      	          	                      	        	    	      	      	      	  border: 2px solid var(--accent);
+    	      	          	                      	        	    	      	      	      	    box-shadow: 4px 4px 0px var(--accent);
+    	      	          	                      	        	    	      	      	      	      color: var(--accent);
+    	      	          	                      	        	    	      	      	      	      }
+
+    	      	          	                      	        	    	      	      	      	      .btn-siguiente:hover {
+    	      	          	                      	        	    	      	      	      	      	  background: var(--accent);
+    	      	          	                      	        	    	      	      	      	      	    color: var(--black);
+    	      	          	                      	        	    	      	      	      	      	      box-shadow: 6px 6px 0px var(--black);
+    	      	          	                      	        	    	      	      	      	      	      }
+    	      	          	                      	        	    	      	      	      	      }
+    	      	          	                      	        	    	      	      	      }
+    	      	          	                      	        	    	      	      }
+    	      	          	                      	        	    	      }
+    	      	          	                      	        	    }
+    	      	          	                      	        }
+    	      	          	                      }
+    	      	          }
+    	      }
+    }
 
     @media (max-width: 450px) {
       .kpi-grid {
@@ -288,6 +367,14 @@
         <span>Frecuencia de compra · Métodos de pago más usados</span>
       </div>
     </div>
+    <div class="nav-buttons">
+      <a class="step-btn btn-atras" href="etapa1_definicion_problema.html">
+          <span class="step-t">Atrás</span>
+            </a>
+              <a class="step-btn btn-siguiente" href="etapa3_recoleccion_datos.html">
+                  <span class="step-t">Siguiente</span>
+                    </a>
+                    </div>
   </div>
 
 </body>
