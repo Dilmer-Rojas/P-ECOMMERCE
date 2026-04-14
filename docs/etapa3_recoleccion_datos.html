@@ -44,8 +44,8 @@
       <p style="margin:0 0 6px; font-size:13px; color:var(--color-text-secondary);">Este dataset fue diseñado por Regina N. Molares como parte de un trabajo práctico integrador para un curso de Business Intelligence con herramientas como Google Sheets y Looker Studio. Simula el funcionamiento de una empresa de e-commerce, permitiendo a los estudiantes aplicar conceptos de BI a través del análisis de transacciones, comportamiento de clientes y rendimiento de productos.</p>
       <div style="display:flex; gap:8px; flex-wrap:wrap;">
         <span style="font-size:11px; background:#E6F1FB; color:#0C447C; padding:2px 9px; border-radius:20px; font-weight:500;">Fuente pública</span>
-        <span style="font-size:11px; background:#EAF3DE; color:#27500A; padding:2px 9px; border-radius:20px; font-weight:500;">Descarga directa CSV</span>
-        <span style="font-size:11px; background:#FAEEDA; color:#633806; padding:2px 9px; border-radius:20px; font-weight:500;">Licencia: CC0 Public Domain</span>
+        <span style="font-size:11px; background:#EAF3DE; color:#27500A; padding:2px 9px; border-radius:20px; font-weight:500;">Descarga directa de CSV's</span>
+        <span style="font-size:11px; background:#FAEEDA; color:#633806; padding:2px 9px; border-radius:20px; font-weight:500;">Licencia: CC BY-NC-SA 4.0</span>
       </div>
     </div>
   </div>
@@ -58,9 +58,18 @@
 <span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt<br>
 <span class="kw">import</span> seaborn <span class="kw">as</span> sns<br>
 <br>
-<span class="cm"># Paso 2 — cargar el archivo</span><br>
-df = pd.<span class="fn">read_csv</span>(<span class="st">'vgsales.csv'</span>)<br>
+<span class="cm"># Paso 2 — cargar los archivos</span><br>
+df = pd.<span class="fn">read_csv</span>(<span class="st">'clientes.csv'</span>)<br>
 <br>
+df = pd.<span class="fn">read_csv</span>(<span class="st">'categorias.csv'</span>)<br>
+<br>
+df = pd.<span class="fn">read_csv</span>(<span class="st">'metodos_pago.csv'</span>)<br>
+<br>
+df = pd.<span class="fn">read_csv</span>(<span class="st">'productos.csv'</span>)<br>
+<br>
+df = pd.<span class="fn">read_csv</span>(<span class="st">'ventas.csv'</span>)<br>
+<br>
+
 <span class="cm"># Paso 3 — primer vistazo</span><br>
 <span class="fn">print</span>(df.<span class="fn">shape</span>)       <span class="cm"># filas y columnas</span><br>
 <span class="fn">print</span>(df.<span class="fn">head</span>())      <span class="cm"># primeras 5 filas</span><br>
