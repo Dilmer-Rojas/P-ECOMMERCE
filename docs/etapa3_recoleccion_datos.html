@@ -353,43 +353,43 @@
           <td style="color:var(--color-text-secondary);">1</td>
           <td><code style="font-size:11px;">ID_Cliente</code></td>
           <td><span class="dtype-pill" style="background:#E6F1FB; color:#0C447C;">int</span></td>
-          <td>Posición según ventas globales</td>
+          <td>Identificador único</td>
           <td style="color:var(--color-text-secondary);">1, 2, 3…</td>
         </tr>
         <tr>
           <td style="color:var(--color-text-secondary);">2</td>
           <td><code style="font-size:11px;">Nombre</code></td>
           <td><span class="dtype-pill" style="background:#EEEDFE; color:#3C3489;">object</span></td>
-          <td>Nombre del videojuego</td>
-          <td style="color:var(--color-text-secondary);">Wii Sports</td>
+          <td>Nombre del cliente</td>
+          <td style="color:var(--color-text-secondary);">Karisa, Lenette…</td>
         </tr>
         <tr>
           <td style="color:var(--color-text-secondary);">3</td>
           <td><code style="font-size:11px;">Apellido</code></td>
           <td><span class="dtype-pill" style="background:#EEEDFE; color:#3C3489;">object</span></td>
-          <td>Consola o plataforma</td>
-          <td style="color:var(--color-text-secondary);">Wii, PS4, DS…</td>
+          <td>Apellido del cliente</td>
+          <td style="color:var(--color-text-secondary);">Cromett, Seabert…</td>
         </tr>
         <tr>
           <td style="color:var(--color-text-secondary);">4</td>
           <td><code style="font-size:11px;">Email</code></td>
-          <td><span class="dtype-pill" style="background:#FAEEDA; color:#633806;">float</span></td>
-          <td>Año de lanzamiento</td>
-          <td style="color:var(--color-text-secondary);">2006.0, NaN</td>
+          <td><span class="dtype-pill" style="background:#FAEEDA; color:#633806;">object</span></td>
+          <td>Correo electrónico del cliente</td>
+          <td style="color:var(--color-text-secondary);">kcromett0@imageshack.us, lseabert1@yahoo.co.jp</td>
         </tr>
         <tr>
           <td style="color:var(--color-text-secondary);">5</td>
           <td><code style="font-size:11px;">Fecha_Registro</code></td>
           <td><span class="dtype-pill" style="background:#EEEDFE; color:#3C3489;">object</span></td>
-          <td>Categoría del juego</td>
-          <td style="color:var(--color-text-secondary);">Sports, RPG…</td>
+          <td>Fecha de registro del cliente</td>
+          <td style="color:var(--color-text-secondary);">19/11/2023, 07/05/2023…</td>
         </tr>
         <tr>
           <td style="color:var(--color-text-secondary);">6</td>
           <td><code style="font-size:11px;">Region</code></td>
           <td><span class="dtype-pill" style="background:#EEEDFE; color:#3C3489;">object</span></td>
-          <td>Empresa que publicó el juego</td>
-          <td style="color:var(--color-text-secondary);">Nintendo, EA…</td>
+          <td>Región a la que pertenece el cliente</td>
+          <td style="color:var(--color-text-secondary);">Patagonia, Buenos Aires…</td>
         </tr>
       </tbody>
     </table>
@@ -409,52 +409,24 @@
       <tbody>
         <tr>
           <td style="color:var(--color-text-secondary);">1</td>
-          <td><code style="font-size:11px;">ID_Cliente</code></td>
+          <td><code style="font-size:11px;">ID_Categoria</code></td>
           <td><span class="dtype-pill" style="background:#E6F1FB; color:#0C447C;">int</span></td>
-          <td>Posición según ventas globales</td>
+          <td>Identificador único</td>
           <td style="color:var(--color-text-secondary);">1, 2, 3…</td>
         </tr>
         <tr>
           <td style="color:var(--color-text-secondary);">2</td>
-          <td><code style="font-size:11px;">Nombre</code></td>
+          <td><code style="font-size:11px;">Categoria</code></td>
           <td><span class="dtype-pill" style="background:#EEEDFE; color:#3C3489;">object</span></td>
-          <td>Nombre del videojuego</td>
-          <td style="color:var(--color-text-secondary);">Wii Sports</td>
+          <td>Nombre de la categoría</td>
+          <td style="color:var(--color-text-secondary);">Lácteos, Carnicería</td>
         </tr>
         <tr>
           <td style="color:var(--color-text-secondary);">3</td>
-          <td><code style="font-size:11px;">Apellido</code></td>
+          <td><code style="font-size:11px;">Descripción</code></td>
           <td><span class="dtype-pill" style="background:#EEEDFE; color:#3C3489;">object</span></td>
-          <td>Consola o plataforma</td>
-          <td style="color:var(--color-text-secondary);">Wii, PS4, DS…</td>
-        </tr>
-        <tr>
-          <td style="color:var(--color-text-secondary);">4</td>
-          <td><code style="font-size:11px;">Email</code></td>
-          <td><span class="dtype-pill" style="background:#FAEEDA; color:#633806;">float</span></td>
-          <td>Año de lanzamiento</td>
-          <td style="color:var(--color-text-secondary);">2006.0, NaN</td>
-        </tr>
-        <tr>
-          <td style="color:var(--color-text-secondary);">5</td>
-          <td><code style="font-size:11px;">Fecha_Registro</code></td>
-          <td><span class="dtype-pill" style="background:#EEEDFE; color:#3C3489;">object</span></td>
-          <td>Categoría del juego</td>
-          <td style="color:var(--color-text-secondary);">Sports, RPG…</td>
-        </tr>
-        <tr>
-          <td style="color:var(--color-text-secondary);">6</td>
-          <td><code style="font-size:11px;">Region</code></td>
-          <td><span class="dtype-pill" style="background:#EEEDFE; color:#3C3489;">object</span></td>
-          <td>Empresa que publicó el juego</td>
-          <td style="color:var(--color-text-secondary);">Nintendo, EA…</td>
-        </tr>
-        <tr>
-          <td style="color:var(--color-text-secondary);">7</td>
-          <td><code style="font-size:11px;">NA_Sales</code></td>
-          <td><span class="dtype-pill" style="background:#EAF3DE; color:#3B6D11;">float</span></td>
-          <td>Ventas en Norteamérica (millones)</td>
-          <td style="color:var(--color-text-secondary);">41.49</td>
+          <td>Descripción de la categoría</td>
+          <td style="color:var(--color-text-secondary);">Productos lácteos, Carnicería…</td>
         </tr>
       </tbody>
     </table>
@@ -474,52 +446,38 @@
       <tbody>
         <tr>
           <td style="color:var(--color-text-secondary);">1</td>
-          <td><code style="font-size:11px;">ID_Cliente</code></td>
+          <td><code style="font-size:11px;">ID_Producto</code></td>
           <td><span class="dtype-pill" style="background:#E6F1FB; color:#0C447C;">int</span></td>
-          <td>Posición según ventas globales</td>
+          <td>Identificador único</td>
           <td style="color:var(--color-text-secondary);">1, 2, 3…</td>
         </tr>
         <tr>
           <td style="color:var(--color-text-secondary);">2</td>
-          <td><code style="font-size:11px;">Nombre</code></td>
+          <td><code style="font-size:11px;">Nombre_producto</code></td>
           <td><span class="dtype-pill" style="background:#EEEDFE; color:#3C3489;">object</span></td>
-          <td>Nombre del videojuego</td>
-          <td style="color:var(--color-text-secondary);">Wii Sports</td>
+          <td>Nombre del producto</td>
+          <td style="color:var(--color-text-secondary);">Leche, Yogur</td>
         </tr>
         <tr>
           <td style="color:var(--color-text-secondary);">3</td>
-          <td><code style="font-size:11px;">Apellido</code></td>
+          <td><code style="font-size:11px;">Categoria</code></td>
           <td><span class="dtype-pill" style="background:#EEEDFE; color:#3C3489;">object</span></td>
-          <td>Consola o plataforma</td>
-          <td style="color:var(--color-text-secondary);">Wii, PS4, DS…</td>
+          <td>Categoría del producto</td>
+          <td style="color:var(--color-text-secondary);">Lácteos, Carnicería</td>
         </tr>
         <tr>
           <td style="color:var(--color-text-secondary);">4</td>
-          <td><code style="font-size:11px;">Email</code></td>
+          <td><code style="font-size:11px;">Precio_Unitario</code></td>
           <td><span class="dtype-pill" style="background:#FAEEDA; color:#633806;">float</span></td>
-          <td>Año de lanzamiento</td>
-          <td style="color:var(--color-text-secondary);">2006.0, NaN</td>
+          <td>Precio unitario del producto</td>
+          <td style="color:var(--color-text-secondary);">12.24, 5.21</td>
         </tr>
         <tr>
           <td style="color:var(--color-text-secondary);">5</td>
-          <td><code style="font-size:11px;">Fecha_Registro</code></td>
-          <td><span class="dtype-pill" style="background:#EEEDFE; color:#3C3489;">object</span></td>
-          <td>Categoría del juego</td>
-          <td style="color:var(--color-text-secondary);">Sports, RPG…</td>
-        </tr>
-        <tr>
-          <td style="color:var(--color-text-secondary);">6</td>
-          <td><code style="font-size:11px;">Region</code></td>
-          <td><span class="dtype-pill" style="background:#EEEDFE; color:#3C3489;">object</span></td>
-          <td>Empresa que publicó el juego</td>
-          <td style="color:var(--color-text-secondary);">Nintendo, EA…</td>
-        </tr>
-        <tr>
-          <td style="color:var(--color-text-secondary);">7</td>
-          <td><code style="font-size:11px;">NA_Sales</code></td>
-          <td><span class="dtype-pill" style="background:#EAF3DE; color:#3B6D11;">float</span></td>
-          <td>Ventas en Norteamérica (millones)</td>
-          <td style="color:var(--color-text-secondary);">41.49</td>
+          <td><code style="font-size:11px;">Stock</code></td>
+          <td><span class="dtype-pill" style="background:#E6F1FB; color:#0C447C;">int</span></td>
+          <td>Cantidad disponible en inventario</td>
+          <td style="color:var(--color-text-secondary);">3327, 3358</td>
         </tr>
       </tbody>
     </table>
@@ -539,52 +497,52 @@
       <tbody>
         <tr>
           <td style="color:var(--color-text-secondary);">1</td>
-          <td><code style="font-size:11px;">ID_Cliente</code></td>
+          <td><code style="font-size:11px;">ID_Venta</code></td>
           <td><span class="dtype-pill" style="background:#E6F1FB; color:#0C447C;">int</span></td>
-          <td>Posición según ventas globales</td>
+          <td>Identificador único de la venta</td>
           <td style="color:var(--color-text-secondary);">1, 2, 3…</td>
         </tr>
         <tr>
           <td style="color:var(--color-text-secondary);">2</td>
-          <td><code style="font-size:11px;">Nombre</code></td>
+          <td><code style="font-size:11px;">Fecha</code></td>
           <td><span class="dtype-pill" style="background:#EEEDFE; color:#3C3489;">object</span></td>
-          <td>Nombre del videojuego</td>
-          <td style="color:var(--color-text-secondary);">Wii Sports</td>
+          <td>Fecha de transacción</td>
+          <td style="color:var(--color-text-secondary);">31/01/2024, 31/01/2024</td>
         </tr>
         <tr>
           <td style="color:var(--color-text-secondary);">3</td>
-          <td><code style="font-size:11px;">Apellido</code></td>
-          <td><span class="dtype-pill" style="background:#EEEDFE; color:#3C3489;">object</span></td>
-          <td>Consola o plataforma</td>
-          <td style="color:var(--color-text-secondary);">Wii, PS4, DS…</td>
+          <td><code style="font-size:11px;">ID_Cliente</code></td>
+          <td><span class="dtype-pill" style="background:#EEEDFE; color:#3C3489;">int</span></td>
+          <td>Identificador del cliente</td>
+          <td style="color:var(--color-text-secondary);">10, 106, 235…</td>
         </tr>
         <tr>
           <td style="color:var(--color-text-secondary);">4</td>
-          <td><code style="font-size:11px;">Email</code></td>
-          <td><span class="dtype-pill" style="background:#FAEEDA; color:#633806;">float</span></td>
-          <td>Año de lanzamiento</td>
-          <td style="color:var(--color-text-secondary);">2006.0, NaN</td>
+          <td><code style="font-size:11px;">ID_Producto</code></td>
+          <td><span class="dtype-pill" style="background:#FAEEDA; color:#633806;">int</span></td>
+          <td>Identificador del producto</td>
+          <td style="color:var(--color-text-secondary);">25, 5, 15…</td>
         </tr>
         <tr>
           <td style="color:var(--color-text-secondary);">5</td>
-          <td><code style="font-size:11px;">Fecha_Registro</code></td>
-          <td><span class="dtype-pill" style="background:#EEEDFE; color:#3C3489;">object</span></td>
-          <td>Categoría del juego</td>
-          <td style="color:var(--color-text-secondary);">Sports, RPG…</td>
+          <td><code style="font-size:11px;">Cantidad</code></td>
+          <td><span class="dtype-pill" style="background:#E6F1FB; color:#0C447C;">int</span></td>
+          <td>Cantidad de unidades vendidas</td>
+          <td style="color:var(--color-text-secondary);">5, 1, 3…</td>
         </tr>
         <tr>
           <td style="color:var(--color-text-secondary);">6</td>
-          <td><code style="font-size:11px;">Region</code></td>
-          <td><span class="dtype-pill" style="background:#EEEDFE; color:#3C3489;">object</span></td>
-          <td>Empresa que publicó el juego</td>
-          <td style="color:var(--color-text-secondary);">Nintendo, EA…</td>
+          <td><code style="font-size:11px;">Metodo_Pago</code></td>
+          <td><span class="dtype-pill" style="background:#EEEDFE; color:#3C3489;">int</span></td>
+          <td>Método de pago utilizado</td>
+          <td style="color:var(--color-text-secondary);">1, 4, 3…</td>
         </tr>
         <tr>
           <td style="color:var(--color-text-secondary);">7</td>
-          <td><code style="font-size:11px;">NA_Sales</code></td>
+          <td><code style="font-size:11px;">Estado</code></td>
           <td><span class="dtype-pill" style="background:#EAF3DE; color:#3B6D11;">float</span></td>
-          <td>Ventas en Norteamérica (millones)</td>
-          <td style="color:var(--color-text-secondary);">41.49</td>
+          <td>Estado de la transacción</td>
+          <td style="color:var(--color-text-secondary);">Completa, Pendiente, Cancelada</td>
         </tr>
       </tbody>
     </table>
@@ -604,61 +562,136 @@
       <tbody>
         <tr>
           <td style="color:var(--color-text-secondary);">1</td>
-          <td><code style="font-size:11px;">ID_Cliente</code></td>
+          <td><code style="font-size:11px;">ID_Metodo</code></td>
           <td><span class="dtype-pill" style="background:#E6F1FB; color:#0C447C;">int</span></td>
-          <td>Posición según ventas globales</td>
+          <td>Identificador único del método de pago</td>
           <td style="color:var(--color-text-secondary);">1, 2, 3…</td>
         </tr>
         <tr>
           <td style="color:var(--color-text-secondary);">2</td>
-          <td><code style="font-size:11px;">Nombre</code></td>
+          <td><code style="font-size:11px;">Metodo</code></td>
           <td><span class="dtype-pill" style="background:#EEEDFE; color:#3C3489;">object</span></td>
-          <td>Nombre del videojuego</td>
-          <td style="color:var(--color-text-secondary);">Wii Sports</td>
+          <td>Nombre del método de pago</td>
+          <td style="color:var(--color-text-secondary);">Tarjeta, Efectivo…</td>
         </tr>
         <tr>
           <td style="color:var(--color-text-secondary);">3</td>
-          <td><code style="font-size:11px;">Apellido</code></td>
+          <td><code style="font-size:11px;">Descripcion</code></td>
           <td><span class="dtype-pill" style="background:#EEEDFE; color:#3C3489;">object</span></td>
-          <td>Consola o plataforma</td>
-          <td style="color:var(--color-text-secondary);">Wii, PS4, DS…</td>
-        </tr>
-        <tr>
-          <td style="color:var(--color-text-secondary);">4</td>
-          <td><code style="font-size:11px;">Email</code></td>
-          <td><span class="dtype-pill" style="background:#FAEEDA; color:#633806;">float</span></td>
-          <td>Año de lanzamiento</td>
-          <td style="color:var(--color-text-secondary);">2006.0, NaN</td>
-        </tr>
-        <tr>
-          <td style="color:var(--color-text-secondary);">5</td>
-          <td><code style="font-size:11px;">Fecha_Registro</code></td>
-          <td><span class="dtype-pill" style="background:#EEEDFE; color:#3C3489;">object</span></td>
-          <td>Categoría del juego</td>
-          <td style="color:var(--color-text-secondary);">Sports, RPG…</td>
-        </tr>
-        <tr>
-          <td style="color:var(--color-text-secondary);">6</td>
-          <td><code style="font-size:11px;">Region</code></td>
-          <td><span class="dtype-pill" style="background:#EEEDFE; color:#3C3489;">object</span></td>
-          <td>Empresa que publicó el juego</td>
-          <td style="color:var(--color-text-secondary);">Nintendo, EA…</td>
+          <td>Descripción del método de pago</td>
+          <td style="color:var(--color-text-secondary);">Tarjeta de crédito, Efectivo…</td>
         </tr>
       </tbody>
     </table>
   </div>
   <p class="section-title">Estadísticas de primer vistazo</p>
+  <span class="cm">Tabla: Metodos de Pago</span><br>
   <div class="stat-mini-grid">
     <div class="stat-mini">
-      <div class="val" style="color:#185FA5;">16,598</div>
-      <div class="lbl">registros totales</div>
+      <div class="val" style="color:#185FA5;">3029</div>
+      <div class="lbl">Registros de ventas totales</div>
     </div>
     <div class="stat-mini">
-      <div class="val" style="color:#0F6E56;">11</div>
+      <div class="val" style="color:#0F6E56;">7</div>
       <div class="lbl">columnas</div>
     </div>
     <div class="stat-mini">
-      <div class="val" style="color:#854F0B;">329</div>
+      <div class="val" style="color:#854F0B;">0</div>
+      <div class="lbl">valores nulos</div>
+    </div>
+    <div class="stat-mini">
+      <div class="val" style="color:#A32D2D;">0</div>
+      <div class="lbl">duplicados exactos</div>
+    </div>
+  </div>
+  <span class="cm">Tabla: Metodos de Pago</span><br>
+  <div class="stat-mini-grid">
+    <div class="stat-mini">
+      <div class="val" style="color:#185FA5;">3029</div>
+      <div class="lbl">Registros de ventas totales</div>
+    </div>
+    <div class="stat-mini">
+      <div class="val" style="color:#0F6E56;">7</div>
+      <div class="lbl">columnas</div>
+    </div>
+    <div class="stat-mini">
+      <div class="val" style="color:#854F0B;">0</div>
+      <div class="lbl">valores nulos</div>
+    </div>
+    <div class="stat-mini">
+      <div class="val" style="color:#A32D2D;">0</div>
+      <div class="lbl">duplicados exactos</div>
+    </div>
+  </div>
+  <span class="cm">Tabla: Metodos de Pago</span><br>
+  <div class="stat-mini-grid">
+    <div class="stat-mini">
+      <div class="val" style="color:#185FA5;">3029</div>
+      <div class="lbl">Registros de ventas totales</div>
+    </div>
+    <div class="stat-mini">
+      <div class="val" style="color:#0F6E56;">7</div>
+      <div class="lbl">columnas</div>
+    </div>
+    <div class="stat-mini">
+      <div class="val" style="color:#854F0B;">0</div>
+      <div class="lbl">valores nulos</div>
+    </div>
+    <div class="stat-mini">
+      <div class="val" style="color:#A32D2D;">0</div>
+      <div class="lbl">duplicados exactos</div>
+    </div>
+  </div>
+  <span class="cm">Tabla: Metodos de Pago</span><br>
+  <div class="stat-mini-grid">
+    <div class="stat-mini">
+      <div class="val" style="color:#185FA5;">3029</div>
+      <div class="lbl">Registros de ventas totales</div>
+    </div>
+    <div class="stat-mini">
+      <div class="val" style="color:#0F6E56;">7</div>
+      <div class="lbl">columnas</div>
+    </div>
+    <div class="stat-mini">
+      <div class="val" style="color:#854F0B;">0</div>
+      <div class="lbl">valores nulos</div>
+    </div>
+    <div class="stat-mini">
+      <div class="val" style="color:#A32D2D;">0</div>
+      <div class="lbl">duplicados exactos</div>
+    </div>
+  </div>
+  <span class="cm">Tabla: Metodos de Pago</span><br>
+  <div class="stat-mini-grid">
+    <div class="stat-mini">
+      <div class="val" style="color:#185FA5;">3029</div>
+      <div class="lbl">Registros de ventas totales</div>
+    </div>
+    <div class="stat-mini">
+      <div class="val" style="color:#0F6E56;">7</div>
+      <div class="lbl">columnas</div>
+    </div>
+    <div class="stat-mini">
+      <div class="val" style="color:#854F0B;">0</div>
+      <div class="lbl">valores nulos</div>
+    </div>
+    <div class="stat-mini">
+      <div class="val" style="color:#A32D2D;">0</div>
+      <div class="lbl">duplicados exactos</div>
+    </div>
+  </div>
+  <span class="cm">Tabla: Metodos de Pago</span><br>
+  <div class="stat-mini-grid">
+    <div class="stat-mini">
+      <div class="val" style="color:#185FA5;">3029</div>
+      <div class="lbl">Registros de ventas totales</div>
+    </div>
+    <div class="stat-mini">
+      <div class="val" style="color:#0F6E56;">7</div>
+      <div class="lbl">columnas</div>
+    </div>
+    <div class="stat-mini">
+      <div class="val" style="color:#854F0B;">0</div>
       <div class="lbl">valores nulos</div>
     </div>
     <div class="stat-mini">
