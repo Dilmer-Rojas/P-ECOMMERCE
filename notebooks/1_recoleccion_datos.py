@@ -1,8 +1,6 @@
 # Paso 1 — importar librerías esenciales
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 # Paso 2 — cargar los archivos
 clientes = pd.read_csv('../data/raw/clientes.csv')
