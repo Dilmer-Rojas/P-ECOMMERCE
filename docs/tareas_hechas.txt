@@ -1,0 +1,20 @@
+1) Usé Power Query para limpiar
+
+CONTEO Y TRATADO DE NULOS | CAMBIO DE TIPO DE DATO | CAMBIO DE NOMBRES DE VARIABLES:
+    - Cambiar los tipos de datos erroneos (esto se documentó en la etapa 2)
+    - En la tabla 'Productos' hice primero el remplazo de ',' por '.' ya que al cambiar el tipo de dato de texto '12,24' a decimal salía como 1224
+     por ello hice el remplazo usando Trasformar > Remplazar los valores > busqué ',' y remplaze por '.' y luego cambie el tipo de dato a float/decimal.
+     Tambien hice el cambio en tipo de dato de la columna 'stock' de str a int.
+    - En la tabla 'Ventas' se hizo el cambio de dato en la columna 'Fecha' de str a 'date'.
+    - Cambiar los nombres erroneos de las columnas en este caso en "Fecha_Resgistro" por "Fecha_Registro" (esto se documentó en la etapa 2)
+    - Identificar Valores Nulos usando Power Query - No se encontraron NULOS | VACIOS - Validos 100%, Error 0%, Vacios 0%
+
+DETECCION DE DUPLICADOS + TRATAMIENTO
+    - Hice la deteccion de nulos usando seleccion de tabla > Formato Condicional > Reglas para resaltar celdas > Valores Duplicados para luego Aplicar
+    el filtro por color.
+    - No se encontraron duplicados en las tablas Clientes | Categorias | Metodo de Pago | Productos
+    - En la tabla Ventas si se encontraron 29 duplicados
+        Ejemplo:  680	04/02/2024	112	37	2	5	Completa
+                  680	04/02/2024	112	37	2	5	Completa
+    - Se eliminaron estos duplicados: Seleccioné la tabla > Datos > Quitar Duplicados.
+
