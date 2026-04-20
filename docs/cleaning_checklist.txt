@@ -19,15 +19,15 @@
     - Fechas
     - Moneda
     - Texto
-- Estandarizar o Normalizar textos | Lima | lima | LIMA - USANDO GRAFICOS EN PYTHON - ESTO LO HAREMOS AL ULTIMO ❌
+- Detección de textos | Lima | lima | LIMA ✅
 
 (4) LIMPIEZA DE DATOS
 - Eliminar duplicados (Data → Remove Duplicates) ✅
-- Corregir textos: ❌
+- Corregir textos: ✅
     - TRIM()
     - PROPER()
-    - Estandarizar texto con TRIM y PROPER ❌
-- Estandarizar fechas ✅
+    - Estandarizar texto con TRIM y PROPER ✅
+- Estandarizar fechas ❌
 - Convertir tipos de datos ✅
 
 (5) VALIDACIÓN DE DATOS
