@@ -1,0 +1,9 @@
+=TRIM(A2)              → elimina espacios extras
+=PROPER(A2)            → capitaliza correctamente
+=UPPER(A2)             → TODO EN MAYÚSCULAS
+=LOWER(A2)             → todo en minúsculas
+=SUBSTITUTE(A2,"x","y")→ reemplaza texto dentro de una celda
+=ISNUMBER(A2)          → verifica si un valor es número (TRUE/FALSE)
+=ISBLANK(A2)           → verifica si la celda está vacía
+=LEN(A2)               → cuenta caracteres (útil para detectar espacios ocultos)
+=DATEVALUE(A2)         → convierte texto a fecha real

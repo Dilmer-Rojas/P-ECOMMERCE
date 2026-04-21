@@ -20,4 +20,12 @@ DETECCION DE DUPLICADOS + TRATAMIENTO
 
 LIMPIEZA DE DATOS
     - No hubo textos que corregir y por tanto no hice uso de PROPER | TRIM
-    - Estandarizar fechas
+    - Estandarizar fechas:
+        En la tabla clientes(fecha_registro) se hizo el cambio de DD-MM-YYYY a YYYY-MM-DD siguiendo estos pasos: Seleccion de columna, CTRL + 1 > Buscamos en fecha: 2012-03-14 > Aceptar
+        En la tabla ventas(Fecha) se aplicó lo mismo
+
+VALIDACION TIPOS DE DATOS
+    - No hay cantidades negativas, se hizo la revisión usando filtros aplicado a columna por columna
+    - No hay valores fuera de rango, se hizo la revisión usando formato condicional y filtros
+    - Hice la validacion de datos usando: Datos → Validación de datos → configuras reglas. Ejemplo: columna Cantidad solo acepta números enteros ≥ 1. Si alguien intenta poner -1 o texto, Excel lo rechaza con un mensaje de error.
+        Esto lo aplique para la mayoria de columnas en el dataset.

@@ -27,20 +27,19 @@
     - TRIM()
     - PROPER()
     - Estandarizar texto con TRIM y PROPER ✅
-- Estandarizar fechas ❌
+- Estandarizar fechas ✅
 - Convertir tipos de datos ✅
 
 (5) VALIDACIÓN DE DATOS
 - Revisar:
     - Cantidades negativas ✅
-    - Valores fuera de rango ❌
-- Aplicar Data Validation ❌
+    - Valores fuera de rango ✅
+- Aplicar Data Validation ✅
 
 (6) RECONSTRUCCIÓN DE CAMPOS
 - Recalcular columnas:
-    - Total = Cantidad * Precio ❌ NO HAY UNA COLUMNA TOTAL PERO PODEMOS CREARLA USANDO SQL|JOINs
-        USANDO
-
+    - Total = Cantidad * Precio ✅ NO HAY UNA COLUMNA TOTAL PERO PODEMOS CREARLA USANDO SQL|JOINs
+        ESTO SE HARÁ AL FINAL
 (7) CONTROL FINAL
 - Revisar consistencia
 - Validar totales
