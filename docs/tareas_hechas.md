@@ -1,6 +1,6 @@
-Usé Power Query para limpiar
+## Usé Power Query para limpiar
 
-DETECCION Y TRATADO DE NULOS | CAMBIO DE TIPO DE DATO | CAMBIO DE NOMBRES DE VARIABLES:
+### DETECCION Y TRATADO DE NULOS | CAMBIO DE TIPO DE DATO | CAMBIO DE NOMBRES DE VARIABLES:
     - Cambiar los tipos de datos erroneos (esto se documentó en la etapa 2)
     - En la tabla 'Productos' hice primero el remplazo de ',' por '.' ya que al cambiar el tipo de dato de texto '12,24' a decimal salía como 1224
      por ello hice el remplazo usando Trasformar > Remplazar los valores > busqué ',' y remplaze por '.' y luego cambie el tipo de dato a float/decimal.
@@ -9,7 +9,7 @@ DETECCION Y TRATADO DE NULOS | CAMBIO DE TIPO DE DATO | CAMBIO DE NOMBRES DE VAR
     - Cambiar los nombres erroneos de las columnas en este caso en "Fecha_Resgistro" por "Fecha_Registro" (esto se documentó en la etapa 2)
     - Identificar Valores Nulos usando Power Query - No se encontraron NULOS | VACIOS - Validos 100%, Error 0%, Vacios 0%
 
-DETECCION DE DUPLICADOS + TRATAMIENTO
+### DETECCION DE DUPLICADOS + TRATAMIENTO
     - Hice la deteccion de duplicados usando seleccion de tabla > Formato Condicional > Reglas para resaltar celdas > Valores Duplicados para luego Aplicar
     el filtro por color.
     - No se encontraron duplicados en las tablas Clientes | Categorias | Metodo de Pago | Productos
@@ -18,17 +18,17 @@ DETECCION DE DUPLICADOS + TRATAMIENTO
                   680	04/02/2024	112	37	2	5	Completa
     - Se eliminaron estos duplicados: Seleccioné la tabla > Datos > Quitar Duplicados.
 
-LIMPIEZA DE DATOS
+### LIMPIEZA DE DATOS
     - No hubo textos que corregir y por tanto no hice uso de PROPER | TRIM
     - Estandarizar fechas:
         En la tabla clientes(fecha_registro) se hizo el cambio de DD-MM-YYYY a YYYY-MM-DD siguiendo estos pasos: Seleccion de columna, CTRL + 1 > Buscamos en fecha: 2012-03-14 > Aceptar
         En la tabla ventas(Fecha) se aplicó lo mismo
 
-VALIDACION TIPOS DE DATOS
+### VALIDACION TIPOS DE DATOS
     - No hay cantidades negativas, se hizo la revisión usando filtros aplicado a columna por columna
     - No hay valores fuera de rango, se hizo la revisión usando formato condicional y filtros
     - Hice la validacion de datos usando: Datos → Validación de datos → configuras reglas. Ejemplo: columna Cantidad solo acepta números enteros ≥ 1. Si alguien intenta poner -1 o texto, Excel lo rechaza con un mensaje de error.
-        Esto lo aplique para la mayoria de columnas en el dataset.
+        Esto lo aplique para la mayoria de columnas en el dataset:
 ---
 
 ## 📋 Cheatsheet — Limpieza de datos en Excel
@@ -68,5 +68,5 @@ VALIDACION TIPOS DE DATOS
 | Quitar validación | `Datos → Validación de datos → Borrar todos → Aceptar` |
 
 ---
-
-¿Te funciona esta versión? Si quieres, también puedo dártelo como archivo descargable.
+OTRA OPCIÓN ES USAR PYTHON
+[Ver el notebook](../notebooks/cleaning.ipynb)
