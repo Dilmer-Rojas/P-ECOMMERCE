@@ -1,4 +1,4 @@
-1) Usé Power Query para limpiar
+Usé Power Query para limpiar
 
 DETECCION Y TRATADO DE NULOS | CAMBIO DE TIPO DE DATO | CAMBIO DE NOMBRES DE VARIABLES:
     - Cambiar los tipos de datos erroneos (esto se documentó en la etapa 2)
@@ -29,3 +29,44 @@ VALIDACION TIPOS DE DATOS
     - No hay valores fuera de rango, se hizo la revisión usando formato condicional y filtros
     - Hice la validacion de datos usando: Datos → Validación de datos → configuras reglas. Ejemplo: columna Cantidad solo acepta números enteros ≥ 1. Si alguien intenta poner -1 o texto, Excel lo rechaza con un mensaje de error.
         Esto lo aplique para la mayoria de columnas en el dataset.
+---
+
+## 📋 Cheatsheet — Limpieza de datos en Excel
+
+---
+
+### 1️⃣ Filtros — detectar cantidades negativas o raras
+
+| Tarea | Pasos |
+|---|---|
+| Activar filtros | Selecciona encabezados → `Datos → Filtro` |
+| Ver extremos | Flecha de columna → `Ordenar de mayor a menor` y al revés |
+| Filtrar negativos | Flecha → `Filtros de número → Menor que → 0` |
+| Quitar filtro | `Datos → Borrar` |
+
+---
+
+### 2️⃣ Formato condicional — valores fuera de rango
+
+| Tarea | Pasos |
+|---|---|
+| Resaltar valores mayores a X | Selecciona columna → `Inicio → Formato condicional → Resaltar reglas → Es mayor que...` → ingresa límite → color → Aceptar |
+| Rango personalizado (fórmula) | Formato condicional → `Nueva regla → Usar fórmula` → ej: `=O(A2<1, A2>100)` → color → Aceptar |
+| Ver solo celdas marcadas | Filtro → `Filtrar por color` |
+| Eliminar reglas | `Inicio → Formato condicional → Borrar reglas → De la selección` |
+
+---
+
+### 3️⃣ Validación de datos — prevenir errores futuros
+
+| Tarea | Pasos |
+|---|---|
+| Abrir validación | Selecciona columna → `Datos → Validación de datos` |
+| Solo enteros ≥ 1 (ej. Cantidad) | Permitir: `Número entero` → Mayor o igual que → `1` |
+| Decimales en rango (ej. Precio) | Permitir: `Decimal` → Entre → `0.01` y `9999` |
+| Agregar mensaje de error | Pestaña `Mensaje de error` → Estilo: `Detener` → escribe tu mensaje |
+| Quitar validación | `Datos → Validación de datos → Borrar todos → Aceptar` |
+
+---
+
+¿Te funciona esta versión? Si quieres, también puedo dártelo como archivo descargable.
