@@ -29,9 +29,6 @@
     - No hay valores fuera de rango, se hizo la revisión usando formato condicional y filtros
     - Hice la validacion de datos usando: Datos → Validación de datos → configuras reglas. Ejemplo: columna Cantidad solo acepta números enteros ≥ 1. Si alguien intenta poner -1 o texto, Excel lo rechaza con un mensaje de error.
         Esto lo aplique para la mayoria de columnas en el dataset:
----
-
-## 📋 Cheatsheet — Limpieza de datos en Excel
 
 ---
 
@@ -66,7 +63,3 @@
 | Decimales en rango (ej. Precio) | Permitir: `Decimal` → Entre → `0.01` y `9999` |
 | Agregar mensaje de error | Pestaña `Mensaje de error` → Estilo: `Detener` → escribe tu mensaje |
 | Quitar validación | `Datos → Validación de datos → Borrar todos → Aceptar` |
-
----
-OTRA OPCIÓN ES USAR PYTHON
-[Ver el notebook](../notebooks/02_data_cleaning.ipynb)
