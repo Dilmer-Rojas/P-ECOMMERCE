@@ -1,0 +1,373 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);color:var(--color-text-primary);background:transparent}
+.tabs{display:flex;gap:6px;margin-bottom:1rem;flex-wrap:wrap;border-bottom:.5px solid var(--color-border-tertiary);padding-bottom:.75rem}
+.tab{padding:5px 13px;border-radius:var(--border-radius-md);font-size:12px;cursor:pointer;border:.5px solid var(--color-border-secondary);background:var(--color-background-secondary);color:var(--color-text-secondary);transition:all .15s;white-space:nowrap}
+.tab.active{background:var(--color-background-primary);color:var(--color-text-primary);font-weight:500;border-color:var(--color-border-primary)}
+.panel{display:none}.panel.active{display:block}
+.fn-card{border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);margin-bottom:1rem;overflow:hidden}
+.fn-header{background:var(--color-background-secondary);padding:.75rem 1rem;display:flex;align-items:center;gap:10px;border-bottom:.5px solid var(--color-border-tertiary);cursor:pointer}
+.fn-badge{font-size:11px;padding:2px 8px;border-radius:4px;font-weight:500;flex-shrink:0}
+.fn-title{font-size:14px;font-weight:500;flex:1}
+.fn-level{font-size:11px;color:var(--color-text-secondary)}
+.fn-body{padding:1rem}
+.fn-desc{font-size:13px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:.75rem}
+.syntax-box{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.75rem 1rem;margin-bottom:.75rem;border:.5px solid var(--color-border-tertiary)}
+.syntax-label{font-size:11px;font-weight:500;color:var(--color-text-secondary);margin-bottom:.4rem}
+.syntax-formula{font-family:var(--font-mono);font-size:13px;color:var(--color-text-primary);line-height:1.8}
+.arg{color:#185FA5;font-weight:500}
+.arg-desc{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin-top:.5rem}
+.arg-name{font-family:var(--font-mono);font-size:12px;color:#185FA5;font-weight:500;white-space:nowrap}
+.arg-txt{font-size:12px;color:var(--color-text-secondary);line-height:1.5}
+.example-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:.75rem}
+.ex-box{border-radius:var(--border-radius-md);padding:.65rem .9rem;font-size:12px;line-height:1.6}
+.ex-label{font-size:11px;font-weight:500;margin-bottom:4px;color:var(--color-text-secondary)}
+.ex-formula{font-family:var(--font-mono);font-size:12px;margin:.3rem 0;padding:4px 8px;background:var(--color-background-secondary);border-radius:4px;display:block;border:.5px solid var(--color-border-tertiary)}
+.ex-result{font-size:12px;color:var(--color-text-success);font-weight:500}
+.insight{border-left:3px solid var(--color-border-info);background:var(--color-background-info);border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;padding:.65rem 1rem;font-size:13px;line-height:1.55;margin-top:.5rem}
+.insight-label{font-size:11px;font-weight:500;color:var(--color-text-info);margin-bottom:3px}
+.warn{border-left:3px solid var(--color-border-warning);background:var(--color-background-warning);border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;padding:.65rem 1rem;font-size:13px;line-height:1.55;margin-top:.5rem}
+.warn-label{font-size:11px;font-weight:500;color:var(--color-text-warning);margin-bottom:3px}
+.compare-table{width:100%;border-collapse:collapse;font-size:12px;margin:.75rem 0}
+.compare-table th{background:var(--color-background-secondary);padding:6px 10px;text-align:left;font-weight:500;font-size:11px;color:var(--color-text-secondary);border-bottom:1px solid var(--color-border-tertiary)}
+.compare-table td{padding:7px 10px;border-bottom:.5px solid var(--color-border-tertiary);vertical-align:top}
+.compare-table tr:last-child td{border-bottom:none}
+.tag-basic{background:#EAF3DE;color:#3B6D11}.tag-med{background:#E6F1FB;color:#185FA5}.tag-adv{background:#EEEDFE;color:#534AB7}
+.btn{padding:7px 16px;border-radius:var(--border-radius-md);font-size:13px;font-weight:500;cursor:pointer;border:.5px solid var(--color-border-secondary);background:var(--color-background-secondary);color:var(--color-text-primary);transition:all .15s;margin-top:.75rem}
+.btn-green{background:#0F6E56;color:#E1F5EE;border-color:#0F6E56}
+.btn-green:hover{background:#085041}
+</style>
+</head>
+<body>
+
+<div class="tabs">
+  <div class="tab active" onclick="show('logicas',this)">Lógicas</div>
+  <div class="tab" onclick="show('busqueda',this)">Búsqueda</div>
+  <div class="tab" onclick="show('agregacion',this)">Agregación</div>
+  <div class="tab" onclick="show('texto',this)">Texto y Fecha</div>
+  <div class="tab" onclick="show('anidadas',this)">Fórmulas anidadas</div>
+</div>
+
+<!-- ===== LÓGICAS ===== -->
+<div id="panel-logicas" class="panel active">
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-badge tag-basic">Básica</span>
+      <div class="fn-title">IF — La función más usada en Excel</div>
+    </div>
+    <div class="fn-body">
+      <div class="fn-desc">Evalúa una condición y devuelve un valor si es verdadera y otro si es falsa. La base de toda lógica en Excel.</div>
+      <div class="syntax-box">
+        <div class="syntax-label">SINTAXIS</div>
+        <div class="syntax-formula">=IF(<span class="arg">condición</span>, <span class="arg">valor_si_verdadero</span>, <span class="arg">valor_si_falso</span>)</div>
+        <div class="arg-desc">
+          <div class="arg-name">condición</div><div class="arg-txt">Expresión que se evalúa como TRUE o FALSE. Ej: A2>1000, B2="Lima"</div>
+          <div class="arg-name">si_verdadero</div><div class="arg-txt">Qué devolver si la condición es TRUE</div>
+          <div class="arg-name">si_falso</div><div class="arg-txt">Qué devolver si la condición es FALSE</div>
+        </div>
+      </div>
+      <div class="example-grid">
+        <div class="ex-box" style="background:var(--color-background-secondary)">
+          <div class="ex-label">Caso 1 — Categorizar ventas</div>
+          <code class="ex-formula">=IF(D2>=5000,"Alta","Baja")</code>
+          <div>Si Total ≥ S/5000 → "Alta", si no → "Baja"</div>
+          <div class="ex-result">→ "Alta" si D2=7000</div>
+        </div>
+        <div class="ex-box" style="background:var(--color-background-secondary)">
+          <div class="ex-label">Caso 2 — Detectar meta cumplida</div>
+          <code class="ex-formula">=IF(C2>=B2,"✓ Meta","✗ Meta")</code>
+          <div>Compara ventas reales vs meta</div>
+          <div class="ex-result">→ "✓ Meta" si supera la meta</div>
+        </div>
+      </div>
+      <div class="insight"><div class="insight-label">IF anidado</div>Para múltiples condiciones: =IF(D2>=10000,"Premium",IF(D2>=5000,"Media","Baja")). Puedes anidar hasta 64 niveles, pero más de 3 se vuelve ilegible — usa IFS() en su lugar.</div>
+    </div>
+  </div>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-badge tag-med">Intermedia</span>
+      <div class="fn-title">IFS — IF múltiple sin anidar</div>
+    </div>
+    <div class="fn-body">
+      <div class="fn-desc">Evalúa múltiples condiciones en orden. Más limpio que anidar IFs cuando tienes 3+ categorías.</div>
+      <div class="syntax-box">
+        <div class="syntax-label">SINTAXIS</div>
+        <div class="syntax-formula">=IFS(<span class="arg">cond1</span>, <span class="arg">val1</span>, <span class="arg">cond2</span>, <span class="arg">val2</span>, ...)</div>
+      </div>
+      <div class="ex-box" style="background:var(--color-background-secondary);margin-bottom:.5rem">
+        <div class="ex-label">Caso real — Clasificar performance de vendedor</div>
+        <code class="ex-formula">=IFS(E2>=95,"Excelente", E2>=80,"Bueno", E2>=60,"Regular", E2<60,"Bajo")</code>
+        <div class="ex-result">→ Evalúa en orden: primera condición TRUE gana</div>
+      </div>
+      <div class="warn"><div class="warn-label">Ojo con el orden</div>IFS evalúa de izquierda a derecha y se detiene en la primera condición TRUE. Siempre pon las condiciones de mayor a menor (≥95 antes que ≥80).</div>
+    </div>
+  </div>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-badge tag-med">Intermedia</span>
+      <div class="fn-title">AND / OR — Condiciones compuestas</div>
+    </div>
+    <div class="fn-body">
+      <div class="fn-desc">Se usan dentro de IF para evaluar múltiples condiciones a la vez.</div>
+      <div class="example-grid">
+        <div class="ex-box" style="background:var(--color-background-secondary)">
+          <div class="ex-label">AND — todas deben cumplirse</div>
+          <code class="ex-formula">=IF(AND(B2="Lima",C2>5000),"Prioridad","Normal")</code>
+          <div>Solo "Prioridad" si es Lima Y ventas &gt;5000</div>
+        </div>
+        <div class="ex-box" style="background:var(--color-background-secondary)">
+          <div class="ex-label">OR — basta con una</div>
+          <code class="ex-formula">=IF(OR(B2="Lima",B2="Norte"),"Zona A","Zona B")</code>
+          <div>"Zona A" si es Lima O Norte</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== BÚSQUEDA ===== -->
+<div id="panel-busqueda" class="panel">
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-badge tag-med">Intermedia</span>
+      <div class="fn-title">VLOOKUP — Búsqueda vertical clásica</div>
+    </div>
+    <div class="fn-body">
+      <div class="fn-desc">Busca un valor en la primera columna de una tabla y devuelve el valor de otra columna en la misma fila. La función de búsqueda más pedida en entrevistas.</div>
+      <div class="syntax-box">
+        <div class="syntax-label">SINTAXIS</div>
+        <div class="syntax-formula">=VLOOKUP(<span class="arg">valor_buscado</span>, <span class="arg">tabla</span>, <span class="arg">núm_columna</span>, <span class="arg">0</span>)</div>
+        <div class="arg-desc">
+          <div class="arg-name">valor_buscado</div><div class="arg-txt">Lo que buscas. Ej: el ID del vendedor</div>
+          <div class="arg-name">tabla</div><div class="arg-txt">El rango donde buscas. La primera columna DEBE contener el valor buscado</div>
+          <div class="arg-name">núm_columna</div><div class="arg-txt">Qué columna de la tabla quieres que devuelva (1=primera, 2=segunda...)</div>
+          <div class="arg-name">0 (FALSE)</div><div class="arg-txt">Siempre 0 para búsqueda exacta. Con 1 busca aproximada — casi nunca lo usas</div>
+        </div>
+      </div>
+      <div class="ex-box" style="background:var(--color-background-secondary);margin-bottom:.75rem">
+        <div class="ex-label">Caso real — Traer el nombre del vendedor por su ID</div>
+        <code class="ex-formula">=VLOOKUP(A2, Vendedores!$A:$C, 2, 0)</code>
+        <div>Busca el ID en columna A de la hoja Vendedores, devuelve la columna 2 (Nombre)</div>
+        <div class="ex-result">→ Devuelve "Ana Torres" si A2="V-001"</div>
+      </div>
+      <div class="warn"><div class="warn-label">La limitación más importante de VLOOKUP</div>Solo busca hacia la derecha — el valor buscado debe estar en la primera columna de tu rango. Si necesitas buscar hacia la izquierda, VLOOKUP no puede. Para eso existe XLOOKUP o INDEX+MATCH.</div>
+    </div>
+  </div>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-badge tag-adv">Avanzada</span>
+      <div class="fn-title">XLOOKUP — El reemplazo moderno de VLOOKUP</div>
+    </div>
+    <div class="fn-body">
+      <div class="fn-desc">Más flexible, más poderoso y más legible que VLOOKUP. Busca en cualquier dirección, maneja errores integrado, y no necesita contar columnas.</div>
+      <div class="syntax-box">
+        <div class="syntax-label">SINTAXIS</div>
+        <div class="syntax-formula">=XLOOKUP(<span class="arg">valor_buscado</span>, <span class="arg">rango_búsqueda</span>, <span class="arg">rango_retorno</span>, <span class="arg">[si_no_encontrado]</span>)</div>
+        <div class="arg-desc">
+          <div class="arg-name">valor_buscado</div><div class="arg-txt">Lo que buscas</div>
+          <div class="arg-name">rango_búsqueda</div><div class="arg-txt">Columna donde buscar (no toda la tabla, solo la columna)</div>
+          <div class="arg-name">rango_retorno</div><div class="arg-txt">Columna que quieres que devuelva</div>
+          <div class="arg-name">si_no_encontrado</div><div class="arg-txt">Qué mostrar si no encuentra nada. Ej: "No encontrado"</div>
+        </div>
+      </div>
+      <div class="example-grid">
+        <div class="ex-box" style="background:var(--color-background-secondary)">
+          <div class="ex-label">Mismo caso — más limpio</div>
+          <code class="ex-formula">=XLOOKUP(A2, Vendedores!A:A, Vendedores!B:B, "N/A")</code>
+          <div class="ex-result">→ No necesitas contar columnas</div>
+        </div>
+        <div class="ex-box" style="background:var(--color-background-secondary)">
+          <div class="ex-label">Buscar hacia la izquierda</div>
+          <code class="ex-formula">=XLOOKUP(B2, Vendedores!B:B, Vendedores!A:A, "N/A")</code>
+          <div class="ex-result">→ Busca Nombre, devuelve ID (imposible en VLOOKUP)</div>
+        </div>
+      </div>
+      <div class="insight"><div class="insight-label">¿VLOOKUP o XLOOKUP?</div>Si trabajas en Excel 365 u Office 2021+, usa siempre XLOOKUP. Si trabajas con archivos compartidos con personas en versiones antiguas de Excel, usa VLOOKUP para compatibilidad.</div>
+    </div>
+  </div>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-badge tag-adv">Avanzada</span>
+      <div class="fn-title">INDEX + MATCH — La combinación profesional</div>
+    </div>
+    <div class="fn-body">
+      <div class="fn-desc">La alternativa clásica a VLOOKUP que funciona en todas las versiones. MATCH encuentra la posición, INDEX devuelve el valor en esa posición. Juntas son imbatibles.</div>
+      <div class="syntax-box">
+        <div class="syntax-label">SINTAXIS COMBINADA</div>
+        <div class="syntax-formula">=INDEX(<span class="arg">columna_retorno</span>, MATCH(<span class="arg">valor_buscado</span>, <span class="arg">columna_búsqueda</span>, <span class="arg">0</span>))</div>
+      </div>
+      <div class="ex-box" style="background:var(--color-background-secondary);margin-bottom:.5rem">
+        <div class="ex-label">Equivalente al VLOOKUP anterior</div>
+        <code class="ex-formula">=INDEX(Vendedores!B:B, MATCH(A2, Vendedores!A:A, 0))</code>
+        <div>MATCH encuentra en qué fila está A2 dentro de la columna A de Vendedores. INDEX devuelve el valor de la columna B en esa fila.</div>
+        <div class="ex-result">→ Funciona en todas las versiones de Excel, busca en ambas direcciones</div>
+      </div>
+    </div>
+  </div>
+
+  <table class="compare-table">
+    <thead><tr><th>Función</th><th>Versión</th><th>Busca izquierda</th><th>Maneja errores</th><th>Facilidad</th></tr></thead>
+    <tbody>
+      <tr><td><strong>VLOOKUP</strong></td><td>Todas</td><td>❌ No</td><td>❌ No nativo</td><td>⭐⭐⭐</td></tr>
+      <tr><td><strong>INDEX+MATCH</strong></td><td>Todas</td><td>✅ Sí</td><td>❌ No nativo</td><td>⭐⭐</td></tr>
+      <tr><td><strong>XLOOKUP</strong></td><td>365/2021+</td><td>✅ Sí</td><td>✅ Sí nativo</td><td>⭐⭐⭐⭐</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== AGREGACIÓN ===== -->
+<div id="panel-agregacion" class="panel">
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-badge tag-basic">Básica</span>
+      <div class="fn-title">SUMIF / SUMIFS — Suma con condiciones</div>
+    </div>
+    <div class="fn-body">
+      <div class="fn-desc">Suma solo las filas que cumplen una o más condiciones. Una de las más usadas en reportes de negocio.</div>
+      <div class="syntax-box">
+        <div class="syntax-label">SINTAXIS</div>
+        <div class="syntax-formula">=SUMIF(<span class="arg">rango_criterio</span>, <span class="arg">criterio</span>, <span class="arg">rango_suma</span>)</div>
+        <div class="syntax-formula" style="margin-top:.4rem">=SUMIFS(<span class="arg">rango_suma</span>, <span class="arg">rango1</span>, <span class="arg">criterio1</span>, <span class="arg">rango2</span>, <span class="arg">criterio2</span>, ...)</div>
+      </div>
+      <div class="example-grid">
+        <div class="ex-box" style="background:var(--color-background-secondary)">
+          <div class="ex-label">SUMIF — una condición</div>
+          <code class="ex-formula">=SUMIF(B:B,"Lima",E:E)</code>
+          <div>Suma la columna E solo donde B="Lima"</div>
+          <div class="ex-result">→ Total ventas de Lima</div>
+        </div>
+        <div class="ex-box" style="background:var(--color-background-secondary)">
+          <div class="ex-label">SUMIFS — dos condiciones</div>
+          <code class="ex-formula">=SUMIFS(E:E,B:B,"Lima",C:C,"Electrónica")</code>
+          <div>Suma E donde B=Lima Y C=Electrónica</div>
+          <div class="ex-result">→ Ventas Lima + Electrónica</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fn-card">
+    <div class="fn-header">
+      <span class="fn-badge tag-basic">Básica</span>
+      <div class="fn-title">COUNTIF / COUNTIFS — Contar con condiciones</div>
+    </div>
+    <div class="fn-body">
+      <div class="fn-desc">Cuenta cuántas filas cumplen una o más condiciones. Esencial para frecuencias, auditorías y KPIs.</div>
+      <div class="example-grid">
+        <div class="ex-box" style="background:var(--color-background-secondary)">
+          <div class="ex-label">¿Cuántas ventas hubo en Lima?</div>
+          <code class="ex-formula">=COUNTIF(B:B,"Lima")</code>
+          <div class="ex-result">→ Número entero: cantidad de filas</div>
+        </div>
+        <div class="ex-box" style="background:var(--color-background-secondary)">
+          <div class="ex-label">¿Cuántas ventas >S/1000 en Norte?</div>
+          <code class="ex-formula">=COUNTIFS(B:B,"Norte",E:E,">1000")</code>
+          <div class="ex-result">→ Cuenta con dos filtros</div>
+        </div>
+      </div>
+      <div class="insight"><div class="insight-label">AVERAGEIF también existe</div>=AVERAGEIF(B:B,"Lima",E:E) calcula el promedio de ventas solo para Lima. Misma lógica que SUMIF pero promedia en vez de sumar.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TEXTO Y FECHA ===== -->
+<div id="panel-texto" class="panel">
+  <div class="fn-card">
+    <div class="fn-header"><span class="fn-badge tag-basic">Básica</span><div class="fn-title">Funciones de Texto más usadas</div></div>
+    <div class="fn-body">
+      <div class="example-grid">
+        <div class="ex-box" style="background:var(--color-background-secondary)">
+          <div class="ex-label">LEFT / RIGHT / MID — extraer texto</div>
+          <code class="ex-formula">=LEFT(A2,3)   → "V-0" de "V-001"</code>
+          <code class="ex-formula">=RIGHT(A2,3)  → "001" de "V-001"</code>
+          <code class="ex-formula">=MID(A2,3,3)  → "001" desde pos 3</code>
+        </div>
+        <div class="ex-box" style="background:var(--color-background-secondary)">
+          <div class="ex-label">CONCATENATE / &amp; — unir texto</div>
+          <code class="ex-formula">=A2&" "&B2</code>
+          <code class="ex-formula">=CONCAT(A2," ",B2)</code>
+          <div class="ex-result">→ "Ana Torres Lima"</div>
+        </div>
+        <div class="ex-box" style="background:var(--color-background-secondary)">
+          <div class="ex-label">FIND / SEARCH — posición de texto</div>
+          <code class="ex-formula">=FIND("-",A2)  → posición del guion</code>
+          <div>FIND es sensible a mayúsculas, SEARCH no</div>
+        </div>
+        <div class="ex-box" style="background:var(--color-background-secondary)">
+          <div class="ex-label">TEXT — formatear números como texto</div>
+          <code class="ex-formula">=TEXT(D2,"S/ #,##0.00")</code>
+          <div class="ex-result">→ "S/ 5,000.00" para reportes</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fn-card">
+    <div class="fn-header"><span class="fn-badge tag-med">Intermedia</span><div class="fn-title">Funciones de Fecha más usadas</div></div>
+    <div class="fn-body">
+      <div class="example-grid">
+        <div class="ex-box" style="background:var(--color-background-secondary)">
+          <div class="ex-label">Extraer partes de fecha</div>
+          <code class="ex-formula">=YEAR(A2)   → 2024</code>
+          <code class="ex-formula">=MONTH(A2)  → 1 (enero)</code>
+          <code class="ex-formula">=DAY(A2)    → 5</code>
+        </div>
+        <div class="ex-box" style="background:var(--color-background-secondary)">
+          <div class="ex-label">Calcular diferencias</div>
+          <code class="ex-formula">=DATEDIF(A2,B2,"D")  → días entre fechas</code>
+          <code class="ex-formula">=DATEDIF(A2,B2,"M")  → meses</code>
+          <code class="ex-formula">=TODAY()-A2          → días desde hoy</code>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ANIDADAS ===== -->
+<div id="panel-anidadas" class="panel">
+  <div class="fn-card">
+    <div class="fn-header"><span class="fn-badge tag-adv">Avanzada</span><div class="fn-title">Fórmulas anidadas — el nivel profesional</div></div>
+    <div class="fn-body">
+      <div class="fn-desc">Combinar funciones dentro de otras es lo que diferencia un usuario básico de Excel de un analista. Estos son los patrones más usados en el trabajo real.</div>
+      <div class="ex-box" style="background:var(--color-background-secondary);margin-bottom:.6rem">
+        <div class="ex-label">Patrón 1 — IFERROR + VLOOKUP (manejo de errores)</div>
+        <code class="ex-formula">=IFERROR(VLOOKUP(A2,Tabla!$A:$C,2,0),"No encontrado")</code>
+        <div>Si VLOOKUP no encuentra el valor (error #N/A), muestra "No encontrado" en vez de un error feo.</div>
+      </div>
+      <div class="ex-box" style="background:var(--color-background-secondary);margin-bottom:.6rem">
+        <div class="ex-label">Patrón 2 — IF + SUMIFS (KPI dinámico)</div>
+        <code class="ex-formula">=IF(SUMIFS(E:E,B:B,"Lima")>=100000,"✓ Meta","✗ "&TEXT(SUMIFS(E:E,B:B,"Lima")/100000*100,"0.0")&"% meta")</code>
+        <div>Si ventas Lima ≥ 100K → "✓ Meta", si no → muestra el % alcanzado.</div>
+      </div>
+      <div class="ex-box" style="background:var(--color-background-secondary);margin-bottom:.5rem">
+        <div class="ex-label">Patrón 3 — INDEX + MATCH + MATCH (búsqueda en 2D)</div>
+        <code class="ex-formula">=INDEX(B2:E10, MATCH("Lima",A2:A10,0), MATCH("Enero",B1:E1,0))</code>
+        <div>Encuentra el valor en la intersección de fila "Lima" y columna "Enero" — como buscar en una tabla cruzada.</div>
+      </div>
+      <div class="insight"><div class="insight-label">Cómo leer fórmulas anidadas sin perderte</div>Léelas de adentro hacia afuera. El resultado de la función más interna es el input de la siguiente. En el Patrón 3: primero los dos MATCH encuentran las posiciones, luego INDEX devuelve el valor en esa intersección.</div>
+    </div>
+  </div>
+</div>
+
+<button class="btn btn-green" onclick="sendPrompt('Listo, quiero el laboratorio de práctica del Bloque B para practicar IF, VLOOKUP, SUMIF y las demás funciones.')">Ir al Laboratorio de Práctica →</button>
+
+<script>
+function show(id,el){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  el.classList.add('active');
+}
+</script>
+</body>
+</html>

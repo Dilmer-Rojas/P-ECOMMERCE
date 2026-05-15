@@ -1,4 +1,4 @@
-## Usé Power Query para limpiar
+## USÉ POWER QUERY PARA LO QUE ES LA LIMPIEZA DE DATOS EN EXCEL
 
 #### DETECCION Y TRATADO DE NULOS | CAMBIO DE TIPO DE DATO | CAMBIO DE NOMBRES DE VARIABLES:
     - Cambiar los tipos de datos erroneos (esto se documentó en la etapa 2)
@@ -29,6 +29,13 @@
     - No hay valores fuera de rango, se hizo la revisión usando formato condicional y filtros
     - Hice la validacion de datos usando: Datos → Validación de datos → configuras reglas. Ejemplo: columna Cantidad solo acepta números enteros ≥ 1. Si alguien intenta poner -1 o texto, Excel lo rechaza con un mensaje de error.
         Esto lo aplique para la mayoria de columnas en el dataset:
+
+#### RECONSTRUCCION DE CAMPOS
+    - Hice el uso de la función de excel: =BUSCARX(D2, productos!$A$2:$A$150, productos!$D$2:$D$150, "No Encontrado", 0)
+    en la tabla 'ventas' para traer el 'precio_unitario' que está en la tabla 'productos' de acuerdo con el 'id_producto'
+    encontrado de ambas tablas.
+    - Hubo errores de tipado con los rangos pero se corrigió.
+    - Luego hicimos el calculo del ´Total = Cantidad * Precio_Unitario´
 
 ---
 

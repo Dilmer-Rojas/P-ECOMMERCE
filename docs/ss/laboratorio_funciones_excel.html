@@ -1,0 +1,471 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);color:var(--color-text-primary);background:transparent;font-size:14px}
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:8px}
+.title{font-size:15px;font-weight:500}
+.prog-wrap{display:flex;align-items:center;gap:8px}
+.prog-track{width:130px;height:6px;background:var(--color-background-secondary);border-radius:3px}
+.prog-fill{height:100%;border-radius:3px;background:#1D9E75;transition:width .4s}
+.prog-txt{font-size:12px;color:var(--color-text-secondary);min-width:80px}
+.tabs{display:flex;gap:5px;margin-bottom:1rem;flex-wrap:wrap;border-bottom:.5px solid var(--color-border-tertiary);padding-bottom:.65rem}
+.tab{padding:5px 12px;border-radius:var(--border-radius-md);font-size:12px;cursor:pointer;border:.5px solid var(--color-border-secondary);background:var(--color-background-secondary);color:var(--color-text-secondary);transition:all .15s;white-space:nowrap}
+.tab.active{background:var(--color-background-primary);color:var(--color-text-primary);font-weight:500;border-color:var(--color-border-primary)}
+.panel{display:none}.panel.active{display:block}
+
+/* Dataset tables */
+.tbl-wrap{overflow-x:auto;border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);margin-bottom:.75rem}
+table{width:100%;border-collapse:collapse;font-size:12px}
+thead th{background:var(--color-background-secondary);padding:6px 10px;text-align:left;font-size:11px;font-weight:500;color:var(--color-text-secondary);border-bottom:1px solid var(--color-border-tertiary);white-space:nowrap}
+tbody td{padding:6px 10px;border-bottom:.5px solid var(--color-border-tertiary);white-space:nowrap}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:var(--color-background-secondary)}
+.hl{background:#FFF8E0;font-weight:500}
+
+/* Missions */
+.mission-grid{display:flex;flex-direction:column;gap:8px}
+.mission{border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:.7rem 1rem;display:flex;gap:12px;align-items:flex-start;cursor:pointer;transition:all .15s}
+.mission:hover{border-color:var(--color-border-secondary);background:var(--color-background-secondary)}
+.mission.done{border-color:#5DCAA5;background:#E1F5EE}
+.mission.active-m{border-color:#378ADD;background:#E6F1FB}
+.m-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0;background:var(--color-background-secondary);border:.5px solid var(--color-border-secondary);color:var(--color-text-secondary);margin-top:1px}
+.mission.done .m-num{background:#1D9E75;border-color:#1D9E75;color:#fff}
+.mission.active-m .m-num{background:#185FA5;border-color:#185FA5;color:#fff}
+.m-body{flex:1}
+.m-title{font-size:13px;font-weight:500;margin-bottom:2px}
+.m-desc{font-size:12px;color:var(--color-text-secondary);line-height:1.5}
+.m-tag{display:inline-block;font-size:10px;padding:1px 6px;border-radius:3px;margin-top:4px;font-weight:500}
+.tag-if{background:#EAF3DE;color:#3B6D11}
+.tag-lookup{background:#E6F1FB;color:#185FA5}
+.tag-sum{background:#EEEDFE;color:#534AB7}
+.tag-adv{background:#FAEEDA;color:#854F0B}
+
+/* Exercise */
+.ex-box{border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.ex-head{background:var(--color-background-secondary);padding:.7rem 1rem;display:flex;align-items:center;gap:10px;border-bottom:.5px solid var(--color-border-tertiary)}
+.ex-title{font-size:13px;font-weight:500;flex:1}
+.ex-pts{font-size:11px;padding:2px 8px;border-radius:4px;background:var(--color-background-primary);border:.5px solid var(--color-border-secondary)}
+.ex-body{padding:1rem}
+.context-box{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.65rem .9rem;margin-bottom:.75rem;font-size:12px;color:var(--color-text-secondary);line-height:1.6;border:.5px solid var(--color-border-tertiary)}
+.context-label{font-size:11px;font-weight:500;color:var(--color-text-primary);margin-bottom:3px}
+.q-text{font-size:13px;font-weight:500;line-height:1.5;margin-bottom:.75rem}
+.mcq-opts{display:flex;flex-direction:column;gap:7px;margin-bottom:.75rem}
+.opt{border:.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:.6rem .9rem;cursor:pointer;font-size:13px;transition:all .15s;line-height:1.5;font-family:var(--font-mono)}
+.opt:hover{border-color:var(--color-border-primary);background:var(--color-background-secondary)}
+.opt.ok{border-color:#1D9E75;background:#E1F5EE;color:#0F6E56;pointer-events:none}
+.opt.no{border-color:#A32D2D;background:#FCEBEB;color:#A32D2D;pointer-events:none}
+.opt.reveal{border-color:#1D9E75;background:#E1F5EE;color:#0F6E56;pointer-events:none}
+.opt.disabled{pointer-events:none;opacity:.45}
+.input-row{display:flex;gap:8px;margin-bottom:.75rem}
+.formula-input{flex:1;border:.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:8px 12px;font-size:13px;font-family:var(--font-mono);background:var(--color-background-secondary);color:var(--color-text-primary);outline:none;transition:border-color .15s}
+.formula-input:focus{border-color:#185FA5;background:var(--color-background-primary)}
+.formula-input.correct{border-color:#1D9E75;background:#E1F5EE}
+.formula-input.wrong{border-color:#A32D2D;background:#FCEBEB}
+.btn{padding:7px 16px;border-radius:var(--border-radius-md);font-size:13px;font-weight:500;cursor:pointer;border:.5px solid var(--color-border-secondary);background:var(--color-background-secondary);color:var(--color-text-primary);transition:all .15s;white-space:nowrap}
+.btn:hover{background:var(--color-background-primary)}
+.btn-green{background:#0F6E56;color:#E1F5EE;border-color:#0F6E56}.btn-green:hover{background:#085041}
+.btn-blue{background:#185FA5;color:#E6F1FB;border-color:#185FA5}.btn-blue:hover{background:#0C447C}
+.fb{border-radius:var(--border-radius-md);padding:.65rem .9rem;font-size:13px;line-height:1.55;display:none;margin-bottom:.75rem}
+.fb.ok{background:#E1F5EE;border-left:3px solid #1D9E75}
+.fb.no{background:#FCEBEB;border-left:3px solid #A32D2D}
+.fb.hint{background:#E6F1FB;border-left:3px solid #185FA5}
+.fb-label{font-size:11px;font-weight:500;margin-bottom:3px}
+.fb-label.ok{color:#0F6E56}.fb-label.no{color:#A32D2D}.fb-label.hint{color:#185FA5}
+code{font-family:var(--font-mono);font-size:12px;background:var(--color-background-secondary);border-radius:4px;padding:4px 8px;display:block;margin:.4rem 0;border:.5px solid var(--color-border-tertiary)}
+
+/* Score */
+.score-wrap{text-align:center;padding:1.5rem 1rem}
+.score-big{font-size:52px;font-weight:500;margin-bottom:.2rem}
+.score-sub{font-size:13px;color:var(--color-text-secondary);margin-bottom:1rem}
+.score-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:1rem 0}
+.sg-item{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.6rem}
+.sg-val{font-size:22px;font-weight:500}
+.sg-lbl{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
+.divider{height:.5px;background:var(--color-border-tertiary);margin:1rem 0}
+.review-list{display:flex;flex-direction:column;gap:6px;margin:1rem 0}
+.ri{border-radius:var(--border-radius-md);padding:.6rem .9rem;font-size:12px;line-height:1.5;display:flex;gap:8px}
+.ri.ok{background:#E1F5EE}.ri.no{background:#FCEBEB}
+.ri-icon{flex-shrink:0;font-size:13px;margin-top:1px}
+.ri-q{font-weight:500;margin-bottom:1px;font-size:12px}
+.ri-d{color:var(--color-text-secondary);font-size:11px}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="title">Laboratorio: Funciones Esenciales de Excel</div>
+  <div class="prog-wrap">
+    <div class="prog-track"><div class="prog-fill" id="prog" style="width:0%"></div></div>
+    <div class="prog-txt" id="prog-txt">0 / 8 misiones</div>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="goTab('datos',this)">Datos</div>
+  <div class="tab" onclick="goTab('misiones',this)">Misiones</div>
+  <div class="tab" onclick="goTab('ejercicio',this)">Ejercicio activo</div>
+  <div class="tab" onclick="goTab('score',this)">Resultados</div>
+</div>
+
+<!-- TAB DATOS -->
+<div id="tab-datos" class="panel active">
+  <div style="font-size:13px;color:var(--color-text-secondary);margin-bottom:.6rem;line-height:1.6;">Tienes dos tablas. Todas las misiones usan estos datos — igual que en el trabajo real donde combinas tablas para responder preguntas de negocio.</div>
+
+  <div style="font-size:12px;font-weight:500;color:var(--color-text-secondary);margin-bottom:.4rem;">Tabla 1 — Ventas (hoja: Ventas, columnas A–F)</div>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>A: ID_Venta</th><th>B: ID_Vendedor</th><th>C: Región</th><th>D: Categoría</th><th>E: Cantidad</th><th>F: Total (S/)</th></tr></thead>
+    <tbody>
+      <tr><td>V-001</td><td>S-01</td><td>Lima</td><td>Electrónica</td><td>2</td><td class="hl">5000</td></tr>
+      <tr><td>V-002</td><td>S-02</td><td>Lima</td><td>Accesorios</td><td>5</td><td class="hl">225</td></tr>
+      <tr><td>V-003</td><td>S-01</td><td>Lima</td><td>Electrónica</td><td>1</td><td class="hl">2500</td></tr>
+      <tr><td>V-004</td><td>S-03</td><td>Norte</td><td>Accesorios</td><td>3</td><td class="hl">360</td></tr>
+      <tr><td>V-005</td><td>S-04</td><td>Sur</td><td>Electrónica</td><td>1</td><td class="hl">850</td></tr>
+      <tr><td>V-006</td><td>S-01</td><td>Lima</td><td>Electrónica</td><td>1</td><td class="hl">2500</td></tr>
+      <tr><td>V-007</td><td>S-03</td><td>Norte</td><td>Audio</td><td>4</td><td class="hl">380</td></tr>
+      <tr><td>V-008</td><td>S-02</td><td>Lima</td><td>Accesorios</td><td>2</td><td class="hl">90</td></tr>
+      <tr><td>V-009</td><td>S-04</td><td>Sur</td><td>Accesorios</td><td>6</td><td class="hl">720</td></tr>
+      <tr><td>V-010</td><td>S-01</td><td>Lima</td><td>Electrónica</td><td>3</td><td class="hl">540</td></tr>
+      <tr><td>V-011</td><td>S-03</td><td>Norte</td><td>Electrónica</td><td>2</td><td class="hl">5000</td></tr>
+      <tr><td>V-012</td><td>S-02</td><td>Lima</td><td>Audio</td><td>1</td><td class="hl">380</td></tr>
+    </tbody>
+  </table></div>
+
+  <div style="font-size:12px;font-weight:500;color:var(--color-text-secondary);margin:.75rem 0 .4rem;">Tabla 2 — Vendedores (hoja: Vendedores, columnas A–C)</div>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>A: ID_Vendedor</th><th>B: Nombre</th><th>C: Meta_Mensual (S/)</th></tr></thead>
+    <tbody>
+      <tr><td>S-01</td><td class="hl">Ana Torres</td><td>8000</td></tr>
+      <tr><td>S-02</td><td class="hl">Carlos Méndez</td><td>5000</td></tr>
+      <tr><td>S-03</td><td class="hl">María López</td><td>6000</td></tr>
+      <tr><td>S-04</td><td class="hl">Juan Ríos</td><td>4000</td></tr>
+    </tbody>
+  </table></div>
+  <div style="font-size:12px;color:var(--color-text-secondary)">Tip: Las celdas amarillas son las columnas que más usarás en las misiones. Ve a <strong>Misiones</strong> cuando estés listo.</div>
+</div>
+
+<!-- TAB MISIONES -->
+<div id="tab-misiones" class="panel">
+  <div style="font-size:13px;color:var(--color-text-secondary);margin-bottom:.75rem;">8 misiones ordenadas de básico a avanzado. Cada una replica una tarea real de análisis.</div>
+  <div class="mission-grid" id="mission-list"></div>
+</div>
+
+<!-- TAB EJERCICIO -->
+<div id="tab-ejercicio" class="panel">
+  <div id="ex-container"><div style="text-align:center;padding:2rem;color:var(--color-text-secondary);font-size:13px;">Selecciona una misión para comenzar.</div></div>
+</div>
+
+<!-- TAB SCORE -->
+<div id="tab-score" class="panel">
+  <div class="score-wrap">
+    <div class="score-big" id="s-pct">0%</div>
+    <div class="score-sub">de misiones completadas</div>
+    <div class="score-grid">
+      <div class="sg-item"><div class="sg-val" id="s-done">0</div><div class="sg-lbl">Completadas</div></div>
+      <div class="sg-item"><div class="sg-val" id="s-total">8</div><div class="sg-lbl">Total</div></div>
+      <div class="sg-item"><div class="sg-val" id="s-pts">0</div><div class="sg-lbl">Puntos</div></div>
+    </div>
+    <div class="divider"></div>
+    <div id="score-msg" style="font-size:13px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:1rem;"></div>
+    <div class="review-list" id="review-list"></div>
+    <div class="divider"></div>
+    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+      <button class="btn" onclick="reset()">Reiniciar</button>
+      <button class="btn btn-blue" onclick="sendPrompt('Terminé el laboratorio de funciones. Enséñame el Bloque C: Pivot Tables y análisis en Excel.')">Siguiente: Bloque C — Pivot Tables →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const missions = [
+  {
+    id:0, title:'IF — Clasificar ventas por tamaño',
+    desc:'Usa IF para categorizar cada venta como "Alta" o "Baja" según su total.', tag:'tag-if', tagLabel:'IF',
+    pts:10, type:'mcq',
+    context:'Columna F tiene los totales. Quieres una nueva columna G que diga "Alta" si el total es ≥ S/1000 y "Baja" si no.',
+    q:'¿Cuál es la fórmula correcta para la celda G2?',
+    opts:['=IF(F2>=1000,"Alta","Baja")','=IF(F2>1000,Alta,Baja)','=IF(F2,"Alta",1000,"Baja")','=IIF(F2>=1000,"Alta","Baja")'],
+    correct:0,
+    fbOk:'Perfecto. =IF(condición, valor_si_true, valor_si_false). Los textos siempre entre comillas. El operador >= significa mayor o igual. Resultado: V-001 con S/5000 → "Alta", V-002 con S/225 → "Baja".',
+    fbNo:'La sintaxis es =IF(condición, "valor_true", "valor_false"). Los textos van entre comillas, el operador correcto es >= para mayor o igual. IIF no existe en Excel.'
+  },
+  {
+    id:1, title:'IFS — Clasificar en 3 categorías',
+    desc:'Usa IFS para categorizar ventas en Premium / Media / Básica según rangos.', tag:'tag-if', tagLabel:'IFS',
+    pts:15, type:'mcq',
+    context:'Quieres clasificar el total de cada venta: ≥S/3000 = "Premium", ≥S/500 = "Media", menos de S/500 = "Básica".',
+    q:'¿Cuál es la fórmula IFS correcta para aplicar en G2?',
+    opts:[
+      '=IFS(F2>=3000,"Premium",F2>=500,"Media",F2<500,"Básica")',
+      '=IFS(F2<500,"Básica",F2>=500,"Media",F2>=3000,"Premium")',
+      '=IFS(F2>=3000,"Premium",F2>=500,"Media")',
+      '=IF(F2>=3000,"Premium",IF(F2>=500,"Media","Básica"))'
+    ],
+    correct:0,
+    fbOk:'Exacto. IFS evalúa en orden y se detiene en la primera condición TRUE — por eso debes poner la más restrictiva primero (≥3000 antes que ≥500). Si inviertes el orden, todos los ≥3000 caerían en "Media" antes de llegar a "Premium".',
+    fbNo:'IFS evalúa en orden y para en la primera condición TRUE. Si pones ≥500 antes que ≥3000, un valor de 5000 caería en "Media" porque 5000≥500 es TRUE y ya para. Siempre de mayor a menor. Nota: la opción D es válida con IF anidado, pero la pregunta pide IFS.'
+  },
+  {
+    id:2, title:'VLOOKUP — Traer el nombre del vendedor',
+    desc:'Usa VLOOKUP para traer el nombre de cada vendedor desde la tabla Vendedores.', tag:'tag-lookup', tagLabel:'VLOOKUP',
+    pts:15, type:'formula',
+    context:'Columna B de Ventas tiene ID_Vendedor (S-01, S-02...). La tabla Vendedores tiene ID en col A y Nombre en col B. Quieres traer el nombre a la columna G de Ventas.',
+    q:'Escribe la fórmula VLOOKUP para la celda G2 de la hoja Ventas. Usa Vendedores!$A:$C como la tabla.',
+    answer:'=VLOOKUP(B2,Vendedores!$A:$C,2,0)',
+    alts:['=vlookup(b2,vendedores!$a:$c,2,0)','=VLOOKUP(B2,Vendedores!$A:$C,2,FALSE)','=vlookup(b2,vendedores!$a:$c,2,false)'],
+    hint:'Sintaxis: =VLOOKUP(valor_buscado, tabla, número_columna, 0). El valor buscado está en B2. La tabla es Vendedores!$A:$C. El nombre está en la columna 2 de esa tabla. El 0 es para búsqueda exacta.',
+    pts:15,
+    fbOk:'Exacto. B2 es el ID a buscar, Vendedores!$A:$C es la tabla (el $ fija la referencia al copiar), 2 porque el Nombre está en la 2ª columna, y 0 para búsqueda exacta. Resultado: S-01 → "Ana Torres".',
+    fbNo:'La fórmula es =VLOOKUP(B2,Vendedores!$A:$C,2,0). B2=valor a buscar, Vendedores!$A:$C=tabla completa, 2=columna del nombre, 0=exacta. El $ en la tabla evita que se mueva al copiar la fórmula.'
+  },
+  {
+    id:3, title:'XLOOKUP — La versión moderna',
+    desc:'Reescribe el VLOOKUP anterior usando XLOOKUP, más limpio y con manejo de error.', tag:'tag-lookup', tagLabel:'XLOOKUP',
+    pts:15, type:'mcq',
+    context:'Mismo objetivo: traer el nombre del vendedor desde la tabla Vendedores. Pero ahora usando XLOOKUP con un mensaje "No encontrado" si el ID no existe.',
+    q:'¿Cuál es la fórmula XLOOKUP correcta?',
+    opts:[
+      '=XLOOKUP(B2,Vendedores!A:A,Vendedores!B:B,"No encontrado")',
+      '=XLOOKUP(B2,Vendedores!A:C,2,"No encontrado")',
+      '=XLOOKUP(Vendedores!A:A,B2,Vendedores!B:B,"No encontrado")',
+      '=XLOOKUP(B2,Vendedores!A:A,Vendedores!B:B)'
+    ],
+    correct:0,
+    fbOk:'Perfecto. La diferencia con VLOOKUP: en vez de decir "tabla completa + número de columna", XLOOKUP pide el rango de búsqueda y el rango de retorno por separado. Mucho más legible y sin contar columnas.',
+    fbNo:'XLOOKUP pide: (valor_buscado, rango_donde_buscar, rango_que_retornar, si_no_encuentra). Rango de búsqueda es solo la columna A de Vendedores, rango de retorno es la columna B. No se usa número de columna como en VLOOKUP.'
+  },
+  {
+    id:4, title:'SUMIF — Total de ventas por región',
+    desc:'Calcula el total de ventas solo para la región Lima.', tag:'tag-sum', tagLabel:'SUMIF',
+    pts:10, type:'formula',
+    context:'Columna C tiene la Región, columna F tiene el Total. Quieres sumar todos los totales donde la región sea "Lima".',
+    q:'Escribe la fórmula SUMIF para sumar las ventas de Lima.',
+    answer:'=SUMIF(C:C,"Lima",F:F)',
+    alts:['=sumif(c:c,"lima",f:f)','=SUMIF(C:C,"Lima",F:F)','=sumif(c:c,"Lima",f:f)'],
+    hint:'Sintaxis: =SUMIF(rango_criterio, criterio, rango_suma). El criterio es "Lima" entre comillas.',
+    fbOk:'Exacto. C:C es donde buscas la condición "Lima", F:F es lo que sumas cuando la condición se cumple. Resultado: S/5000+S/225+S/2500+S/90+S/540+S/380 = S/11,235 solo de Lima.',
+    fbNo:'La fórmula es =SUMIF(C:C,"Lima",F:F). Primero el rango donde filtrar (columna C = Región), luego el criterio ("Lima"), luego qué sumar (columna F = Total).'
+  },
+  {
+    id:5, title:'SUMIFS — Ventas por región Y categoría',
+    desc:'Suma las ventas de Lima específicamente de Electrónica usando SUMIFS.', tag:'tag-sum', tagLabel:'SUMIFS',
+    pts:15, type:'formula',
+    context:'Quieres saber cuánto se vendió en Lima Y en la categoría Electrónica. Columnas: C=Región, D=Categoría, F=Total.',
+    q:'Escribe la fórmula SUMIFS para ventas de Lima + Electrónica.',
+    answer:'=SUMIFS(F:F,C:C,"Lima",D:D,"Electrónica")',
+    alts:['=sumifs(f:f,c:c,"lima",d:d,"electrónica")','=sumifs(f:f,c:c,"Lima",d:d,"Electrónica")','=SUMIFS(F:F,C:C,"Lima",D:D,"Electrónica")'],
+    hint:'Diferencia clave con SUMIF: en SUMIFS el rango_suma va PRIMERO, luego los pares rango/criterio. =SUMIFS(qué_sumar, dónde_filtrar1, criterio1, dónde_filtrar2, criterio2)',
+    fbOk:'Perfecto. En SUMIFS el orden cambia: primero F:F (qué sumar), luego C:C+"Lima" (primer filtro), luego D:D+"Electrónica" (segundo filtro). Resultado: V-001(5000) + V-003(2500) + V-006(2500) + V-010(540) = S/10,540.',
+    fbNo:'SUMIFS invierte el orden vs SUMIF: primero va el rango_suma (F:F), luego los pares de rango+criterio. Es =SUMIFS(F:F, C:C,"Lima", D:D,"Electrónica"). Un error común es poner el rango_suma al final.'
+  },
+  {
+    id:6, title:'COUNTIFS — Contar ventas con dos filtros',
+    desc:'Cuenta cuántas ventas hubo en Norte con total mayor a S/300.', tag:'tag-sum', tagLabel:'COUNTIFS',
+    pts:10, type:'mcq',
+    context:'Quieres saber cuántas transacciones en la región Norte tuvieron un total superior a S/300.',
+    q:'¿Cuál es la fórmula correcta?',
+    opts:[
+      '=COUNTIFS(C:C,"Norte",F:F,">300")',
+      '=COUNTIFS(C:C,"Norte",F:F,>300)',
+      '=COUNTIF(C:C,"Norte",F:F,">300")',
+      '=COUNT(C:C,"Norte",F:F,">300")'
+    ],
+    correct:0,
+    fbOk:'Correcto. En COUNTIFS los criterios numéricos también van entre comillas: ">300". Sin comillas Excel da error. COUNTIF (sin S) solo acepta un criterio. COUNT simplemente cuenta números, no tiene criterios.',
+    fbNo:'Tres errores comunes aquí: 1) COUNTIF sin S solo acepta un criterio — necesitas COUNTIFS para dos. 2) Los criterios numéricos como >300 también van entre comillas: ">300". 3) COUNT no tiene criterios, solo cuenta celdas con números.'
+  },
+  {
+    id:7, title:'IFERROR + VLOOKUP — Fórmula defensiva',
+    desc:'Combina IFERROR con VLOOKUP para manejar IDs que no existen en la tabla.', tag:'tag-adv', tagLabel:'Anidada',
+    pts:20, type:'formula',
+    context:'Tienes IDs de vendedores en B2. Algunos IDs podrían no estar en la tabla Vendedores y generarían error #N/A. Quieres que en ese caso muestre "Sin datos" en vez del error.',
+    q:'Escribe la fórmula IFERROR anidada con VLOOKUP para la celda G2.',
+    answer:'=IFERROR(VLOOKUP(B2,Vendedores!$A:$C,2,0),"Sin datos")',
+    alts:['=iferror(vlookup(b2,vendedores!$a:$c,2,0),"sin datos")','=IFERROR(VLOOKUP(B2,Vendedores!$A:$C,2,FALSE),"Sin datos")'],
+    hint:'IFERROR envuelve a VLOOKUP: =IFERROR(fórmula_que_puede_fallar, "qué_mostrar_si_falla"). La fórmula interna es exactamente el VLOOKUP que escribiste en la Misión 3.',
+    fbOk:'Excelente. IFERROR(fórmula, valor_si_error) es el patrón más usado en Excel profesional. Si VLOOKUP encuentra el ID → devuelve el nombre normalmente. Si no lo encuentra (#N/A) → devuelve "Sin datos". Nunca entregues un reporte con errores #N/A visibles.',
+    fbNo:'La fórmula es =IFERROR(VLOOKUP(B2,Vendedores!$A:$C,2,0),"Sin datos"). IFERROR envuelve al VLOOKUP completo: si VLOOKUP funciona devuelve el nombre, si da cualquier error muestra "Sin datos". Es la forma profesional de manejar búsquedas.'
+  }
+];
+
+let completed = new Array(missions.length).fill(false);
+let points = 0;
+let attempts = {};
+let currentM = null;
+
+function renderMissions(){
+  document.getElementById('mission-list').innerHTML = missions.map((m,i)=>{
+    const done = completed[i], active = currentM===i;
+    return `<div class="mission ${done?'done':active?'active-m':''}" onclick="startMission(${i})">
+      <div class="m-num">${done?'✓':i+1}</div>
+      <div class="m-body">
+        <div class="m-title">${m.title}${done?' — completada':''}</div>
+        <div class="m-desc">${m.desc}</div>
+        <span class="m-tag ${m.tag}">${m.tagLabel} · ${m.pts} pts</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function startMission(i){
+  currentM = i;
+  renderMissions();
+  goTab('ejercicio', document.querySelectorAll('.tab')[2]);
+  renderEx(i);
+}
+
+function renderEx(i){
+  const m = missions[i];
+  const done = completed[i];
+  let inner = '';
+
+  if(m.type==='mcq'){
+    inner = `<div class="mcq-opts">${m.opts.map((o,j)=>{
+      let cls = done ? (j===m.correct?'reveal':'disabled') : '';
+      return `<div class="opt ${cls}" id="opt-${i}-${j}" onclick="pickOpt(${i},${j})">${o}</div>`;
+    }).join('')}</div>`;
+  } else {
+    inner = `<div class="input-row">
+      <input class="formula-input ${done?'correct':''}" id="inp-${i}" placeholder="=escribe tu fórmula aquí..." value="${done?m.answer:''}" ${done?'disabled':''} />
+      ${!done?`<button class="btn" onclick="giveHint(${i})">Pista</button>`:''}
+    </div>`;
+  }
+
+  const nextBtn = done ? `<button class="btn btn-blue" onclick="nextM(${i})">Siguiente misión →</button>` :
+    m.type==='formula' ? `<button class="btn btn-green" onclick="checkFormula(${i})">Verificar →</button>` : '';
+
+  document.getElementById('ex-container').innerHTML = `
+    <div class="ex-box">
+      <div class="ex-head">
+        <div class="ex-title">Misión ${i+1} — ${m.title}</div>
+        <span class="ex-pts">${m.pts} pts</span>
+      </div>
+      <div class="ex-body">
+        <div class="context-box"><div class="context-label">Contexto</div>${m.context}</div>
+        <div class="q-text">${m.q}</div>
+        ${inner}
+        <div class="fb" id="fb-${i}"></div>
+        ${nextBtn}
+      </div>
+    </div>`;
+
+  if(!done && m.type==='formula'){
+    document.getElementById(`inp-${i}`).addEventListener('keydown',e=>{if(e.key==='Enter')checkFormula(i);});
+  }
+}
+
+function pickOpt(mi,oi){
+  const m = missions[mi];
+  document.querySelectorAll(`[id^="opt-${mi}-"]`).forEach(o=>o.classList.add('disabled'));
+  const correct = oi===m.correct;
+  document.getElementById(`opt-${mi}-${oi}`).classList.add(correct?'ok':'no');
+  if(!correct) document.getElementById(`opt-${mi}-${m.correct}`).classList.add('reveal');
+  const fb = document.getElementById(`fb-${mi}`);
+  fb.className = `fb ${correct?'ok':'no'}`;
+  fb.innerHTML = `<div class="fb-label ${correct?'ok':'no'}">${correct?'Correcto':'No exactamente'}</div>${correct?m.fbOk:m.fbNo}`;
+  fb.style.display='block';
+  completeMission(mi, !correct);
+  setTimeout(()=>renderEx(mi),150);
+}
+
+function checkFormula(i){
+  const m = missions[i];
+  const inp = document.getElementById(`inp-${i}`);
+  const val = inp.value.trim();
+  const norm = s=>s.toLowerCase().replace(/\s+/g,'');
+  const ok = m.alts.some(a=>norm(val)===norm(a)) || norm(val)===norm(m.answer);
+  const fb = document.getElementById(`fb-${i}`);
+  if(ok){
+    inp.classList.add('correct');
+    fb.className='fb ok';
+    fb.innerHTML=`<div class="fb-label ok">Correcto</div>${m.fbOk}<code>${m.answer}</code>`;
+    fb.style.display='block';
+    completeMission(i,false);
+    setTimeout(()=>renderEx(i),150);
+  } else {
+    inp.classList.add('wrong');
+    fb.className='fb no';
+    fb.innerHTML=`<div class="fb-label no">Revisa la fórmula</div>${m.fbNo}<code>${m.answer}</code>`;
+    fb.style.display='block';
+    setTimeout(()=>{ inp.classList.remove('wrong'); inp.value=''; },1800);
+    attempts[i]=(attempts[i]||0)+1;
+    if(attempts[i]>=2){ completeMission(i,true); setTimeout(()=>renderEx(i),200); }
+  }
+}
+
+function giveHint(i){
+  const fb = document.getElementById(`fb-${i}`);
+  fb.className='fb hint';
+  fb.innerHTML=`<div class="fb-label hint">Pista</div>${missions[i].hint}`;
+  fb.style.display='block';
+}
+
+function completeMission(i,partial){
+  if(!completed[i]){
+    completed[i]=true;
+    points+=partial?Math.floor(missions[i].pts*.5):missions[i].pts;
+    updateProg();
+    renderMissions();
+  }
+}
+
+function nextM(i){
+  const next=i+1;
+  if(next<missions.length) startMission(next);
+  else { goTab('score',document.querySelectorAll('.tab')[3]); updateScore(); }
+}
+
+function updateProg(){
+  const done=completed.filter(Boolean).length;
+  const pct=Math.round(done/missions.length*100);
+  document.getElementById('prog').style.width=pct+'%';
+  document.getElementById('prog-txt').textContent=`${done} / ${missions.length} misiones`;
+}
+
+function updateScore(){
+  const done=completed.filter(Boolean).length;
+  const pct=Math.round(done/missions.length*100);
+  document.getElementById('s-pct').textContent=pct+'%';
+  document.getElementById('s-done').textContent=done;
+  document.getElementById('s-pts').textContent=points;
+  const maxPts=missions.reduce((s,m)=>s+m.pts,0);
+  let msg='';
+  if(pct===100) msg='¡Laboratorio completado al 100%! Dominas IF, IFS, VLOOKUP, XLOOKUP, SUMIF, SUMIFS, COUNTIFS e IFERROR. Estás listo para Pivot Tables.';
+  else if(pct>=75) msg='Muy sólido. Las funciones clave están dominadas. Revisa las misiones pendientes antes de avanzar.';
+  else if(pct>=50) msg='Buen avance. Completa las misiones restantes — son las más usadas en entrevistas reales.';
+  else msg='Sigue practicando. Estas funciones aparecen en casi toda entrevista de Data Analyst. Reintenta las que faltan.';
+  document.getElementById('score-msg').textContent=msg;
+
+  document.getElementById('review-list').innerHTML=completed.map((done,i)=>{
+    if(!done&&i>=missions.length) return '';
+    const m=missions[i];
+    const ok=done;
+    return `<div class="ri ${ok?'ok':'no'}">
+      <div class="ri-icon">${ok?'✓':'–'}</div>
+      <div><div class="ri-q">${m.title}</div><div class="ri-d">${ok?m.tagLabel+' · '+m.pts+' pts':'Pendiente'}</div></div>
+    </div>`;
+  }).join('');
+}
+
+function goTab(id,el){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  el.classList.add('active');
+  if(id==='score') updateScore();
+}
+
+function reset(){
+  completed=new Array(missions.length).fill(false);
+  points=0; currentM=null; attempts={};
+  updateProg(); renderMissions();
+  document.getElementById('ex-container').innerHTML='<div style="text-align:center;padding:2rem;color:var(--color-text-secondary);font-size:13px;">Selecciona una misión para comenzar.</div>';
+  goTab('misiones',document.querySelectorAll('.tab')[1]);
+}
+
+renderMissions();
+</script>
+</body>
+</html>
